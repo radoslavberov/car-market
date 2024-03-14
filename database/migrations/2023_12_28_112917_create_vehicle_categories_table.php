@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('car_categories', function (Blueprint $table) {
+        Schema::create('vehicle_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->boolean('active')->default(1);

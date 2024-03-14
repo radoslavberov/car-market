@@ -14,9 +14,9 @@ class DatabaseSeeder extends Seeder
     {
         $seeders = [
             UsersTableSeeder::class,
-            CarCategoriesTableSeeder::class,
+            VehicleCategoriesTableSeeder::class,
             FuelsTableSeeder::class,
-            CarBrandsTableSeeder::class,
+            VehicleBrandsTableSeeder::class,
             LocationsTableSeeder::class,
             TransmissionsTableSeeder::class,
             VehicleModelsSeeder::class,

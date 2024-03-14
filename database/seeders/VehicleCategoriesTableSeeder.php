@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 
 
-class CarCategoriesTableSeeder extends Seeder
+class VehicleCategoriesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -78,7 +78,7 @@ class CarCategoriesTableSeeder extends Seeder
             ],
         ];
         foreach ($categories as $category) {
-            DB::table('car_categories')->insertOrIgnore($category);
+            DB::table('vehicle_categories')->insertOrIgnore($category);
         }
     }
 }
