@@ -21,7 +21,7 @@ Route::post('/login', [AuthController::class, 'login']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
 
-    Route::post('/change-password', [AuthController::class, 'changePassword']);
+    Route::post('/auth/change-password', [AuthController::class, 'changePassword']);
     Route::post('/auth/edit', [AuthController::class, 'editUser']);
     Route::get('/auth/me', [AuthController::class, 'getCurrentUser']);
     Route::post('/logout', [AuthController::class, 'logout']);
