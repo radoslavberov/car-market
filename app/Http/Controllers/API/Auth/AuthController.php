@@ -25,7 +25,7 @@ class AuthController extends Controller
             'name' =>$request->name,
             'email' => $request->email,
             'password' => $request->password,
-//            'is_admin' => 0,
+            'is_admin' => 0,
             'active' => 1
         ]);
 
@@ -82,7 +82,8 @@ class AuthController extends Controller
 
     public function getCurrentUser()
     {
-        $user = auth()->user()->load('estatesAnalyses');
+        $user = auth()->user();
+//            ->load('estatesAnalyses');
         return response([
             'data' => new UserResource($user),
         ]);
