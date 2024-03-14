@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\API\AdvertisementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +16,7 @@ use App\Http\Controllers\Api\Auth\AuthController;
 |
 */
 
-Route::get('api/register', [AuthController::class, 'register']);
+Route::get('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
@@ -23,6 +24,14 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/change-password', [AuthController::class, 'changePassword']);
     Route::post('/auth/edit', [AuthController::class, 'editUser']);
     Route::post('/logout', [AuthController::class, 'logout']);
+
+    Route::prefix('advertisements')->controller(AdvertisementController::class)->group(function() {
+        Route::get('/', 'index');
+        Route::get('{advertisement}', 'show');
+        Route::post('/store', 'store');
+        Route::patch('{advertisement}', 'update');
+        Route::delete('{advertisement}', 'destroy');
+    });
 });
 
 
