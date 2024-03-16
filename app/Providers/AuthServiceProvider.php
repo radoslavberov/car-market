@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
+
+use App\Models\Advertisement;
 use App\Models\ConstructionType;
 use App\Models\District;
 use App\Models\Estate;
@@ -10,6 +12,7 @@ use App\Models\EstateAnalysis;
 use App\Models\EstateType;
 use App\Models\EstateFavorite;
 use App\Models\Location;
+use App\Policies\AdvertisementPolicy;
 use App\Policies\ConstructionTypePolicy;
 use App\Policies\DistrictPolicy;
 use App\Policies\EstateAnalysisPolicy;
@@ -27,7 +30,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-//        Estate::class => EstatePolicy::class,
+        Advertisement::class => AdvertisementPolicy::class,
     ];
 
     /**

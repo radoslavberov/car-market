@@ -53,7 +53,7 @@ class AdvertisementController extends Controller
      */
     public function show(Advertisement $advertisement)
     {
-        //
+        return AdvertisementResource::make($advertisement);
     }
 
     /**
@@ -61,7 +61,7 @@ class AdvertisementController extends Controller
      */
     public function update(UpdateAdvertisementRequest $request, Advertisement $advertisement)
     {
-        //
+        $this->authorize('update',$advertisement);
     }
 
     /**
@@ -69,6 +69,8 @@ class AdvertisementController extends Controller
      */
     public function destroy(Advertisement $advertisement)
     {
-        //
+        $this->authorize('delete', $advertisement);
+        $advertisement->delete();
+        return response()->json(['message' => 'Вие изтрихте вашата обява!', 200]);
     }
 }
