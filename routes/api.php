@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\API\AdvertisementController;
-
+use App\Http\Controllers\DashboardController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -20,6 +20,8 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
+
+    Route::get('/dashboard-stats', [DashboardController::class, 'dashboard']);
 
     Route::post('/auth/change-password', [AuthController::class, 'changePassword']);
     Route::post('/auth/edit', [AuthController::class, 'editUser']);
