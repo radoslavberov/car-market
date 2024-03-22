@@ -27,7 +27,9 @@ class AdvertisementController extends Controller
      */
     public function store(StoreAdvertisementRequest $request)
     {
+//dd($request->all());
         $advertisement = Advertisement::create([
+            'name'                  => $request->name,
             'description'           => $request->description,
             'color'                 => $request->color,
             'year'                  => $request->year,
@@ -40,8 +42,8 @@ class AdvertisementController extends Controller
             'vehicle_brand_id'      => $request->vehicle_brand_id,
             'vehicle_model_id'      => $request->vehicle_model_id,
             'vehicle_model_type_id' => $request->vehicle_model_type_id,
-            'car_category_id'       => $request->car_category_id,
-            'car_fuel_id'           => $request->car_fuel_id,
+            'vehicle_category_id'   => $request->vehicle_category_id,
+            'fuel_id'               => $request->fuel_id,
             'transmission_id'       => $request->transmission_id,
         ]);
 

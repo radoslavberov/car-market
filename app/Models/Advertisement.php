@@ -10,6 +10,7 @@ class Advertisement extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'name',
         'description',
         'color',
         'year',
@@ -22,8 +23,8 @@ class Advertisement extends Model
         'vehicle_brand_id',
         'vehicle_model_id',
         'vehicle_model_type_id',
-        'car_category_id',
-        'car_fuel_id',
+        'vehicle_category_id',
+        'fuel_id',
         'transmission_id',
     ];
 
@@ -52,12 +53,12 @@ class Advertisement extends Model
         return $this->belongsTo(VehicleModelType::class);
     }
 
-    public function carCategory(): BelongsTo
+    public function vehicleCategory(): BelongsTo
     {
         return $this->belongsTo(VehicleCategory::class);
     }
 
-    public function carFuel(): BelongsTo
+    public function fuel(): BelongsTo
     {
         return $this->belongsTo(Fuel::class);
     }

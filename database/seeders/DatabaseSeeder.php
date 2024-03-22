@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             TransmissionsTableSeeder::class,
             VehicleModelsSeeder::class,
             VehicleModelTypesSeeder::class,
-
+            AdvertisementSeeder::class
         ];
         $this->call($seeders);
     }

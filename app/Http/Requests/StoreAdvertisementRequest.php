@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Models\VehicleModel;
+use App\Models\VehicleModelType;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreAdvertisementRequest extends FormRequest
@@ -32,8 +34,28 @@ class StoreAdvertisementRequest extends FormRequest
             'description' => 'required|string',
             'location_id' => 'required|exists:locations,id',
             'vehicle_brand_id' => 'required|exists:vehicle_brands,id',
-            'vehicle_model_id' => 'required|exists:vehicle_models,id',
-            'vehicle_model_type_id' => 'required|exists:vehicle_model_types,id',
+            'vehicle_model_id' => [
+                'required',
+                'exists:vehicle_models,id',
+                function ($attribute, $value, $fail) {
+                    $vehicleBrandId = $this->vehicle_brand_id;
+                    $vehicleModel = VehicleModel::findOrFail($value);
+                    if (!$vehicleModel || $vehicleModel->vehicle_brand_id != $vehicleBrandId) {
+                        return $fail('The selected vehicle model does not belong to the specified vehicle brand.');
+                    }
+                },
+            ],
+            'vehicle_model_type_id' => [
+                'required',
+                'exists:vehicle_model_types,id',
+                function ($attribute, $value, $fail) {
+                    $vehicleModelId = $this->vehicle_model_id;
+                    $vehicleModelType = VehicleModelType::findOrFail($value);
+                    if (!$vehicleModelType || $vehicleModelType->vehicle_model_id != $vehicleModelId) {
+                        return $fail('The selected vehicle model type does not belong to the specified vehicle model.');
+                    }
+                },
+            ],
             'vehicle_category_id' => 'required|exists:vehicle_categories,id',
             'fuel_id' => 'required|exists:fuels,id',
             'transmission_id' => 'required|exists:transmissions,id',
