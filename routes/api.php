@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\API\AdvertisementController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\API\CommentController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -35,6 +36,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::patch('{advertisement}', 'update');
         Route::delete('{advertisement}', 'destroy');
     });
+
+    Route::post('advertisements/{advertisement}/comment', [CommentController::class, 'store']);
+    Route::delete('/comment/{comment}', [CommentController::class, 'destroy']);
 });
 
 

@@ -4,6 +4,7 @@ namespace App\Http\Resources\Advertisement;
 
 use App\Http\Resources\FuelResource;
 use App\Http\Resources\LocationResource;
+use App\Http\Resources\TransmissionResource;
 use App\Http\Resources\User\UserResource;
 use App\Http\Resources\VehicleBrandResource;
 use App\Http\Resources\VehicleCategoryResource;
@@ -38,7 +39,8 @@ class AdvertisementResource extends JsonResource
             'vehicleModelType'  => $this->whenLoaded('vehicleModelType', new VehicleModelTypeResource($this->vehicleModelType)),
             'vehicleCategory'   => $this->whenLoaded('vehicleCategory', new VehicleCategoryResource($this->vehicleCategory)),
             'fuel'              => $this->whenLoaded('fuel', new FuelResource($this->fuel)),
-            'transmission'      => $this->whenLoaded('transmission', new FuelResource($this->transmission)),
+            'transmission'      => $this->whenLoaded('transmission', new TransmissionResource($this->transmission)),
+            'comments'          => $this->comments,
         ];
     }
 }

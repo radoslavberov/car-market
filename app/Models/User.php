@@ -49,21 +49,23 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    public function advertisements(): HasMany
+    {
+        return $this->hasMany(Advertisement::class);
+    }
 
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
+    }
+    public function advertisementsCountThisMonth()
+    {
+        return $this->advertisements()->whereMonth('created_at', now()->month)->count();
+    }
 
-//    public function analysisCountThisMonth()
-//    {
-//        return $this->estatesAnalyses()->whereMonth('created_at', now()->month)->count();
-//    }
-//
-//    public function canDoAnalysis()
-//    {
-//        $currentMonthAnalysisCount = $this->analysisCountThisMonth();
-//        return $currentMonthAnalysisCount < 10;
-//    }
-//
-//    public function canAccessPanel(Panel $panel): bool
-//    {
-//        return $this->is_admin;
-//    }
+    public function canDodvertisements()
+    {
+        $currentMonthAnalysisCount = $this->advertisementsCountThisMonth();
+        return $currentMonthAnalysisCount < 5;
+    }
 }
