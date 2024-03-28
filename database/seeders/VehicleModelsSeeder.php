@@ -78,6 +78,27 @@ class VehicleModelsSeeder extends Seeder
                 'updated_at' => now()
             ],
             [
+                'name' => 'S',
+                'vehicle_brand_id' => 2,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'X',
+                'vehicle_brand_id' => 3,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => '4 series',
+                'vehicle_brand_id' => 3,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
                 'name' => '5 series',
                 'vehicle_brand_id' => 3,
                 'active' => 1,
@@ -85,7 +106,14 @@ class VehicleModelsSeeder extends Seeder
                 'updated_at' => now()
             ],
             [
-                'name' => 'X series',
+                'name' => '7 series',
+                'vehicle_brand_id' => 3,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'X',
                 'vehicle_brand_id' => 3,
                 'active' => 1,
                 'created_at' => now(),
@@ -106,6 +134,20 @@ class VehicleModelsSeeder extends Seeder
                 'updated_at' => now()
             ],
             [
+                'name' => 'Yaris',
+                'vehicle_brand_id' => 4,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'C-HR',
+                'vehicle_brand_id' => 4,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
                 'name' => 'Trackhawk',
                 'vehicle_brand_id' => 5,
                 'active' => 1,
@@ -120,7 +162,35 @@ class VehicleModelsSeeder extends Seeder
                 'updated_at' => now()
             ],
             [
+                'name' => 'Wrangler',
+                'vehicle_brand_id' => 5,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'Grand Cherokee',
+                'vehicle_brand_id' => 5,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
                 'name' => 'Bravo',
+                'vehicle_brand_id' => 6,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => '500',
+                'vehicle_brand_id' => 6,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'Panda',
                 'vehicle_brand_id' => 6,
                 'active' => 1,
                 'created_at' => now(),
@@ -134,6 +204,20 @@ class VehicleModelsSeeder extends Seeder
                 'updated_at' => now()
             ],
             [
+                'name' => 'Tipo',
+                'vehicle_brand_id' => 6,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'Model S',
+                'vehicle_brand_id' => 7,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
                 'name' => 'Model 3',
                 'vehicle_brand_id' => 7,
                 'active' => 1,
@@ -141,7 +225,14 @@ class VehicleModelsSeeder extends Seeder
                 'updated_at' => now()
             ],
             [
-                'name' => 'Model S',
+                'name' => 'Model X',
+                'vehicle_brand_id' => 7,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'Model Y',
                 'vehicle_brand_id' => 7,
                 'active' => 1,
                 'created_at' => now(),
@@ -155,7 +246,21 @@ class VehicleModelsSeeder extends Seeder
                 'updated_at' => now()
             ],
             [
-                'name' => 'Polo',
+                'name' => 'Passat',
+                'vehicle_brand_id' => 8,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'Tiguan',
+                'vehicle_brand_id' => 8,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'Jetta',
                 'vehicle_brand_id' => 8,
                 'active' => 1,
                 'created_at' => now(),
