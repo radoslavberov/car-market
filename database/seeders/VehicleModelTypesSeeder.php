@@ -15,8 +15,99 @@ class VehicleModelTypesSeeder extends Seeder
     {
         $models = [
             [
-                'name' => 'S 63',
+                'name' => 'S 250',
                 'vehicle_model_id' => 1,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'S 300',
+                'vehicle_model_id' => 1,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'S 350',
+                'vehicle_model_id' => 1,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'S 400',
+                'vehicle_model_id' => 1,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'S 450',
+                'vehicle_model_id' => 1,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'S 500',
+                'vehicle_model_id' => 1,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'S 550',
+                'vehicle_model_id' => 1,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'S 55 AMG',
+                'vehicle_model_id' => 1,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'S 63 AMG',
+                'vehicle_model_id' => 1,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'S 65 AMG',
+                'vehicle_model_id' => 1,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'E 200',
+                'vehicle_model_id' => 2,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'E 220',
+                'vehicle_model_id' => 2,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'E 300',
+                'vehicle_model_id' => 2,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'E 320',
+                'vehicle_model_id' => 2,
                 'active' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
@@ -29,117 +120,285 @@ class VehicleModelTypesSeeder extends Seeder
                 'updated_at' => now()
             ],
             [
-                'name' => 'Q 7',
+                'name' => 'E 400',
+                'vehicle_model_id' => 2,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'E 450',
+                'vehicle_model_id' => 2,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'E 500',
+                'vehicle_model_id' => 2,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'E 550',
+                'vehicle_model_id' => 2,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'E 53 AMG',
+                'vehicle_model_id' => 2,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'E 63 AMG',
+                'vehicle_model_id' => 2,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'C 200',
                 'vehicle_model_id' => 3,
                 'active' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
-                'name' => 'A 7',
+                'name' => 'C 220',
+                'vehicle_model_id' => 3,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'C 250',
+                'vehicle_model_id' => 3,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'C 300',
+                'vehicle_model_id' => 3,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'C 320',
+                'vehicle_model_id' => 3,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'C 350',
+                'vehicle_model_id' => 3,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'C 400',
+                'vehicle_model_id' => 3,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'C 43 AMG',
+                'vehicle_model_id' => 3,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'C 55 AMG',
+                'vehicle_model_id' => 3,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'C 63 AMG',
+                'vehicle_model_id' => 3,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'GLS 350',
                 'vehicle_model_id' => 4,
                 'active' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
-                'name' => '535',
+                'name' => 'GLS 400',
+                'vehicle_model_id' => 4,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'GLS 450',
+                'vehicle_model_id' => 4,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'GLS 500',
+                'vehicle_model_id' => 4,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'GLS 600',
+                'vehicle_model_id' => 4,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'GLS 63 AMG',
+                'vehicle_model_id' => 4,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'G 500',
                 'vehicle_model_id' => 5,
                 'active' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
-                'name' => 'X 5',
+                'name' => 'G 63 AMG',
+                'vehicle_model_id' => 5,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'G 800',
+                'vehicle_model_id' => 5,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'GLE 250',
                 'vehicle_model_id' => 6,
                 'active' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
-                'name' => 'XK 50',
+                'name' => 'GLE 300',
+                'vehicle_model_id' => 6,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'GLE 350',
+                'vehicle_model_id' => 6,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'GLE 400',
+                'vehicle_model_id' => 6,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'GLE 450',
+                'vehicle_model_id' => 6,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'GLE 500',
+                'vehicle_model_id' => 6,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'GLE 53 AMG',
+                'vehicle_model_id' => 6,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'GLE 63 AMG',
+                'vehicle_model_id' => 6,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'GLC 200',
                 'vehicle_model_id' => 7,
                 'active' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
-                'name' => 'Verso',
-                'vehicle_model_id' => 8,
+                'name' => 'GLC 250',
+                'vehicle_model_id' => 7,
                 'active' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
-                'name' => 'SRT',
-                'vehicle_model_id' => 9,
+                'name' => 'GLC 300',
+                'vehicle_model_id' => 7,
                 'active' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
-                'name' => 'XJ',
-                'vehicle_model_id' => 10,
+                'name' => 'GLC 350',
+                'vehicle_model_id' => 7,
                 'active' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
-                'name' => 'Sport',
-                'vehicle_model_id' => 11,
+                'name' => 'GLC 400',
+                'vehicle_model_id' => 7,
                 'active' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
-                'name' => 'Grande',
-                'vehicle_model_id' => 12,
+                'name' => 'GLC 53 AMG',
+                'vehicle_model_id' => 7,
                 'active' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
-                'name' => 'Long Range',
-                'vehicle_model_id' => 13,
+                'name' => 'GLC 63 AMG',
+                'vehicle_model_id' => 7,
                 'active' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
-            ],
-            [
-                'name' => 'Plaid',
-                'vehicle_model_id' => 14,
-                'active' => 1,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'name' => '5',
-                'vehicle_model_id' => 15,
-                'active' => 1,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'name' => '4',
-                'vehicle_model_id' => 16,
-                'active' => 1,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'name' => '4',
-                'vehicle_model_id' => 17,
-                'active' => 1,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'name' => '5',
-                'vehicle_model_id' => 18,
-                'active' => 1,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
+            ],  
         ];
         foreach ($models as $model) {
             DB::table('vehicle_model_types')->insertOrIgnore($model);

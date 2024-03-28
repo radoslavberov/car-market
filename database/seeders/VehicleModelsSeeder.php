@@ -29,6 +29,41 @@ class VehicleModelsSeeder extends Seeder
                 'updated_at' => now()
             ],
             [
+                'name' => 'C class',
+                'vehicle_brand_id' => 1,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'GLS',
+                'vehicle_brand_id' => 1,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'G class',
+                'vehicle_brand_id' => 1,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'GLE',
+                'vehicle_brand_id' => 1,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'GLC',
+                'vehicle_brand_id' => 1,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
                 'name' => 'Q',
                 'vehicle_brand_id' => 2,
                 'active' => 1,
