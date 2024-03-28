@@ -41,6 +41,7 @@ class AdvertisementResource extends JsonResource
             'fuel'              => $this->whenLoaded('fuel', new FuelResource($this->fuel)),
             'transmission'      => $this->whenLoaded('transmission', new TransmissionResource($this->transmission)),
             'comments'          => $this->comments,
+            'images'            => $this->images,
         ];
     }
 }

@@ -24,6 +24,7 @@ class StoreAdvertisementRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'images[]' => 'image|mimes:jpg,jpeg,png|max:2048',
             'name' => 'required|string|max:255',
             'price' => 'required|numeric|min:0',
             'color' => 'required|string|max:255',
@@ -46,7 +47,7 @@ class StoreAdvertisementRequest extends FormRequest
                 },
             ],
             'vehicle_model_type_id' => [
-                'required',
+                'nullable',
                 'exists:vehicle_model_types,id',
                 function ($attribute, $value, $fail) {
                     $vehicleModelId = $this->vehicle_model_id;

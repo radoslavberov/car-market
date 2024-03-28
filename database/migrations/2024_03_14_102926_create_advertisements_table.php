@@ -28,7 +28,7 @@ return new class extends Migration
             $table->unsignedBigInteger('location_id');
             $table->unsignedBigInteger('vehicle_brand_id');
             $table->unsignedBigInteger('vehicle_model_id');
-            $table->unsignedBigInteger('vehicle_model_type_id');
+            $table->unsignedBigInteger('vehicle_model_type_id')->nullable();
             $table->unsignedBigInteger('vehicle_category_id');
             $table->unsignedBigInteger('fuel_id');
             $table->unsignedBigInteger('transmission_id');
