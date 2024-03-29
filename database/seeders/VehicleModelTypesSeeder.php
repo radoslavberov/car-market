@@ -645,8 +645,36 @@ class VehicleModelTypesSeeder extends Seeder
                 'updated_at' => now()
             ],
             [
-                'name' => 'X7',
-                'vehicle_model_id' => 14,
+                'name' => 'C2',
+                'vehicle_model_id' => 37,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'C3',
+                'vehicle_model_id' => 37,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'C4',
+                'vehicle_model_id' => 37,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'C5',
+                'vehicle_model_id' => 37,
+                'active' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'C8',
+                'vehicle_model_id' => 37,
                 'active' => 1,
                 'created_at' => now(),
                 'updated_at' => now()

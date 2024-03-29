@@ -136,12 +136,6 @@ class VehicleBrandsTableSeeder extends Seeder
                 'updated_at' => now()
             ],
             [
-                'name' => 'Citroen',
-                'active' => 1,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
                 'name' => 'Ferrari',
                 'active' => 1,
                 'created_at' => now(),
