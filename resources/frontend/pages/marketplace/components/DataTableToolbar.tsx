@@ -14,11 +14,9 @@ import { QUERY_KEY } from '@/data/constants';
 
 interface DataTableToolbarProps<TData> {
 	table: Table<TData>;
-	showFavorites: boolean;
-	onSetShowFavorites: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export function DataTableToolbar<TData>({ table, showFavorites, onSetShowFavorites }: DataTableToolbarProps<TData>) {
+export function DataTableToolbar<TData>({ table }: DataTableToolbarProps<TData>) {
 	const queryClient = useQueryClient();
 
 	// Use the query client to get the data from the cache
@@ -103,20 +101,6 @@ export function DataTableToolbar<TData>({ table, showFavorites, onSetShowFavorit
 						}))}
 					/>
 				)}
-
-				{/* Toggle show favorites */}
-				<Toggle
-					pressed={showFavorites}
-					onPressedChange={(pressed) => {
-						onSetShowFavorites(pressed);
-						queryClient.invalidateQueries([QUERY_KEY.estates]);
-					}}
-					variant="outline"
-					className="h-8 border-dashed"
-				>
-					<Icons.star className={cn('mr-2 h-4 w-4', showFavorites && 'text-brand')} />
-					Покажи само любими
-				</Toggle>
 
 				{/* Clear filters */}
 				{isFiltered && (

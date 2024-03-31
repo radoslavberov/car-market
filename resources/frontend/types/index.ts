@@ -5,7 +5,7 @@ export interface User {
 	active: number; // 1 or 0
 	isAdmin: number; // 1 or 0
 	emailVerifiedAt: string | null; // ISO date
-    // monthlyAnalysisDone: number;
+	// monthlyAnalysisDone: number;
 	// analysisRemaining: number;
 	// analysisLimit: number;
 	createdAt: string | null; // ISO date
@@ -27,61 +27,64 @@ export interface PopulationRange {
 
 export interface Fuel {
 	id: number;
-    name: string;
-    active: boolean;
+	name: string;
+	active: boolean;
 }
 
 export interface VehicleModelType {
 	id: number;
-    name: string;
+	name: string;
 	vehicleModel: VehicleModel;
-    active: boolean;
+	active: boolean;
 }
-
 
 export interface VehicleBrand {
 	id: number;
-    name: string;
-    active: boolean;
+	name: string;
+	active: boolean;
 }
 
 export interface VehicleCategory {
 	id: number;
-    name: string;
-    active: boolean;
+	name: string;
+	active: boolean;
 }
 
 export interface VehicleModel {
 	id: number;
-    name: string;
+	name: string;
 	vehicleBrand: VehicleBrand;
-    active: boolean;
+	active: boolean;
 }
 
 export interface Transmission {
 	id: number;
-    name: string;
-    active: boolean;
+	name: string;
+	active: boolean;
 }
-
+export interface Location {
+	id: number;
+	name: string;
+	active: boolean;
+}
 export interface Advertisement {
 	id: number;
 	name: string;
 	price: number | null;
 	mileage: number | null;
-	horse_power: number | null;
+	horsePower: number | null;
 	engine_capacity: number | null;
 	color: string | null;
 	description: string | null;
 	user: User;
 	year: number | null;
 	location: Location | null;
-	vehicleBrand: VehicleBrand| null;
-	vehicleModel: VehicleModel| null;
-	vehicleModelType: VehicleModelType| null;
-	vehicleCategory: VehicleCategory| null;
-	fuel: Fuel| null;
-	transmission: Transmission| null;
+	vehicleBrand: VehicleBrand | null;
+	vehicleModel: VehicleModel | null;
+	vehicleModelType: VehicleModelType | null;
+	vehicleCategory: VehicleCategory | null;
+	fuel: Fuel | null;
+	transmission: Transmission | null;
 }
 
 // export interface EstateType {
@@ -90,11 +93,7 @@ export interface Advertisement {
 // 	slug: string;
 // }
 //
-// export interface Location {
-// 	id: number;
-// 	name: string;
-// 	slug: string;
-// }
+
 
 // export interface LocationEstateData {
 // 	id: number;
@@ -185,5 +184,5 @@ export interface AdminPanelAnylysis {
 	description: string;
 	createdAt: string; // ISO date
 	updatedAt: string; // ISO date
-	user: { id: number, name: string, email: string };
+	user: { id: number; name: string; email: string };
 }

@@ -1,7 +1,6 @@
 import {
 	DashboardStats,
 	Analysis,
-	Favorite,
 	AdminPanelUser,
 	AdminPanelAnylysis,
 	Advertisement,
@@ -21,14 +20,12 @@ export const getDashboardStats = async (): Promise<DashboardStats> => {
 // 	sortBy,
 // 	sort,
 // 	filters,
-// 	showFavorites,
 // }: {
 // 	pageIndex: number;
 // 	pageSize: number;
 // 	sortBy?: string;
 // 	sort?: 'asc' | 'desc';
 // 	filters?: ColumnFiltersState;
-// 	showFavorites: boolean;
 // }): Promise<{
 // 	rows: Advertisement[];
 // 	meta: {
@@ -103,42 +100,6 @@ export const generateEstateAnalysis = async (id: any): Promise<Analysis> => {
 	});
 };
 
-export const getLocations = async (): Promise<Location[]> => {
-	return api.get('/api/locations').then((res) => {
-		let locations = res.data.data;
-
-		// Sort by first & second word in name
-		locations = locations.sort((a: Location, b: Location) => {
-			const aName = a.name.split(' ');
-			const bName = b.name.split(' ');
-
-			if (aName[0] === bName[0]) {
-				if (aName[1] === bName[1]) return 0;
-				else if (aName[1] < bName[1]) return -1;
-				else return 1;
-			} else if (aName[0] < bName[0]) return -1;
-			else return 1;
-		});
-
-		return locations;
-	});
-};
-
-export const getDistricts = async (): Promise<District[]> => {
-	return api.get('/api/districts').then((res) => {
-		let districts = res.data.data;
-
-		// Sort alphabetically
-		districts = districts.sort((a: District, b: District) => {
-			if (a.name === b.name) return 0;
-			else if (a.name < b.name) return -1;
-			else return 1;
-		});
-
-		return districts;
-	});
-};
-
 export const getUserAnalyses = async ({
 	pageIndex = 0,
 	pageSize = 20,
@@ -172,20 +133,6 @@ export const getUserAnalyses = async ({
 		.then((res) => {
 			return res.data;
 		});
-};
-export const getLocation = async (id: any, districtId: any): Promise<LocationEstateData> => {
-	return api
-		.get(`/api/locations/${id}${districtId ? `?district=${districtId}` : ''}`)
-		.then((res) => {
-			return res.data.data;
-		})
-		.catch((err) => console.log(err.response));
-};
-
-export const getConstructionTypes = async (): Promise<ConstructionType[]> => {
-	return api.get('/api/construction-types').then((res) => {
-		return res.data.data;
-	});
 };
 
 interface AdminPanelUserFilters {

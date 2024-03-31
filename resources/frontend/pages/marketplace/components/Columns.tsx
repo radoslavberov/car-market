@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/Badge';
 import { Checkbox } from '@/components/ui/Checkbox';
 
 // import { labels, priorities, statuses } from '../data';
-import { Estate, Favorite } from '@/types/index';
+import { Advertisement } from '@/types/index';
 import { DataTableColumnHeader } from './DataTableColumnHeader';
 import { DataTableRowActions } from './DataTableRowActions';
 import { Button, buttonVariants } from '@/components/ui/Button';
@@ -16,7 +16,7 @@ import { Icons } from '@/components/Icons';
 import { cn } from '@/lib/utils';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/Tooltip';
 
-export const columns: ColumnDef<Estate>[] = [
+export const columns: ColumnDef<Advertisement>[] = [
 	{
 		accessorKey: 'id',
 		header: ({ column }) => <DataTableColumnHeader column={column} title="" />,
@@ -39,7 +39,7 @@ export const columns: ColumnDef<Estate>[] = [
 		header: ({ column }) => <DataTableColumnHeader className="w-full" column={column} title="Превозно средство" />,
 		cell: ({ row }) => (
 			<div>
-				{row.original?.vehicleBrand.name} {row.original?.vehicleModelType.name}
+				{row.original?.vehicleBrand?.name} {row.original?.vehicleModelType?.name}
 			</div>
 		),
 	},
@@ -60,17 +60,15 @@ export const columns: ColumnDef<Estate>[] = [
 	{
 		accessorKey: 'fuel',
 		header: ({ column }) => <DataTableColumnHeader column={column} title="Тип гориво" />,
-		cell: ({ row }) => <div>{row.original?.fuel.name}</div>,
+		cell: ({ row }) => <div>{row.original?.fuel?.name}</div>,
 	},
 	{
 		id: 'location',
-		accessorFn: (data) => data.location?.name.toUpperCase(),
 		header: ({ column }) => <DataTableColumnHeader column={column} title="Местоп." className="w-24" />,
-		cell: ({ row }) => <div>{row.getValue('location')}</div>,
+		cell: ({ row }) => <div>{row.original?.location?.name}</div>,
 	},
 	{
 		id: 'mileage',
-		accessorFn: (data) => data.district?.name.toUpperCase(),
 		header: ({ column }) => <DataTableColumnHeader column={column} title="Мили" className="w-24" />,
 		cell: ({ row }) => <div>{row.original?.mileage} мили</div>,
 	},
@@ -81,9 +79,8 @@ export const columns: ColumnDef<Estate>[] = [
 	},
 	{
 		id: 'transmission',
-		accessorFn: (data) => data.transmission?.name,
 		header: ({ column }) => <DataTableColumnHeader column={column} title="Трансмисия" />,
-		cell: ({ row }) => <div>{row.original?.transmission.name}</div>,
+		cell: ({ row }) => <div>{row.original?.transmission?.name}</div>,
 	},
 	{
 		accessorKey: 'vehicleCategory',
@@ -104,8 +101,4 @@ export const columns: ColumnDef<Estate>[] = [
 			</div>
 		),
 	},
-	// {
-	// 	id: 'actions',
-	// 	cell: ({ row }) => <DataTableRowActions row={row} />,
-	// },
 ];

@@ -17,7 +17,6 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { DataTablePagination } from '@/components/DataTablePagination';
 import { DataTableToolbar } from './DataTableToolbar';
 import { cn } from '@/lib/utils';
-import { Favorite } from '@/types';
 
 interface DataTableProps<TData, TValue> {
 	isFetching: boolean;
@@ -33,9 +32,6 @@ interface DataTableProps<TData, TValue> {
 	onSetSorting: React.Dispatch<React.SetStateAction<SortingState>>;
 	columnFilters: ColumnFiltersState;
 	onSetColumnFilters: React.Dispatch<React.SetStateAction<ColumnFiltersState>>;
-	showFavorites: boolean;
-	onSetShowFavorites: React.Dispatch<React.SetStateAction<boolean>>;
-	favorites: Favorite[] | undefined;
 }
 
 export function DataTable<TData, TValue>({
@@ -49,9 +45,6 @@ export function DataTable<TData, TValue>({
 	onSetSorting: setSorting,
 	columnFilters,
 	onSetColumnFilters: setColumnFilters,
-	showFavorites,
-	onSetShowFavorites: setShowFavorites,
-	favorites,
 }: DataTableProps<TData, TValue>) {
 	const [rowSelection, setRowSelection] = React.useState({});
 	const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
@@ -65,9 +58,6 @@ export function DataTable<TData, TValue>({
 			columnVisibility,
 			rowSelection,
 			columnFilters,
-		},
-		meta: {
-			favorites,
 		},
 		enableRowSelection: true,
 		onRowSelectionChange: setRowSelection,
@@ -90,7 +80,7 @@ export function DataTable<TData, TValue>({
 
 	return (
 		<div className={cn('space-y-4', isFetching && 'opacity-50')}>
-			{/* <DataTableToolbar table={table} showFavorites={showFavorites} onSetShowFavorites={setShowFavorites} />
+			{/* <DataTableToolbar table={table} />
 			<DataTablePagination table={table} /> */}
 			<div className="border rounded-md bg-background">
 				<Table>

@@ -5,10 +5,6 @@ import { useQuery } from '@tanstack/react-query';
 import { ColumnFiltersState, SortDirection, SortingState } from '@tanstack/react-table';
 import {
 	getAdvertisements,
-	getConstructionTypes,
-	getDistricts,
-	getFavorites,
-	getLocations,
 } from '@/data';
 import { Icons } from '@/components/Icons';
 import { useLocation, useSearchParams } from 'react-router-dom';
@@ -27,7 +23,6 @@ export function MarketplacePage() {
 	});
 	const [sorting, setSorting] = useState<SortingState>([]);
 	const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-	const [showFavorites, setShowFavorites] = useState<boolean>(false);
 	const [searchParams] = useSearchParams();
 	// Fetch options
 	const fetchDataOptions: {
@@ -36,14 +31,12 @@ export function MarketplacePage() {
 		sort?: SortDirection;
 		sortBy?: string;
 		filters?: ColumnFiltersState;
-		showFavorites: boolean;
 	} = {
 		pageIndex,
 		pageSize,
 		sort: sorting.length ? (sorting[0].desc ? 'desc' : 'asc') : undefined,
 		sortBy: sorting.length ? sorting[0].id : undefined,
 		filters: columnFilters.length ? columnFilters : undefined,
-		showFavorites,
 	};
 
 	// // Fetch real estates
@@ -74,14 +67,7 @@ export function MarketplacePage() {
 
 	// // Load all the data we need for the filters
 	// useQuery({ queryKey: [QUERY_KEY.estateTypes], queryFn: getEstateTypes });
-	useQuery({ queryKey: [QUERY_KEY.locations], queryFn: getLocations });
-	useQuery({ queryKey: [QUERY_KEY.districts], queryFn: getDistricts });
-	useQuery({ queryKey: [QUERY_KEY.constructionTypes], queryFn: getConstructionTypes });
 	// useQuery({ queryKey: [QUERY_KEY.providers], queryFn: getProviders });
-	const { data: favorites } = useQuery({
-		queryKey: [QUERY_KEY.favorites],
-		queryFn: getFavorites,
-	});
 
 	// Data that will be passed to the DataTable component
 	const pagination = useMemo(() => ({ pageIndex, pageSize }), [pageIndex, pageSize]);
@@ -93,7 +79,7 @@ export function MarketplacePage() {
 			...prevPagination,
 			pageIndex: 0,
 		}));
-	}, [fetchDataOptions.filters, fetchDataOptions.showFavorites]);
+	}, [fetchDataOptions.filters]);
 
 	// Update the URL with the current pagination, sorting and filtering states
 	useEffect(() => {
@@ -250,9 +236,6 @@ export function MarketplacePage() {
 					onSetSorting={setSorting}
 					columnFilters={columnFilters}
 					onSetColumnFilters={setColumnFilters}
-					showFavorites={showFavorites}
-					onSetShowFavorites={setShowFavorites}
-					favorites={favorites}
 				/>
 			) : (
 				<span className="flex flex-row items-center text-muted-foreground">

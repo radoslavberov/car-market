@@ -1,11 +1,5 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import {
-	generateEstateAnalysis,
-	getAdvertisement,
-	getFavorites,
-	makeFavorite,
-	removeFavorite,
-} from '@/data';
+import { getAdvertisement } from '@/data';
 import { Euro, HardHat, Home, Expand, Hotel, Calendar, Bot } from 'lucide-react';
 import { Card, CardHeader, CardContent, CardTitle } from '@/components/ui/Card';
 import { Icons } from '@/components/Icons';
@@ -51,38 +45,21 @@ export function VehiclePage() {
 						<Icons.chevronLeft className="block w-8 h-8 text-muted-foreground group-hover:text-foreground" />
 					</span>
 					<div className="flex flex-col gap-1">
-						{isError ? (
-							<h2 className="text-3xl font-bold tracking-tight">Не намерихме имота, който търсите!</h2>
-						) : (
-							<h2 className="flex flex-row items-baseline gap-1 text-3xl font-bold tracking-tight">
-								<span>
-									{isLoading ? 'Имот' : `#${data?.id} - ${data?.estateType?.name ?? 'Имот'}`}
-								</span>
-							</h2>
-						)}
+						<h2 className="flex flex-row items-baseline gap-1 text-3xl font-bold tracking-tight">
+							<span>
+								{isLoading ? '' : `${data?.vehicleBrand?.name} ${data?.vehicleModelType?.name}`}
+							</span>
+						</h2>
+
 						{isLoading ? (
 							<p className="flex flex-row items-center text-muted-foreground">
 								<Icons.spinner className="w-4 h-4 mr-2 animate-spin" /> Моля изчакайте, докато заредим
 								информацията за имота.
 							</p>
-						) : isError ? (
-							<p className="text-muted-foreground">
-								Нямаме информация за имота, който търсите. Моля опитайте отново.
-							</p>
 						) : (
 							<p className="flex flex-row items-center capitalize text-muted-foreground">
 								<Icons.pin className="w-5 h-5 mr-2 text-brand" />
-								<a
-									className="cursor-pointer hover:underline"
-									target="_blank"
-									href={
-										data?.latitude
-											? `https://maps.google.com/?q=${data.latitude},${data.longitude}`
-											: undefined
-									}
-								>
-									{data?.location?.name}, {data?.district?.name}, {data?.latitude}, {data?.longitude}
-								</a>
+								<p>{data?.location?.name}</p>
 							</p>
 						)}
 					</div>
@@ -98,82 +75,64 @@ export function VehiclePage() {
 					</CardHeader>
 					<CardContent>
 						<div className="text-2xl font-bold">
-							{new Intl.NumberFormat('en-US').format(Number(data?.price)) + ' EUR'}
+							{new Intl.NumberFormat('en-US').format(Number(data?.price)) + ' ЛВ'}
 						</div>
-						{/* <p className="text-xs text-muted-foreground">+20.1% from last month</p> */}
 					</CardContent>
 				</Card>
 				<Card>
 					<CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-						<CardTitle className="text-sm font-medium">Цена/кв.м.</CardTitle>
+						<CardTitle className="text-sm font-medium">Цвят</CardTitle>
 						<Euro className="w-4 h-4 text-muted-foreground" />
 					</CardHeader>
 					<CardContent>
-						<div className="text-2xl font-bold">
-							{new Intl.NumberFormat('en-US').format(Number(data?.priceSquareMeters)) + ' EUR/m2'}
-						</div>
-						{/* <p className="text-xs text-muted-foreground">+19% from last month</p> */}
+						<div className="text-2xl font-bold">{data?.color ?? NO_INFO_TEXT}</div>
 					</CardContent>
 				</Card>
 				<Card>
 					<CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-						<CardTitle className="text-sm font-medium">Площ (кв.м)</CardTitle>
+						<CardTitle className="text-sm font-medium">Двигател</CardTitle>
 						<Expand className="w-4 h-4 text-muted-foreground" />
 					</CardHeader>
 					<CardContent>
-						<div className="text-2xl font-bold">
-							{new Intl.NumberFormat('en-US').format(Number(data?.squareMeters)) + ' m2'}
-						</div>
-						{/* <p className="text-xs text-muted-foreground">+180.1% from last month</p> */}
+						<div className="text-2xl font-bold">{data?.fuel?.name ?? NO_INFO_TEXT}</div>
 					</CardContent>
 				</Card>
 				<Card>
 					<CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-						<CardTitle className="text-sm font-medium">Добавен</CardTitle>
+						<CardTitle className="text-sm font-medium">Пробег</CardTitle>
 						<Calendar className="w-4 h-4 text-muted-foreground" />
 					</CardHeader>
 					<CardContent>
-						<div className="text-2xl font-bold">
-							{data?.createdAt
-								? intlFormatDistance(new Date(data.createdAt), Date.now(), {
-										locale: 'bg-BG',
-								  })
-								: ''}
-						</div>
-						<p className="text-xs text-muted-foreground">
-							{data?.crawledAt
-								? `Обновен ${intlFormatDistance(new Date(data.crawledAt), Date.now(), {
-										locale: 'bg-BG',
-								  })}`
-								: ''}
-						</p>
+						<div className="text-2xl font-bold">{data?.mileage ?? NO_INFO_TEXT} км</div>
 					</CardContent>
 				</Card>
 				<Card>
 					<CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-						<CardTitle className="text-sm font-medium">Тип Имот</CardTitle>
+						<CardTitle className="text-sm font-medium">Купе</CardTitle>
 						<Home className="w-4 h-4 text-muted-foreground" />
 					</CardHeader>
 					<CardContent>
-						<div className="text-2xl font-bold">{data?.estateType?.name ?? NO_INFO_TEXT}</div>
+						<div className="text-2xl font-bold">{data?.vehicleCategory?.name ?? NO_INFO_TEXT}</div>
 					</CardContent>
 				</Card>
 				<Card>
 					<CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-						<CardTitle className="text-sm font-medium">Тип Конструкция</CardTitle>
+						<CardTitle className="text-sm font-medium">Капацитет на двигателя</CardTitle>
 						<HardHat className="w-4 h-4 text-muted-foreground" />
 					</CardHeader>
 					<CardContent>
-						<div className="text-2xl font-bold">{data?.constructionType?.name ?? NO_INFO_TEXT}</div>
+						<div className="text-2xl font-bold">
+							{data?.engine_capacity ?? NO_INFO_TEXT} {data?.engine_capacity ? 'литра' : ''}
+						</div>
 					</CardContent>
 				</Card>
 				<Card>
 					<CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-						<CardTitle className="text-sm font-medium">Етаж</CardTitle>
+						<CardTitle className="text-sm font-medium">Скоростна кутия</CardTitle>
 						<Hotel className="w-4 h-4 text-muted-foreground" />
 					</CardHeader>
 					<CardContent>
-						<div className="text-2xl font-bold">{data?.floor ?? NO_INFO_TEXT}</div>
+						<div className="text-2xl font-bold">{data?.transmission?.name ?? NO_INFO_TEXT}</div>
 					</CardContent>
 				</Card>
 				<Card>
