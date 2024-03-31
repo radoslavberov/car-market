@@ -12,10 +12,10 @@ import { SettingsLayout } from '@/pages/settings/Layout';
 import { SettingsAccountPage } from '@/pages/settings/Account';
 import { SettingsPasswordPage } from '@/pages/settings/Password';
 import { NotFoundPage } from '@/pages/404/Page';
-// import { EstatePage } from '@/pages/estate/Page';
+import { VehiclePage } from '@/pages/estate/Page';
 // import { LocationsPage } from '@/pages/locations/Page';
 // import { AnalysesDashboardPage } from '@/pages/dashboard/Analyses';
-// import { DashboardOverviewPage } from '@/pages/dashboard/Overview';
+import { DashboardOverviewPage } from '@/pages/dashboard/Overview';
 import { LandingPage } from '@/pages/landing/Page';
 import { useEffect } from 'react';
 import { toast } from './hooks/toast.hook';
@@ -64,12 +64,12 @@ export default function App() {
 			{/* Authenticated pages */}
 			<Route element={<Layout variant="auth" />}>
 				<Route path="dashboard" element={<DashboardLayout />}>
-					{/*<Route path="" element={<DashboardOverviewPage />} />*/}
+					<Route path="" element={<DashboardOverviewPage />} />
 					{/*<Route path="analyses" element={<AnalysesDashboardPage />} />*/}
 				</Route>
 				<Route path="marketplace" element={<MarketplacePage />} />
 				{/*<Route path="locations" element={<LocationsPage />} />*/}
-				{/*<Route path="estates/:id" element={<EstatePage />} />*/}
+				<Route path="estates/:id" element={<VehiclePage />} />
 				<Route path="settings" element={<SettingsLayout />}>
 					<Route path="" element={<Navigate replace to="account" />} />
 					<Route path="*" element={<Navigate replace to="account" />} />

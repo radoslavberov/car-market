@@ -22,17 +22,18 @@ export function DashboardOverviewPage() {
 	});
 
 	// Get estate counts for today
-	const estatesToday =
-		data?.estateCountLastWeek.find((i) => {
+	const advertisementsToday =
+		data?.advertisementsCountLastWeek.find((i) => {
 			return i.date === today;
 		})?.count ?? 0;
 
 	// Get estate counts for yesterday
-	const estatesYesterday =
-		data?.estateCountLastWeek.find((i) => {
+	const advertisementsYesterday =
+		data?.advertisementsCountLastWeek.find((i) => {
 			return i.date === yesterday;
 		})?.count ?? 0;
 
+	console.log(data);
 	return (
 		<>
 			{/* Tabs content */}
@@ -42,11 +43,11 @@ export function DashboardOverviewPage() {
 					{/* Total Estates */}
 					<Card>
 						<CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-							<CardTitle className="text-sm font-medium">Брой имоти</CardTitle>
+							<CardTitle className="text-sm font-medium">Брой обяви</CardTitle>
 							<Euro className="h-4 w-4 text-muted-foreground" />
 						</CardHeader>
 						<CardContent>
-							<div className="text-2xl font-bold">{data?.total.estates}</div>
+							<div className="text-2xl font-bold">{data?.total.advertisements}</div>
 							{/* <p className="text-xs text-muted-foreground">+20.1% from last month</p> */}
 						</CardContent>
 					</Card>
@@ -66,11 +67,11 @@ export function DashboardOverviewPage() {
 					{/* Total Districts */}
 					<Card>
 						<CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-							<CardTitle className="text-sm font-medium">Райони/Квартали</CardTitle>
+							<CardTitle className="text-sm font-medium">Марки</CardTitle>
 							<UserSquare className="h-4 w-4 text-muted-foreground" />
 						</CardHeader>
 						<CardContent>
-							<div className="text-2xl font-bold">{data?.total.districts}</div>
+							<div className="text-2xl font-bold">{data?.total.brands}</div>
 							{/* <p className="text-xs text-muted-foreground">+19% from last month</p> */}
 						</CardContent>
 					</Card>
@@ -78,14 +79,14 @@ export function DashboardOverviewPage() {
 					{/* Estates Added Today */}
 					<Card>
 						<CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-							<CardTitle className="text-sm font-medium">Имоти добавени днес</CardTitle>
+							<CardTitle className="text-sm font-medium">Oбяви добавени днес</CardTitle>
 							<Activity className="h-4 w-4 text-muted-foreground" />
 						</CardHeader>
 						{data && (
 							<CardContent>
-								<div className="text-2xl font-bold">{estatesToday}</div>
+								<div className="text-2xl font-bold">{advertisementsToday}</div>
 								<p className="text-xs text-muted-foreground">
-									Имоти добавени вчера: {estatesYesterday}
+									Oбяви добавени вчера: {advertisementsYesterday}
 								</p>
 							</CardContent>
 						)}
@@ -107,21 +108,20 @@ export function DashboardOverviewPage() {
 					{/* Highest priced estates list */}
 					<Card className="col-span-7 lg:col-span-3">
 						<CardHeader>
-							<CardTitle>Най-високи цени на имоти</CardTitle>
-							<CardDescription>Показаната цена е средната за квадратен метър</CardDescription>
+							<CardTitle>Най-високи цени за марка автомобили</CardTitle>
+							<CardDescription>Показаната цена е средната за марка автомобили </CardDescription>
 						</CardHeader>
 						<CardContent>
 							<div className="space-y-8">
-								{data?.avgPriceSqMeter?.map((item, index) => (
+								{data?.getAveragePriceByBrand?.map((item, index) => (
 									<div key={index} className="flex items-center">
 										<div className="space-y-1">
 											<p className="text-sm font-medium leading-none">
-												{item.location?.toUpperCase() || 'Без намерено местоложение'}
+												{item.vehicleBrand?.toUpperCase() || 'Без намерено местоложение'}
 											</p>
-											<p className="text-sm text-muted-foreground">{item.provider}</p>
 										</div>
 										<div className="ml-auto font-medium text-[#5fd045]">
-											~{new Intl.NumberFormat('en-US').format(Number(item.price)) + ' EUR'}
+											~{new Intl.NumberFormat('en-US').format(Number(item.price)) + ' ЛВ'}
 										</div>
 									</div>
 								))}
@@ -132,7 +132,7 @@ export function DashboardOverviewPage() {
 					{/* Estate types chart */}
 					<Card className="col-span-7">
 						<CardHeader>
-							<CardTitle>Тип имоти</CardTitle>
+							<CardTitle>Автомобилни категории</CardTitle>
 						</CardHeader>
 						<CardContent className="pl-2">
 							<EstateTypesChart />

@@ -15,7 +15,7 @@ export const CustomTooltip = ({ active, payload, label }: any) => {
 				<CardContent>
 					{payload.map((pld: any, index: number) => (
 						<p key={index} className="pb-2 text-sm">
-							<span className="font-bold">{new Intl.NumberFormat('en-US').format(pld.value)}</span> имота
+							<span className="font-bold">{new Intl.NumberFormat('en-US').format(pld.value)}</span> {payload.length > 1 ? "автомобили" : "автомобил"}
 						</p>
 					))}
 				</CardContent>
@@ -31,9 +31,9 @@ export function EstateTypesChart() {
 
 	const data = useMemo(() => {
 		if (stats)
-			return stats.estateCountByType
+			return stats.advertisementsCountByCategory
 				.filter((i: any) => {
-					return i.name?.toLowerCase().match(/апартамент|къща|мезонет/gi)?.length > 0;
+					return i.name?.toLowerCase().match(/джип|ван|кабрио|седан|хечбек|комби/gi)?.length > 0;
 				})
 				.map((i) => ({
 					name: i.name,

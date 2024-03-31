@@ -10,7 +10,7 @@ export function Layout({ variant }: { variant: 'auth' | 'guest' }) {
 
 	useEffect(() => {
 		// Redirect to login page if user is not authenticated
-		if ((!user || !token) && variant === 'auth') navigate('/login', { replace: true });
+		if ((!user || !token) && variant === 'auth') navigate('', { replace: true });
 
 		// Redirect to dashboard if user is authenticated
 		if (user && token && variant === 'guest') navigate('/dashboard', { replace: true });

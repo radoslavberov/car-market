@@ -15,7 +15,7 @@ export const CustomTooltip = ({ active, payload, label }: any) => {
 				<CardContent>
 					{payload.map((pld: any, index: number) => (
 						<p key={index} className="pb-2 text-sm">
-							<span className="font-bold">{new Intl.NumberFormat('en-US').format(pld.value)}</span> нови имота
+							<span className="font-bold">{new Intl.NumberFormat('en-US').format(pld.value)}</span> нови обяви
 						</p>
 					))}
 				</CardContent>
@@ -39,7 +39,7 @@ export function EstateCountChart() {
 
         // Fill last 7 days with data from API
 		return lastWeek.map((day) => {
-			const dayStats = stats?.estateCountLastWeek.find((i: any) => i.date === day);
+			const dayStats = stats?.advertisementsCountLastWeek.find((i: any) => i.date === day);
 			return {
 				name: intlFormat(new Date(day)),
 				total: dayStats?.count || 0,

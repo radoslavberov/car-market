@@ -4,13 +4,11 @@ import { DataTable } from './components/DataTable';
 import { useQuery } from '@tanstack/react-query';
 import { ColumnFiltersState, SortDirection, SortingState } from '@tanstack/react-table';
 import {
+	getAdvertisements,
 	getConstructionTypes,
 	getDistricts,
-	getEstates,
-	getEstateTypes,
 	getFavorites,
 	getLocations,
-	getProviders,
 } from '@/data';
 import { Icons } from '@/components/Icons';
 import { useLocation, useSearchParams } from 'react-router-dom';
@@ -48,10 +46,22 @@ export function MarketplacePage() {
 		showFavorites,
 	};
 
+	// // Fetch real estates
+	// const { isLoading, isFetching, data } = useQuery({
+	// 	queryKey: [QUERY_KEY.estates, fetchDataOptions],
+	// 	queryFn: () => getAdvertisements(fetchDataOptions),
+	// 	keepPreviousData: true,
+	// 	meta: {
+	// 		// Error message that will be displayed via toast if the query fails
+	// 		errorMessage: 'Неуспешно зареждане на имотите. Моля опитайте пак по-късно.',
+	// 	},
+	// 	enabled: !!user,
+	// });
+
 	// Fetch real estates
 	const { isLoading, isFetching, data } = useQuery({
-		queryKey: [QUERY_KEY.estates, fetchDataOptions],
-		queryFn: () => getEstates(fetchDataOptions),
+		queryKey: [QUERY_KEY.advertisements],
+		queryFn: () => getAdvertisements(),
 		keepPreviousData: true,
 		meta: {
 			// Error message that will be displayed via toast if the query fails
@@ -60,12 +70,14 @@ export function MarketplacePage() {
 		enabled: !!user,
 	});
 
-	// Load all the data we need for the filters
-	useQuery({ queryKey: [QUERY_KEY.estateTypes], queryFn: getEstateTypes });
+	console.log(data)
+
+	// // Load all the data we need for the filters
+	// useQuery({ queryKey: [QUERY_KEY.estateTypes], queryFn: getEstateTypes });
 	useQuery({ queryKey: [QUERY_KEY.locations], queryFn: getLocations });
 	useQuery({ queryKey: [QUERY_KEY.districts], queryFn: getDistricts });
 	useQuery({ queryKey: [QUERY_KEY.constructionTypes], queryFn: getConstructionTypes });
-	useQuery({ queryKey: [QUERY_KEY.providers], queryFn: getProviders });
+	// useQuery({ queryKey: [QUERY_KEY.providers], queryFn: getProviders });
 	const { data: favorites } = useQuery({
 		queryKey: [QUERY_KEY.favorites],
 		queryFn: getFavorites,
@@ -222,15 +234,15 @@ export function MarketplacePage() {
 				{data && (
 					<div className="mt-2 md:mt-0">
 						<div className="text-sm font-medium">Намерени резултати</div>
-						<div className="text-2xl font-bold text-[#5fd045] md:text-right">{data.meta.total}</div>
+						<div className="text-2xl font-bold text-[#5fd045] md:text-right">{data.length}</div>
 					</div>
 				)}
 			</div>
-			{!isLoading ? (
+			 {!isLoading ? (
 				<DataTable
 					isFetching={isFetching}
-					data={data?.rows || defaultData}
-					count={data?.meta.total ?? -1}
+					data={data || defaultData}
+					count={data?.length ?? -1}
 					columns={columns}
 					pagination={pagination}
 					onSetPagination={setPagination}
@@ -246,7 +258,7 @@ export function MarketplacePage() {
 				<span className="flex flex-row items-center text-muted-foreground">
 					<Icons.spinner className="w-4 h-4 mr-2 animate-spin" /> Моля изчакайте...
 				</span>
-			)}
+			)} 
 		</div>
 	);
 }

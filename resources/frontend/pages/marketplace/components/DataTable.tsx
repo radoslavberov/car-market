@@ -90,8 +90,8 @@ export function DataTable<TData, TValue>({
 
 	return (
 		<div className={cn('space-y-4', isFetching && 'opacity-50')}>
-			<DataTableToolbar table={table} showFavorites={showFavorites} onSetShowFavorites={setShowFavorites} />
-			<DataTablePagination table={table} />
+			{/* <DataTableToolbar table={table} showFavorites={showFavorites} onSetShowFavorites={setShowFavorites} />
+			<DataTablePagination table={table} /> */}
 			<div className="border rounded-md bg-background">
 				<Table>
 					<TableHeader>

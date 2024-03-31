@@ -30,12 +30,12 @@ export function AppHeader() {
 											user.monthlyAnalysisDone == user.analysisLimit ? 'text-destructive' : 'text-brand',
 										)}
 									>
-										{user.monthlyAnalysisDone} / {user.analysisLimit} анализа
+										{user.monthlyAnalysisDone} / {user.analysisLimit} обяви
 									</span>
 								</div>
 							</TooltipTrigger>
 							<TooltipContent side="bottom" className="flex flex-col max-w-xl">
-								<span>Вашият месечен лимит за имотни анализи.</span>
+								<span>Вашият месечен лимит за обяви.</span>
 								<span>
 									Ако достигнете този лимит, ще трябва да изчакате до следващия месец, за да направите
 									нов!

@@ -8,7 +8,7 @@ export function Layout() {
 	return (
 		<div className="relative min-h-screen text-white max-h-fit">
 			<div
-				className="absolute inset-x-0 top-0 z-0 bg-no-repeat bg-cover bottom-1/2"
+				className="absolute inset-x-0 top-10 z-0 bg-no-repeat bg-cover bottom-1/2"
 				style={{
 					backgroundImage: `url(${siteConfig.landingImage})`,
 				}}

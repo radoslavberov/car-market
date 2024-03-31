@@ -1,8 +1,8 @@
 export const QUERY_KEY = {
 	auth: 'auth',
 	stats: 'dashboard-stats',
-	estate: 'estate',
-	estates: 'estates',
+	advertisement: 'advertisement',
+	advertisements: 'advertisements',
 	location: 'location',
 	locations: 'locations',
 	districts: 'districts',

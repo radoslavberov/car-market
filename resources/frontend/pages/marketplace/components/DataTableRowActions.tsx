@@ -2,12 +2,12 @@ import { Row } from '@tanstack/react-table';
 import { Icons } from '@/components/Icons';
 import { MoreHorizontal } from 'lucide-react';
 import { toast } from '@/hooks/toast.hook';
-import { makeFavorite, removeFavorite, getFavorites } from '@/data';
+import { makeFavorite, removeFavorite, getFavorites, getAdvertisements } from '@/data';
 import { useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Button } from '@/components/ui/Button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/DropdownMenu';
-import { Estate } from '@/types';
+import { Advertisement } from '@/types';
 import { useQueryClient } from '@tanstack/react-query';
 import { QUERY_KEY } from '@/data/constants';
 import { cn } from '@/lib/utils';
@@ -19,39 +19,10 @@ export function DataTableRowActions<TData>({ row }: DataTableRowActionsProps<TDa
 	const queryClient = useQueryClient();
 
 	// Get the estate data
-	const estate = row.original as Estate;
+	const estate = row.original as Advertisement;
 
 	// Fetch favorite data
-	const { data, isFetching } = useQuery({ queryKey: [QUERY_KEY.favorites], queryFn: getFavorites });
-
-	// Check if estate is in favorites
-	const favorite = useMemo(() => data?.find((favorite) => favorite.estateId === estate.id), [data, estate.id]);
-
-	// Function to handle adding/removing favorite
-	const handleFavorites = async () => {
-		try {
-			// Toggle favorite status for estate
-			if (favorite) await removeFavorite(favorite.id);
-			else await makeFavorite(estate.id);
-
-			// Show success message
-			toast({
-				title: `Имот #${estate.id} ${favorite ? 'премахнат от' : 'добавен в'} любими`,
-			});
-
-			// Refetch favorites
-			queryClient.invalidateQueries([QUERY_KEY.favorites]);
-		} catch (error) {
-			// Handle error (e.g., show a toast message)
-			toast({
-				title: 'Възникна грешка',
-				description: favorite
-					? 'Проблем при премахване от любими. Моля, опитайте по-късно.'
-					: 'Проблем при добавяне в любими. Моля, опитайте по-късно.',
-				variant: 'destructive',
-			});
-		}
-	};
+	const { data, isFetching } = useQuery({ queryKey: [QUERY_KEY.advertisements], queryFn: getAdvertisements });
 
 	return (
 		<DropdownMenu>

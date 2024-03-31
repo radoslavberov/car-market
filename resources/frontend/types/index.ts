@@ -25,27 +25,63 @@ export interface PopulationRange {
 	women: number;
 }
 
-export interface Estate {
-	// id: number;
-	// url: string;
-	// price: string | null;
-	// squareMeters: string | null;
-	// priceSquareMeters: string | null;
-	// floor: number | null;
-	// year: number | null;
-	// location: Location | null;
-	// district: District | null;
-	// estateType: EstateType | null;
-	// constructionType: ConstructionType | null;
-	// latitude: string | null;
-	// longitude: string | null;
-	// population: PopulationRange[] | null;
-	// provider: string | null;
-	// description: string | null;
-    // createdAt: string | null; // ISO date
-    // updatedAt: string | null; // ISO date
-    // crawledAt: string | null; // ISO date
-	// active: boolean;
+export interface Fuel {
+	id: number;
+    name: string;
+    active: boolean;
+}
+
+export interface VehicleModelType {
+	id: number;
+    name: string;
+	vehicleModel: VehicleModel;
+    active: boolean;
+}
+
+
+export interface VehicleBrand {
+	id: number;
+    name: string;
+    active: boolean;
+}
+
+export interface VehicleCategory {
+	id: number;
+    name: string;
+    active: boolean;
+}
+
+export interface VehicleModel {
+	id: number;
+    name: string;
+	vehicleBrand: VehicleBrand;
+    active: boolean;
+}
+
+export interface Transmission {
+	id: number;
+    name: string;
+    active: boolean;
+}
+
+export interface Advertisement {
+	id: number;
+	name: string;
+	price: number | null;
+	mileage: number | null;
+	horse_power: number | null;
+	engine_capacity: number | null;
+	color: string | null;
+	description: string | null;
+	user: User;
+	year: number | null;
+	location: Location | null;
+	vehicleBrand: VehicleBrand| null;
+	vehicleModel: VehicleModel| null;
+	vehicleModelType: VehicleModelType| null;
+	vehicleCategory: VehicleCategory| null;
+	fuel: Fuel| null;
+	transmission: Transmission| null;
 }
 
 // export interface EstateType {
@@ -93,21 +129,24 @@ export interface Estate {
 // }
 
 export interface DashboardStats {
-	// avgPriceSqMeter: { price: string; location: string | null; provider: string | null }[];
-	// total: {
-	// 	estates: number;
-	// 	providers: number;
-	// 	locations: number;
-	// 	districts: number;
-	// };
-	// estateCountByType: {
-	// 	name: string | null;
-	// 	count: number;
-	// }[];
-	// estateCountLastWeek: {
-	// 	date: string;
-	// 	count: number;
-	// }[];
+	total: {
+		advertisements: number;
+		brands: number;
+		locations: number;
+		getTodayAdvertisements: number;
+	};
+	getAveragePriceByBrand: {
+		vehicleBrand: string | null;
+		price: number;
+	}[];
+	advertisementsCountByCategory: {
+		name: string;
+		count: number;
+	}[];
+	advertisementsCountLastWeek: {
+		date: string;
+		count: number;
+	}[];
 }
 export interface Analysis {
 	// id: number;
