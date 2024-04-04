@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Advertisements;
 
 use App\Models\VehicleModel;
 use App\Models\VehicleModelType;
