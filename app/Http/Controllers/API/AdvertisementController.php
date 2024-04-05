@@ -16,8 +16,10 @@ use App\Models\Image;
 use App\Models\VehicleBrand;
 use App\Models\VehicleModel;
 use App\Models\VehicleModelType;
+use Filament\Forms\Get;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use function Filament\Support\get_model_label;
 
 class AdvertisementController extends Controller
 {
@@ -102,8 +104,13 @@ class AdvertisementController extends Controller
         DB::beginTransaction();
 
         try {
+            $getBrand = VehicleBrand::findOrFail($request->vehicle_brand_id);
+            $getModel = VehicleModel::findOrFail($request->vehicle_model_id);
+
+            $generateName = $getBrand->name .' '. $getModel->name;
+
             $advertisement = Advertisement::create([
-                'name' => $request->name,
+                'name' => $generateName,
                 'description' => $request->description,
                 'color' => $request->color,
                 'year' => $request->year,
@@ -120,7 +127,6 @@ class AdvertisementController extends Controller
                 'fuel_id' => $request->fuel_id,
                 'transmission_id' => $request->transmission_id,
             ]);
-
             if ($request->hasFile('images')) {
 
                 $folderName = 'images_advertisement_' . $advertisement->id;

@@ -25,7 +25,7 @@ class StoreAdvertisementRequest extends FormRequest
     {
         return [
             'images[]' => 'image|mimes:jpg,jpeg,png|max:2048',
-            'name' => 'required|string|max:255',
+//            'name' => 'required|string|max:255',
             'price' => 'required|numeric|min:0',
             'color' => 'required|string|max:255',
             'year' => 'required|integer|min:1900|max:' . date('Y'),
