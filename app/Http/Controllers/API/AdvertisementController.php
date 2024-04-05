@@ -8,11 +8,13 @@ use App\Http\Requests\Advertisements\StoreAdvertisementRequest;
 use App\Http\Requests\Advertisements\UpdateAdvertisementRequest;
 use App\Http\Resources\Advertisement\AdvertisementCollection;
 use App\Http\Resources\Advertisement\AdvertisementResource;
+use App\Http\Resources\LocationCollection;
 use App\Http\Resources\VehicleBrandCollection;
 use App\Http\Resources\VehicleModelCollection;
 use App\Http\Resources\VehicleModelTypeCollection;
 use App\Models\Advertisement;
 use App\Models\Image;
+use App\Models\Location;
 use App\Models\VehicleBrand;
 use App\Models\VehicleModel;
 use App\Models\VehicleModelType;
@@ -211,5 +213,12 @@ class AdvertisementController extends Controller
     {
         $vehicleModelTypes = VehicleModelType::where('vehicle_model_id', $vehicleModelId)->get();
         return VehicleModelTypeCollection::make($vehicleModelTypes);
+    }
+
+    #Get all locations endpoint
+    public function getLocations()
+    {
+        $locations = Location::all();
+        return LocationCollection::make($locations);
     }
 }

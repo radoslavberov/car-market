@@ -44,6 +44,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/vehicle-brands', [AdvertisementController::class, 'getVehicleBrands']);
     Route::get('/vehicle-models/{brandId}', [AdvertisementController::class, 'getVehicleModels']);
     Route::get('/vehicle-model-types/{modelId}', [AdvertisementController::class, 'getVehicleModelTypes']);
+    Route::get('/locations', [AdvertisementController::class, 'getLocations']);
 
 });
 
