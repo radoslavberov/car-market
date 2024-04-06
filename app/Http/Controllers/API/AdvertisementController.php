@@ -130,7 +130,8 @@ class AdvertisementController extends Controller
                 'fuel_id' => $request->fuel_id,
                 'transmission_id' => $request->transmission_id,
             ]);
-            if ($request->hasFile('images')) {
+
+            if ($request->hasFile('images') === true) {
 
                 $folderName = 'images_advertisement_' . $advertisement->id;
 
@@ -167,6 +168,7 @@ class AdvertisementController extends Controller
      */
     public function show(Advertisement $advertisement)
     {
+        $advertisement->load('comments', 'images');
         return AdvertisementResource::make($advertisement);
     }
 
