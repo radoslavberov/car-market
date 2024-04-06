@@ -6,7 +6,6 @@ import { getDashboardStats } from '@/data';
 import { EstateTypesChart } from './components/EstateTypesChart';
 import { EstateCountChart } from './components/EstateCountChart';
 import { QUERY_KEY } from '@/data/constants';
-
 // Get today's and yesterday's dates
 const today = new Date().toISOString().split('T')[0];
 const yesterday = new Date(new Date().setDate(new Date().getDate() - 1)).toISOString().split('T')[0];

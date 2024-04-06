@@ -1,30 +1,14 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { getAdvertisement } from '@/data';
-import { Euro, HardHat, Home, Expand, Hotel, Calendar, Bot } from 'lucide-react';
+import { Euro, HardHat, Home, Expand, Hotel, Calendar } from 'lucide-react';
 import { Card, CardHeader, CardContent, CardTitle } from '@/components/ui/Card';
 import { Icons } from '@/components/Icons';
 import { useParams } from 'react-router-dom';
 import { useEffect, useMemo, useState } from 'react';
-import { intlFormatDistance } from 'date-fns';
 import { Button, buttonVariants } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
-import {
-	Dialog,
-	DialogContent,
-	DialogDescription,
-	DialogFooter,
-	DialogHeader,
-	DialogTitle,
-	DialogTrigger,
-} from '@/components/ui/Dialog';
-import { Separator } from '@/components/ui/Separator';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/Tooltip';
-import { Analysis } from '@/types';
 import { QUERY_KEY } from '@/data/constants';
-import { PopulationChart } from './components/PopulationChart';
-import { toast } from '@/hooks/toast.hook';
-import { EstateLocationMap } from './components/EstateLocationMap';
-import { ScrollArea } from '@/components/ui/ScrollArea';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/Carusel';
 
 const NO_INFO_TEXT = 'Няма инф.';
 
@@ -46,9 +30,7 @@ export function VehiclePage() {
 					</span>
 					<div className="flex flex-col gap-1">
 						<h2 className="flex flex-row items-baseline gap-1 text-3xl font-bold tracking-tight">
-							<span>
-								{isLoading ? '' : `${data?.vehicleBrand?.name} ${data?.vehicleModelType?.name}`}
-							</span>
+							<span>{isLoading ? '' : `${data?.name}`}</span>
 						</h2>
 
 						{isLoading ? (
@@ -159,6 +141,32 @@ export function VehiclePage() {
 					</CardContent>
 				</Card>
 			</div>
+
+			<Carousel
+				opts={{
+					align: 'start',
+				}}
+			>
+				<CarouselContent className="w-full">
+					{data?.comments?.map((comment) => (
+						<CarouselItem key={comment.id} className="md:basis-1/2 lg:basis-1/2 w-full">
+							<div className="p-1">
+								<Card className="w-full">
+									<CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
+										<CardTitle className="text-sm font-medium">{comment.description}</CardTitle>
+										<Expand className="w-4 h-4 text-muted-foreground" />
+									</CardHeader>
+									<CardContent>
+										<div className="text-2xl font-bold">{comment.description}</div>
+									</CardContent>
+								</Card>
+							</div>
+						</CarouselItem>
+					))}
+				</CarouselContent>
+				<CarouselPrevious />
+				<CarouselNext />
+			</Carousel>
 		</div>
 	);
 }

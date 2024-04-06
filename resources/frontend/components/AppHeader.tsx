@@ -25,13 +25,13 @@ export function AppHeader() {
 							<TooltipTrigger asChild>
 								<div className="flex flex-col text-sm leading-4 cursor-default">
 									<span className="font-semibold">Месечен лимит</span>
-									<span
+									{/* <span
 										className={cn(
 											user.monthlyAnalysisDone == user.analysisLimit ? 'text-destructive' : 'text-brand',
 										)}
 									>
 										{user.monthlyAnalysisDone} / {user.analysisLimit} обяви
-									</span>
+									</span> */}
 								</div>
 							</TooltipTrigger>
 							<TooltipContent side="bottom" className="flex flex-col max-w-xl">
