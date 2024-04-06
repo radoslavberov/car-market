@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\VehicleModelTypes;
 
+use App\Http\Resources\VehicleModels\VehicleModelResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class LocationResource extends JsonResource
+class VehicleModelTypeResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,6 +19,7 @@ class LocationResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'active' => $this->active,
+            'vehicleModel' => $this->whenLoaded('vehicleModel', new VehicleModelResource($this->vehicleModel)),
         ];
     }
 }

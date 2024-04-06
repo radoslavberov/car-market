@@ -8,21 +8,19 @@ use App\Http\Requests\Advertisements\StoreAdvertisementRequest;
 use App\Http\Requests\Advertisements\UpdateAdvertisementRequest;
 use App\Http\Resources\Advertisement\AdvertisementCollection;
 use App\Http\Resources\Advertisement\AdvertisementResource;
-use App\Http\Resources\LocationCollection;
+use App\Http\Resources\Location\LocationCollection;
 use App\Http\Resources\UserAdvertisementCollection;
-use App\Http\Resources\VehicleBrandCollection;
-use App\Http\Resources\VehicleModelCollection;
-use App\Http\Resources\VehicleModelTypeCollection;
+use App\Http\Resources\VehicleBrands\VehicleBrandCollection;
+use App\Http\Resources\VehicleModels\VehicleModelCollection;
+use App\Http\Resources\VehicleModelTypes\VehicleModelTypeCollection;
 use App\Models\Advertisement;
 use App\Models\Image;
 use App\Models\Location;
 use App\Models\VehicleBrand;
 use App\Models\VehicleModel;
 use App\Models\VehicleModelType;
-use Filament\Forms\Get;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use function Filament\Support\get_model_label;
 
 class AdvertisementController extends Controller
 {

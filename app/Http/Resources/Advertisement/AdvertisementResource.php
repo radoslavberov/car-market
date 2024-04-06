@@ -4,13 +4,13 @@ namespace App\Http\Resources\Advertisement;
 
 use App\Http\Resources\CommentCollection;
 use App\Http\Resources\FuelResource;
-use App\Http\Resources\LocationResource;
+use App\Http\Resources\Location\LocationResource;
 use App\Http\Resources\TransmissionResource;
 use App\Http\Resources\User\UserResource;
-use App\Http\Resources\VehicleBrandResource;
+use App\Http\Resources\VehicleBrands\VehicleBrandResource;
 use App\Http\Resources\VehicleCategoryResource;
-use App\Http\Resources\VehicleModelResource;
-use App\Http\Resources\VehicleModelTypeResource;
+use App\Http\Resources\VehicleModels\VehicleModelResource;
+use App\Http\Resources\VehicleModelTypes\VehicleModelTypeResource;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Location;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class VehicleModelTypeCollection extends ResourceCollection
+class LocationCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.
@@ -15,7 +15,7 @@ class VehicleModelTypeCollection extends ResourceCollection
     public function toArray(Request $request): array
     {
         return [
-            'data' => VehicleModelTypeResource::collection($this->collection),
+            'data' => LocationResource::collection($this->collection),
         ];
     }
 }
