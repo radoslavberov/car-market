@@ -40,15 +40,11 @@ class AdvertisementResource extends JsonResource
             'vehicleCategory'   => $this->whenLoaded('vehicleCategory', new VehicleCategoryResource($this->vehicleCategory)),
             'fuel'              => $this->whenLoaded('fuel', new FuelResource($this->fuel)),
             'transmission'      => $this->whenLoaded('transmission', new TransmissionResource($this->transmission)),
-            'comments'          => $this->whenLoaded('comments', function () {
-                return $this->comments->map(function ($comment) {
-                    return [
-                        'user' => new UserResource($comment->user),
-                        'description' => $comment->description,
-                        'advertisement_id' => $comment->advertisement_id,
-                    ];
-                });
-            }),
+            'comments'          => $this->comments->map(fn($comment) => [
+                                        'user' => new UserResource($comment->user),
+                                        'description' => $comment->description,
+                                        'advertisement_id' => $comment->advertisement_id,
+                                    ]) ?? null,
             'images'            => $this->images,
         ];
     }
