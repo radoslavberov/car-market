@@ -9,6 +9,7 @@ use App\Http\Requests\Advertisements\UpdateAdvertisementRequest;
 use App\Http\Resources\Advertisement\AdvertisementCollection;
 use App\Http\Resources\Advertisement\AdvertisementResource;
 use App\Http\Resources\LocationCollection;
+use App\Http\Resources\UserAdvertisementCollection;
 use App\Http\Resources\VehicleBrandCollection;
 use App\Http\Resources\VehicleModelCollection;
 use App\Http\Resources\VehicleModelTypeCollection;
@@ -190,7 +191,7 @@ class AdvertisementController extends Controller
     public function getUserAdvertisements()
     {
         $getUserAdvertisements = Advertisement::where('user_id', auth()->id())->get();
-        return AdvertisementCollection::make($getUserAdvertisements);
+        return UserAdvertisementCollection::make($getUserAdvertisements);
     }
 
 
