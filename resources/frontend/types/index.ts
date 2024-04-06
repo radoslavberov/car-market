@@ -90,22 +90,11 @@ export interface Advertisement {
 
 export interface AdvertisementInput {
 	[key: string]: any;
-	name: string;
 	price: number;
 	mileage: number;
 	horse_power: number;
 	engine_capacity: number;
-	color: string;
-	description: string;
 	year: number;
-	location_id: number;
-	vehicle_brand_id: number;
-	vehicle_model_id: number;
-	vehicle_model_type_id: number;
-	vehicle_category_id: number | null;
-	fuel_id: number;
-	transmission_id: number;
-	imeges: File[];
 }
 
 // export interface LocationEstateData {

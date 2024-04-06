@@ -729,12 +729,15 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 							{/* Picture */}
 							<div className="grid w-full max-w-sm items-center gap-1.5">
 								<Label htmlFor="picture">Picture</Label>
-								<input
+								<Input
 									id="picture"
 									type="file"
+									multiple
 									onChange={(event) => {
-										const file = event.target.files![0];
-										formData.append('images', file);
+										const files = Array.from(event.target.files!);
+										files.forEach((file, index) => {
+										  formData.append(`images[${index}]`, file);
+										});
 									}}
 								/>
 							</div>
