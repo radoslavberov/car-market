@@ -144,8 +144,11 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 		setIsLoading(true);
 		try {
 			// Call API to add the link
-
-			forEach
+			for (const key in data) {
+				// Convert numeric values to string if necessary
+				const value = typeof data[key] === 'number' ? data[key].toString() : data[key];
+				formData.append(key, value);
+			}
 			formData.append('fuel_id', selectedFuel!.toString()); // Convert to string if necessary
 			formData.append('year', '2002'); // Assuming year is a string
 			formData.append('location_id', '3'); // Assuming location_id is a string
@@ -153,7 +156,8 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 			formData.append('vehicle_model_id', selectedVehicleModel!.toString()); // Convert to string if necessary
 			formData.append(
 				'vehicle_model_type_id',
-				selectedVehicleModelType ? selectedVehicleModelType.toString() : ''); // Convert to string if necessary
+				selectedVehicleModelType ? selectedVehicleModelType.toString() : '',
+			); // Convert to string if necessary
 			formData.append('vehicle_category_id', selectedVehicleCategory!.toString()); // Convert to string if necessary
 			formData.append('transmission_id', selectedTransmission!.toString()); // Convert to string if necessary
 			formData.append('color', selectedColor!); // Assuming color is a string
@@ -730,7 +734,7 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 									type="file"
 									onChange={(event) => {
 										const file = event.target.files![0];
-										formData.append('file', file);
+										formData.append('images', file);
 									}}
 								/>
 							</div>

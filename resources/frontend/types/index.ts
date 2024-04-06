@@ -89,6 +89,7 @@ export interface Advertisement {
 }
 
 export interface AdvertisementInput {
+	[key: string]: any;
 	name: string;
 	price: number;
 	mileage: number;
