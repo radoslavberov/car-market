@@ -185,7 +185,10 @@ class AdvertisementController extends Controller
      */
     public function destroy(Advertisement $advertisement)
     {
+
         $this->authorize('delete', $advertisement);
+        $advertisement->comments()->delete();
+        $advertisement->images()->delete();
         $advertisement->delete();
         return response()->json(['message' => 'Вие изтрихте вашата обява!', 200]);
     }
