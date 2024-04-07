@@ -1,3 +1,4 @@
+import { ArrowLeft } from 'lucide-react';
 import {
 	AlertTriangle,
 	ArrowRight,
@@ -34,6 +35,8 @@ import {
 	Info,
 	XIcon,
 	type Icon as LucideIcon,
+	Pen,
+	ChevronsUpDown,
 } from 'lucide-react';
 
 interface LogoProps extends LucideProps {
@@ -50,6 +53,7 @@ export const Icons = {
 	marketplace: Store,
 	orders: ShoppingBag,
 	close: X,
+	delete: Trash,
 	spinner: Loader2,
 	chevronLeft: ChevronLeft,
 	chevronRight: ChevronRight,
@@ -57,13 +61,16 @@ export const Icons = {
 	post: FileText,
 	page: File,
 	media: Image,
+	chevronUpDown: ChevronsUpDown,
 	settings: Settings,
 	billing: CreditCard,
 	ellipsis: MoreVertical,
 	add: Plus,
+	edit: Pen,
 	warning: AlertTriangle,
 	user: User,
 	arrowRight: ArrowRight,
+	arrowLeft: ArrowLeft,
 	help: HelpCircle,
 	pizza: Pizza,
 	twitter: Twitter,

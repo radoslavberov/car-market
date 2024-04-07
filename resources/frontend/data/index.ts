@@ -4,9 +4,16 @@ import {
 	AdminPanelUser,
 	AdminPanelAnylysis,
 	Advertisement,
+	AdvertisementInput,
+	ErrorResponse,
+	VehicleBrand,
+	VehicleModelType,
+	VehicleModel,
+	Location,
 } from '@/types/index';
 import { ColumnFiltersState } from '@tanstack/react-table';
 import api from '@/lib/api';
+import axios from 'axios';
 
 export const getDashboardStats = async (): Promise<DashboardStats> => {
 	return api.get('/api/dashboard-stats').then((res) => {
@@ -82,6 +89,18 @@ export const getDashboardStats = async (): Promise<DashboardStats> => {
 // 		});
 // };
 
+export const getLocations = async (): Promise<Location> => {
+	return api.get(`/api/locations`).then((res) => {
+		return res.data.data;
+	});
+};
+
+export const getUserAdvertisements = async (): Promise<Advertisement[]> => {
+	return api.get(`/api/advertisements/advertisements`).then((res) => {
+		return res.data.data;
+	});
+};
+
 export const getAdvertisement = async (id: any): Promise<Advertisement> => {
 	return api.get(`/api/advertisements/${id}`).then((res) => {
 		return res.data.data;
@@ -90,6 +109,24 @@ export const getAdvertisement = async (id: any): Promise<Advertisement> => {
 
 export const getAdvertisements = async (): Promise<Advertisement[]> => {
 	return api.get(`/api/advertisements`).then((res) => {
+		return res.data.data;
+	});
+};
+
+export const getVehicleModels = async (brandId: any): Promise<VehicleModel[]> => {
+	return api.get(`/api/vehicle-models/${brandId}`).then((res) => {
+		return res.data.data;
+	});
+};
+
+export const getVehicleBrands = async (): Promise<VehicleBrand[]> => {
+	return api.get(`/api/vehicle-brands`).then((res) => {
+		return res.data.data;
+	});
+};
+
+export const getVehicleModelTypes = async (modelId: any): Promise<VehicleModelType[]> => {
+	return api.get(`/api/vehicle-model-types/${modelId}`).then((res) => {
 		return res.data.data;
 	});
 };
@@ -246,26 +283,37 @@ export const deactivateUser = async (id: number): Promise<[]> => {
 	});
 };
 
-export const deleteAnalysis = async (id: number): Promise<[]> => {
-	return api.delete(`/api/admin/analyses/${id}`).then((res) => {
+export const deleteAdvertisment = async (id: number): Promise<[]> => {
+	return api.delete(`/api/advertisements/${id}`).then((res) => {
 		return res.data.data;
 	});
 };
 
-export const getFavorites = async (): Promise<Favorite[]> => {
-	return api.get('/api/favorites').then((res) => {
-		return res.data.data;
-	});
+export const addAdvertisment = async (data: FormData): Promise<Advertisement> => {
+	console.log(data);
+	return api
+		.post('/api/advertisements/store', data, { headers: { 'Content-Type': 'multipart/form-data' } })
+		.then((res) => {
+			return res.data.data;
+		})
+		.catch((e) => {
+			throw {
+				message: e?.response?.data?.message || 'Failed to add advertisment',
+				errors: e?.response?.data?.errors || null,
+			} as ErrorResponse;
+		});
 };
 
-export const makeFavorite = async (estate_id: any): Promise<Favorite> => {
-	return api.post('/api/favorites', { estate_id }).then((res) => {
-		return res.data.data;
-	});
-};
-
-export const removeFavorite = async (favorite_id: any): Promise<void> => {
-	return api.delete(`/api/favorites/${favorite_id}`).then(() => {
-		// No data to return, just a successful delete
-	});
+export const editAdvertisment = async (data: AdvertisementInput, id: number): Promise<Advertisement> => {
+	return api
+		.put(`/api/advertisements/${id}`, data)
+		.then((res) => {
+			return res.data.data;
+		})
+		.catch((e) => {
+			throw {
+				message: e?.response?.data?.message || 'Failed to edit advertisement',
+				errors: e?.response?.data?.errors || null,
+			} as ErrorResponse;
+		});
 };

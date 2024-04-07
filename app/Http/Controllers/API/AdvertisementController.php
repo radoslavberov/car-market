@@ -3,13 +3,22 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreAdvertisementRequest;
-use App\Http\Requests\UpdateAdvertisementRequest;
+use App\Http\Requests\Advertisements\AdvertisementFilterRequest;
+use App\Http\Requests\Advertisements\StoreAdvertisementRequest;
+use App\Http\Requests\Advertisements\UpdateAdvertisementRequest;
 use App\Http\Resources\Advertisement\AdvertisementCollection;
 use App\Http\Resources\Advertisement\AdvertisementResource;
+use App\Http\Resources\Location\LocationCollection;
+use App\Http\Resources\UserAdvertisementCollection;
+use App\Http\Resources\VehicleBrands\VehicleBrandCollection;
+use App\Http\Resources\VehicleModels\VehicleModelCollection;
+use App\Http\Resources\VehicleModelTypes\VehicleModelTypeCollection;
 use App\Models\Advertisement;
 use App\Models\Image;
-use Illuminate\Http\Request;
+use App\Models\Location;
+use App\Models\VehicleBrand;
+use App\Models\VehicleModel;
+use App\Models\VehicleModelType;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -18,10 +27,74 @@ class AdvertisementController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(AdvertisementFilterRequest $request)
     {
-        $advertisement = Advertisement::all();
-        return AdvertisementCollection::make($advertisement);
+        # Default and maximum number of items per page
+        $defaultLimit = 20;
+        $maxLimit = 50;
+
+        # Get query parameters
+        $sortBy = $request->query('sortBy', 'default');
+        $sortDirection = $request->query('sort', 'desc');
+        $page = $request->query('page', 1);
+        $limit = $request->query('limit', $defaultLimit) > $maxLimit ? $defaultLimit : $request->query('limit', $defaultLimit);
+
+        # Sort mapping for the query
+        $sortMapping = [
+            'id' => 'id',
+            'vehicleCategory' => 'vehicle_categories.name',
+            'price' => 'price',
+            'color' => 'color',
+            'location' => 'locations.name',
+            'year' => 'year',
+            'vehicleModel' => 'vehicle_models.name',
+            'vehicleModelType' => 'vehicle_model_types.name',
+            'createdAt' => 'advertisements.created_at',
+            'default' => 'created_at'
+        ];
+
+        # Query builder for estates
+        $advertisementsQuery = Advertisement::query()
+            ->select('advertisements.*', 'vehicle_brands.name',
+                'locations.name', 'vehicle_models.name', 'vehicle_models.vehicle_brand_id',
+            'vehicle_model_types.name', 'vehicle_model_types.vehicle_model_id', 'vehicle_categories.name')
+            ->leftJoin('vehicle_brands', 'advertisements.vehicle_brand_id', '=', 'vehicle_brands.id')
+            ->leftJoin('locations', 'advertisements.location_id', '=', 'locations.id')
+            ->leftJoin('vehicle_models', 'advertisements.vehicle_model_id', '=', 'vehicle_models.id')
+            ->leftJoin('vehicle_model_types', 'advertisements.vehicle_model_type_id', '=', 'vehicle_model_types.id')
+            ->leftJoin('vehicle_categories', 'advertisements.vehicle_category_id', '=', 'vehicle_categories.id')
+
+            # Filter by query parameters
+            ->when($request->vehicleBrand, function ($query, $brand) {
+                return $query->whereIn('vehicle_brand_id', $brand);
+            })
+            ->when($request->vehicleCategory, function ($query, $category) {
+                return $query->whereIn('vehicle_category_id', $category);
+            })
+            ->when($request->vehicleModel, function ($query, $vehicleModel) {
+                return $query->whereIn('vehicle_model_id', $vehicleModel);
+            })
+            ->when($request->vehicleModelType, function ($query, $vehicleModelType) {
+                return $query->whereIn('vehicle_model_type_id', $vehicleModelType);
+            })
+            ->when($request->location, function ($query, $location) {
+                return $query->whereIn('advertisements.location_id', $location);
+            })
+            ->orderBy($sortMapping[$sortBy], $sortDirection);
+
+        # Apply limit and offset
+        $total = $advertisementsQuery->count();
+        $offset = ($page - 1) * $limit;
+
+        # Get estates
+        $advertisements = $advertisementsQuery->offset($offset)->limit($limit)->get();
+
+        # Create a resource collection with pagination data
+        $advertisementsCollection = new AdvertisementCollection($advertisements);
+        $advertisementsCollection->setPaginationData($page, $total, $limit);
+
+        return $advertisementsCollection;
+
     }
 
     /**
@@ -34,8 +107,13 @@ class AdvertisementController extends Controller
         DB::beginTransaction();
 
         try {
+            $getBrand = VehicleBrand::findOrFail($request->vehicle_brand_id);
+            $getModel = VehicleModel::findOrFail($request->vehicle_model_id);
+
+            $generateName = $getBrand->name .' '. $getModel->name;
+
             $advertisement = Advertisement::create([
-                'name' => $request->name,
+                'name' => $generateName,
                 'description' => $request->description,
                 'color' => $request->color,
                 'year' => $request->year,
@@ -53,7 +131,7 @@ class AdvertisementController extends Controller
                 'transmission_id' => $request->transmission_id,
             ]);
 
-            if ($request->hasFile('images')) {
+            if ($request->hasFile('images') === true) {
 
                 $folderName = 'images_advertisement_' . $advertisement->id;
 
@@ -90,6 +168,7 @@ class AdvertisementController extends Controller
      */
     public function show(Advertisement $advertisement)
     {
+        $advertisement->load('comments', 'images');
         return AdvertisementResource::make($advertisement);
     }
 
@@ -106,8 +185,46 @@ class AdvertisementController extends Controller
      */
     public function destroy(Advertisement $advertisement)
     {
+
         $this->authorize('delete', $advertisement);
+        $advertisement->comments()->delete();
+        $advertisement->images()->delete();
         $advertisement->delete();
         return response()->json(['message' => 'Вие изтрихте вашата обява!', 200]);
+    }
+
+    public function getUserAdvertisements()
+    {
+        $getUserAdvertisements = Advertisement::where('user_id', auth()->id())->get();
+        return UserAdvertisementCollection::make($getUserAdvertisements);
+    }
+
+
+    #Get all vehicle brands endpoint
+    public function getVehicleBrands()
+    {
+        $brands = VehicleBrand::where('active', 1)->get();
+        return VehicleBrandCollection::make($brands);
+    }
+
+    #Get all vehicle models endpoint by vehicle brand id
+    public function getVehicleModels(string $brandId)
+    {
+        $vehicleModels = VehicleModel::where('vehicle_brand_id', $brandId)->get();
+        return VehicleModelCollection::make($vehicleModels);
+    }
+
+    #Get all vehicle model types endpoint by passing vehicle model id
+    public function getVehicleModelTypes(string $vehicleModelId)
+    {
+        $vehicleModelTypes = VehicleModelType::where('vehicle_model_id', $vehicleModelId)->get();
+        return VehicleModelTypeCollection::make($vehicleModelTypes);
+    }
+
+    #Get all locations endpoint
+    public function getLocations()
+    {
+        $locations = Location::all();
+        return LocationCollection::make($locations);
     }
 }

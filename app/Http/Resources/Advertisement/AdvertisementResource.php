@@ -2,14 +2,16 @@
 
 namespace App\Http\Resources\Advertisement;
 
+use App\Http\Resources\CommentCollection;
 use App\Http\Resources\FuelResource;
-use App\Http\Resources\LocationResource;
+use App\Http\Resources\Location\LocationResource;
 use App\Http\Resources\TransmissionResource;
 use App\Http\Resources\User\UserResource;
-use App\Http\Resources\VehicleBrandResource;
+use App\Http\Resources\VehicleBrands\VehicleBrandResource;
 use App\Http\Resources\VehicleCategoryResource;
-use App\Http\Resources\VehicleModelResource;
-use App\Http\Resources\VehicleModelTypeResource;
+use App\Http\Resources\VehicleModels\VehicleModelResource;
+use App\Http\Resources\VehicleModelTypes\VehicleModelTypeResource;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -40,8 +42,26 @@ class AdvertisementResource extends JsonResource
             'vehicleCategory'   => $this->whenLoaded('vehicleCategory', new VehicleCategoryResource($this->vehicleCategory)),
             'fuel'              => $this->whenLoaded('fuel', new FuelResource($this->fuel)),
             'transmission'      => $this->whenLoaded('transmission', new TransmissionResource($this->transmission)),
-            'comments'          => $this->comments,
-            'images'            => $this->images,
+            'comments'          => $this->whenLoaded('comments', function () {
+                return $this->comments->map(function ($comment) {
+                    return [
+                        'user'              => new UserResource($comment->user),
+                        'description'       => $comment->description,
+                        'advertisement_id'  => $comment->advertisement_id,
+                        'createdAt'         => Carbon::parse($comment->created_at)->format('d/m/y H:i')
+                    ];
+                });
+            }),
+            'images'            => $this->whenLoaded('images', function () {
+                return $this->images->map(function ($image) {
+                    return [
+                        'title'             => $image->title,
+                        'path'              => $image->path,
+                        'advertisement_id'  => $image->advertisement_id,
+                        'createdAt'         => Carbon::parse($image->created_at)->format('d/m/y H:i')
+                    ];
+                });
+            }),
         ];
     }
 }

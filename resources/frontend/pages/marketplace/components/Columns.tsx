@@ -1,20 +1,13 @@
 'use client';
 
 import { ColumnDef } from '@tanstack/react-table';
-
-import { Badge } from '@/components/ui/Badge';
-import { Checkbox } from '@/components/ui/Checkbox';
-
 // import { labels, priorities, statuses } from '../data';
 import { Advertisement } from '@/types/index';
 import { DataTableColumnHeader } from './DataTableColumnHeader';
-import { DataTableRowActions } from './DataTableRowActions';
-import { Button, buttonVariants } from '@/components/ui/Button';
+import { buttonVariants } from '@/components/ui/Button';
 import { NavLink } from 'react-router-dom';
-import { intlFormatDistance } from 'date-fns';
-import { Icons } from '@/components/Icons';
-import { cn } from '@/lib/utils';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/Tooltip';
+import { DeleteDialog } from '@/components/DeleteDialog';
+import { useAuth } from '@/hooks/auth.hook';
 
 export const columns: ColumnDef<Advertisement>[] = [
 	{
@@ -22,9 +15,13 @@ export const columns: ColumnDef<Advertisement>[] = [
 		header: ({ column }) => <DataTableColumnHeader column={column} title="" />,
 		cell: ({ row }) => {
 			const vehicleId = row.getValue('id') as number;
+			console.log(row.original);
 			return (
 				<div className="flex flex-row items-center gap-2">
-					<NavLink className={buttonVariants({ variant: 'outline', size: 'sm' })} to={`/estates/${vehicleId}`}>
+					<NavLink
+						className={buttonVariants({ variant: 'outline', size: 'sm' })}
+						to={`/advertisments/${vehicleId}`}
+					>
 						Преглед
 					</NavLink>
 				</div>
@@ -39,7 +36,7 @@ export const columns: ColumnDef<Advertisement>[] = [
 		header: ({ column }) => <DataTableColumnHeader className="w-full" column={column} title="Превозно средство" />,
 		cell: ({ row }) => (
 			<div>
-				{row.original?.vehicleBrand?.name} {row.original?.vehicleModelType?.name}
+				{row.original?.name} {row.original?.vehicleModelType?.name}
 			</div>
 		),
 	},
@@ -89,16 +86,33 @@ export const columns: ColumnDef<Advertisement>[] = [
 	},
 	{
 		accessorKey: 'engineCapacity',
-		header: ({ column }) => <DataTableColumnHeader column={column} title="Капацитет на вдигателя" className="w-full m-auto" />,
+		header: ({ column }) => (
+			<DataTableColumnHeader column={column} title="Капацитет на вдигателя" className="w-full m-auto" />
+		),
 		cell: ({ row }) => <div className="text-center">{row.original?.engine_capacity}</div>,
 	},
 	{
 		accessorKey: 'horsePower',
 		header: ({ column }) => <DataTableColumnHeader column={column} title="Конски сили" className="w-24" />,
-		cell: ({ row }) => (
-			<div>
-				{row.original?.horsePower} КС.
-			</div>
-		),
+		cell: ({ row }) => <div>{row.original?.horsePower} КС.</div>,
+	},
+	{
+		accessorKey: 'delete',
+		header: ({ column }) => <DataTableColumnHeader column={column} title="" />,
+		cell: ({ row }) => {
+			const { user } = useAuth(); // Get the user object from the useAuth hook
+			const vehicleId = row.getValue('id') as number;
+			const urlContainsGaga = window.location.href.includes('advertisments');
+			// Render the delete button only if the user is admin
+			if (user?.isAdmin || urlContainsGaga) {
+				return (
+					<div className="flex flex-row items-center gap-2">
+						<DeleteDialog advertismentId={vehicleId} />
+					</div>
+				);
+			}
+		},
+		enableSorting: false,
+		enableHiding: false,
 	},
 ];

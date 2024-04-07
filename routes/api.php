@@ -31,6 +31,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::prefix('advertisements')->controller(AdvertisementController::class)->group(function() {
         Route::get('/', 'index');
+        Route::get('/advertisements', 'getUserAdvertisements');
         Route::get('{advertisement}', 'show');
         Route::post('/store', 'store');
         Route::patch('{advertisement}', 'update');
@@ -39,6 +40,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::post('advertisements/{advertisement}/comment', [CommentController::class, 'store']);
     Route::delete('/comment/{comment}', [CommentController::class, 'destroy']);
+
+    Route::get('/vehicle-brands', [AdvertisementController::class, 'getVehicleBrands']);
+    Route::get('/vehicle-models/{brandId}', [AdvertisementController::class, 'getVehicleModels']);
+    Route::get('/vehicle-model-types/{modelId}', [AdvertisementController::class, 'getVehicleModelTypes']);
+    Route::get('/locations', [AdvertisementController::class, 'getLocations']);
+
 });
 
 

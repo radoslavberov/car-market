@@ -14,7 +14,7 @@ import { SettingsPasswordPage } from '@/pages/settings/Password';
 import { NotFoundPage } from '@/pages/404/Page';
 import { VehiclePage } from '@/pages/estate/Page';
 // import { LocationsPage } from '@/pages/locations/Page';
-// import { AnalysesDashboardPage } from '@/pages/dashboard/Analyses';
+import { UserAdvertismentsPage } from '@/pages/dashboard/Advertisments';
 import { DashboardOverviewPage } from '@/pages/dashboard/Overview';
 import { LandingPage } from '@/pages/landing/Page';
 import { useEffect } from 'react';
@@ -65,11 +65,11 @@ export default function App() {
 			<Route element={<Layout variant="auth" />}>
 				<Route path="dashboard" element={<DashboardLayout />}>
 					<Route path="" element={<DashboardOverviewPage />} />
-					{/*<Route path="analyses" element={<AnalysesDashboardPage />} />*/}
+					<Route path="advertisments" element={<UserAdvertismentsPage />} />
 				</Route>
 				<Route path="marketplace" element={<MarketplacePage />} />
 				{/*<Route path="locations" element={<LocationsPage />} />*/}
-				<Route path="estates/:id" element={<VehiclePage />} />
+				<Route path="advertisments/:id" element={<VehiclePage />} />
 				<Route path="settings" element={<SettingsLayout />}>
 					<Route path="" element={<Navigate replace to="account" />} />
 					<Route path="*" element={<Navigate replace to="account" />} />

@@ -70,30 +70,32 @@ export interface Location {
 export interface Advertisement {
 	id: number;
 	name: string;
-	price: number | null;
-	mileage: number | null;
-	horsePower: number | null;
-	engine_capacity: number | null;
-	color: string | null;
-	description: string | null;
+	price: number;
+	mileage: number;
+	horsePower: number;
+	engine_capacity: number;
+	color: string;
+	description: string;
 	user: User;
-	year: number | null;
-	location: Location | null;
-	vehicleBrand: VehicleBrand | null;
-	vehicleModel: VehicleModel | null;
+	comments: Comment[];
+	year: number;
+	location: Location;
+	vehicleBrand: VehicleBrand;
+	vehicleModel: VehicleModel;
 	vehicleModelType: VehicleModelType | null;
-	vehicleCategory: VehicleCategory | null;
-	fuel: Fuel | null;
-	transmission: Transmission | null;
+	vehicleCategory: VehicleCategory;
+	fuel: Fuel;
+	transmission: Transmission;
 }
 
-// export interface EstateType {
-// 	id: number;
-// 	name: string;
-// 	slug: string;
-// }
-//
-
+export interface AdvertisementInput {
+	[key: string]: any;
+	price: number;
+	mileage: number;
+	horse_power: number;
+	engine_capacity: number;
+	year: number;
+}
 
 // export interface LocationEstateData {
 // 	id: number;
@@ -147,16 +149,13 @@ export interface DashboardStats {
 		count: number;
 	}[];
 }
-export interface Analysis {
-	// id: number;
-	// estateId: number;
-	// userId: number;
-	// score: number;
-	// pros: string;
-	// cons: string;
-	// description: string;
-	// createdAt: string; // ISO date
-	// updatedAt: string; // ISO date
+export interface Comment {
+	id: number;
+	advertisementId: number;
+	userId: number;
+	description: string;
+	createdAt: string; // ISO date
+	updatedAt: string; // ISO date
 }
 export interface Favorite {
 	// id: number;

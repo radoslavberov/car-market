@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Advertisements;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class EstateFilterRequest extends FormRequest
+class AdvertisementFilterRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -18,22 +18,20 @@ class EstateFilterRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
         return [
-            'district[]' => 'nullable|integer',
-            'estateType[]' => 'nullable|integer',
-            'constructionType[]' => 'nullable|integer',
+            'vehicleCategory[]' => 'nullable|integer',
+            'vehicleBrand[]' => 'nullable|integer',
+            'vehicleModelType[]' => 'nullable|integer',
+            'vehicleModel[]' => 'nullable|integer',
             'location[]' => 'nullable|integer',
-            'provider[]' => 'nullable|integer',
-            'sortBy' => Rule::in(['id', 'estateType', 'price', 'squareMeters', 'priceSquareMeters', 'location', 'district', 'year', 'constructionType', 'provider', 'createdAt', 'crawledAt']),
+            'sortBy' => Rule::in(['id', 'vehicleCategory', 'price', 'color', 'year', 'location', 'vehicleModel', 'vehicleModelType', 'createdAt']),
             'sort' => Rule::in(['asc', 'desc']),
-            'isFavorite' => 'nullable|boolean'
         ];
     }
-
     public function messages()
     {
         return [
