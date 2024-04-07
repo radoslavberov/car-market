@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    //Creatinng controller for login and register
     public function register(RegisterRequest $request)
     {
         # Check if user has accepted terms and conditions

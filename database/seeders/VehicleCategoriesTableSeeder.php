@@ -15,6 +15,7 @@ class VehicleCategoriesTableSeeder extends Seeder
      */
     public function run(): void
     {
+        //adding vehicle categories
         $categories = [
             [
                 'name' => 'Джип',

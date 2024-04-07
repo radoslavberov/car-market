@@ -13,6 +13,7 @@ class TransmissionsTableSeeder extends Seeder
      */
     public function run(): void
     {
+        //creating seeder for transmission
         $transmission = [
             [
                 'name' => 'Ръчна', 

@@ -13,6 +13,7 @@ class LocationsTableSeeder extends Seeder
      */
     public function run(): void
     {
+        //creating seeder for locations
         $locations = [
         [
             'name' => 'София', 

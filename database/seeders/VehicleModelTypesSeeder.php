@@ -13,6 +13,7 @@ class VehicleModelTypesSeeder extends Seeder
      */
     public function run(): void
     {
+        //adding model types
         $models = [
             [
                 'name' => 'S 250',

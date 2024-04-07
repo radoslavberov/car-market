@@ -13,6 +13,7 @@ class VehicleModelsSeeder extends Seeder
      */
     public function run(): void
     {
+        //adding seeders for car models
         $models = [
             [
                 'name' => 'S class',
