@@ -29,6 +29,7 @@ export function DeleteDialog({ advertismentId }: DeleteDialogProps) {
 		deleteAdvertisment(advertismentId)
 			.then(() => {
 				queryClient.invalidateQueries([QUERY_KEY.advertisements]);
+				queryClient.invalidateQueries([QUERY_KEY.userAdvertisements]);
 				toast({
 					title: 'Успех',
 					description: 'Обявате беше изтрита успешно',

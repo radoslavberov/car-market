@@ -19,22 +19,25 @@ export function DashboardLayout() {
 				<h2 className="text-3xl font-bold tracking-tight">Здравей {user?.name}</h2>
 			</div>
 			<Tabs defaultValue={defaultTab} value={defaultTab} className="space-y-4">
-				<TabsList>
-					{/* Overview Tab */}
-					<NavLink to="/dashboard">
-						<TabsTrigger value="overview">Преглед</TabsTrigger>
-					</NavLink>
+				<div className="flex justify-between">
+					<TabsList>
+						{/* Overview Tab */}
+						<NavLink to="/dashboard">
+							<TabsTrigger value="overview">Преглед</TabsTrigger>
+						</NavLink>
 
-					{/* Analyses Tab */}
-					<NavLink to="/dashboard/advertisments">
-						<TabsTrigger value="advertisments">Моите обяви</TabsTrigger>
-					</NavLink>
-				</TabsList>
+						{/* Advertisments Tab */}
+						<NavLink to="/dashboard/advertisments">
+							<TabsTrigger value="advertisments">Моите обяви</TabsTrigger>
+						</NavLink>
+					</TabsList>
+
+					<AdvertismentDialog />
+				</div>
 
 				{/* Outlet for rendering nested routes */}
 				<Outlet />
 			</Tabs>
-			<AdvertismentDialog />
 		</>
 	);
 }

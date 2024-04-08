@@ -14,13 +14,15 @@ const NO_INFO_TEXT = 'Няма инф.';
 
 export function VehiclePage() {
 	let { id } = useParams();
-	const queryClient = useQueryClient();
-
 	const { isLoading, data } = useQuery({
-		queryKey: [QUERY_KEY.advertisement],
+		queryKey: [QUERY_KEY.advertisement, id],
 		queryFn: () => getAdvertisement(id),
+		enabled: !!id,
 	});
-	console.log(data);
+	const backgroundImages = Object.values(
+		import.meta.glob(`C:/Users/MSI/Desktop/Rado Proekt/car-market/storage/app/public/${data?.images[0].path}/*.{png,jpg,jpeg,PNG,JPEG}`)
+	);
+	console.log(backgroundImages);
 	return (
 		<div className="flex flex-col flex-1 h-full space-y-8">
 			<div className="flex flex-col justify-between gap-4 lg:items-center lg:flex-row">
@@ -30,7 +32,7 @@ export function VehiclePage() {
 					</span>
 					<div className="flex flex-col gap-1">
 						<h2 className="flex flex-row items-baseline gap-1 text-3xl font-bold tracking-tight">
-							<span>{isLoading ? '' : `${data?.name}`}</span>
+							<span>{isLoading ? '' : data?.name}</span>
 						</h2>
 
 						{isLoading ? (
@@ -126,7 +128,8 @@ export function VehiclePage() {
 					</CardContent>
 				</Card>
 			</div>
-
+			<img src={"C:/Users/MSI/Desktop/Rado Proekt/car-market/storage/app/public/images_advertisement_23/Екранна снимка 2024-01-31 224159.png"} alt='gaga' />
+           
 			{/* Description */}
 			<div className={cn(data ? 'grid' : 'hidden', 'grid-cols-1')}>
 				<Card>
@@ -141,32 +144,33 @@ export function VehiclePage() {
 					</CardContent>
 				</Card>
 			</div>
-
-			<Carousel
-				opts={{
-					align: 'start',
-				}}
-			>
-				<CarouselContent className="w-full">
-					{data?.comments?.map((comment) => (
-						<CarouselItem key={comment.id} className="md:basis-1/2 lg:basis-1/2 w-full">
-							<div className="p-1">
-								<Card className="w-full">
-									<CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-										<CardTitle className="text-sm font-medium">{comment.description}</CardTitle>
-										<Expand className="w-4 h-4 text-muted-foreground" />
-									</CardHeader>
-									<CardContent>
-										<div className="text-2xl font-bold">{comment.description}</div>
-									</CardContent>
-								</Card>
-							</div>
-						</CarouselItem>
-					))}
-				</CarouselContent>
-				<CarouselPrevious />
-				<CarouselNext />
-			</Carousel>
+			{data?.comments.length! > 0 && (
+				<Carousel
+					opts={{
+						align: 'start',
+					}}
+				>
+					<CarouselContent className="w-full">
+						{data?.comments?.map((comment) => (
+							<CarouselItem key={comment.id} className="md:basis-1/2 lg:basis-1/2 w-full">
+								<div className="p-1">
+									<Card className="w-full">
+										<CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
+											<CardTitle className="text-sm font-medium">{comment.user.name} </CardTitle>
+											<span className="text-sm font-medium">{comment.createdAt}</span>
+										</CardHeader>
+										<CardContent>
+											<div className="text-2xl font-bold">{comment.description}</div>
+										</CardContent>
+									</Card>
+								</div>
+							</CarouselItem>
+						))}
+					</CarouselContent>
+					<CarouselPrevious />
+					<CarouselNext />
+				</Carousel>
+			)}
 		</div>
 	);
 }

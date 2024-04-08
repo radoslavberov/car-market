@@ -67,6 +67,14 @@ export interface Location {
 	name: string;
 	active: boolean;
 }
+
+export interface Image {
+	advertisement_id: number;
+	createdAt: string;
+	path: string;
+	title: string;
+}
+
 export interface Advertisement {
 	id: number;
 	name: string;
@@ -76,6 +84,7 @@ export interface Advertisement {
 	engine_capacity: number;
 	color: string;
 	description: string;
+	images: Image[];
 	user: User;
 	comments: Comment[];
 	year: number;
@@ -152,7 +161,7 @@ export interface DashboardStats {
 export interface Comment {
 	id: number;
 	advertisementId: number;
-	userId: number;
+	user: User;
 	description: string;
 	createdAt: string; // ISO date
 	updatedAt: string; // ISO date

@@ -59,25 +59,33 @@ export function UserAdvertismentsPage() {
 	const defaultData = useMemo(() => [], []); // Default data is used when the real data is loading
 
 	return (
-		<div className="flex flex-col flex-1 h-full space-y-8">
-			 {!isLoading ? (
-				<DataTable
-					isFetching={isFetching}
-					data={data || defaultData}
-					count={data?.length ?? -1}
-					columns={columns}
-					pagination={pagination}
-					onSetPagination={setPagination}
-					sorting={sorting}
-					onSetSorting={setSorting}
-					columnFilters={columnFilters}
-					onSetColumnFilters={setColumnFilters}
-				/>
-			) : (
-				<span className="flex flex-row items-center text-muted-foreground">
-					<Icons.spinner className="w-4 h-4 mr-2 animate-spin" /> Моля изчакайте...
-				</span>
-			)} 
+		<div>
+			{data && (
+					<div className="mt-2 md:mt-0 mb-5">
+						<div className="text-sm font-medium  md:text-right">Намерени резултати</div>
+						<div className="text-2xl font-bold text-[#5fd045] md:text-right">{data.length}</div>
+					</div>
+				)}
+			<div className="flex flex-col flex-1 h-full space-y-8">
+				{!isLoading ? (
+					<DataTable
+						isFetching={isFetching}
+						data={data || defaultData}
+						count={data?.length ?? -1}
+						columns={columns}
+						pagination={pagination}
+						onSetPagination={setPagination}
+						sorting={sorting}
+						onSetSorting={setSorting}
+						columnFilters={columnFilters}
+						onSetColumnFilters={setColumnFilters}
+					/>
+				) : (
+					<span className="flex flex-row items-center text-muted-foreground">
+						<Icons.spinner className="w-4 h-4 mr-2 animate-spin" /> Моля изчакайте...
+					</span>
+				)}
+			</div>
 		</div>
 	);
 }

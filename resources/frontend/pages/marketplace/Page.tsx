@@ -3,9 +3,7 @@ import { columns } from './components/Columns';
 import { DataTable } from './components/DataTable';
 import { useQuery } from '@tanstack/react-query';
 import { ColumnFiltersState, SortDirection, SortingState } from '@tanstack/react-table';
-import {
-	getAdvertisements,
-} from '@/data';
+import { getAdvertisements, getLocations } from '@/data';
 import { Icons } from '@/components/Icons';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import { QUERY_KEY } from '@/data/constants';
@@ -13,7 +11,7 @@ import { useAuth } from '@/hooks/auth.hook';
 export function MarketplacePage() {
 	const location = useLocation();
 
-    // Get current user
+	// Get current user
 	const { user } = useAuth();
 
 	// Pagination, sorting and filtering states
@@ -63,12 +61,12 @@ export function MarketplacePage() {
 		enabled: !!user,
 	});
 
-	console.log(data)
+	console.log(data);
 
 	// // Load all the data we need for the filters
 	// useQuery({ queryKey: [QUERY_KEY.estateTypes], queryFn: getEstateTypes });
 	// useQuery({ queryKey: [QUERY_KEY.providers], queryFn: getProviders });
-
+	useQuery({ queryKey: [QUERY_KEY.locations], queryFn: () => getLocations() });
 	// Data that will be passed to the DataTable component
 	const pagination = useMemo(() => ({ pageIndex, pageSize }), [pageIndex, pageSize]);
 	const defaultData = useMemo(() => [], []); // Default data is used when the real data is loading
@@ -224,7 +222,7 @@ export function MarketplacePage() {
 					</div>
 				)}
 			</div>
-			 {!isLoading ? (
+			{!isLoading ? (
 				<DataTable
 					isFetching={isFetching}
 					data={data || defaultData}

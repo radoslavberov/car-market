@@ -21,10 +21,16 @@ import { useForm } from 'react-hook-form';
 import { toast } from '@/hooks/toast.hook';
 import { Textarea } from '@/components/ui/Textarea';
 import { Command, CommandEmpty, CommandGroup, CommandItem, CommandList } from '@/components/ui/Command';
-import { Advertisement, AdvertisementInput } from '@/types';
-import { addAdvertisment, editAdvertisment, getVehicleBrands, getVehicleModelTypes, getVehicleModels } from '@/data';
+import { Advertisement, AdvertisementInput, Location } from '@/types';
+import {
+	addAdvertisment,
+	editAdvertisment,
+	getLocations,
+	getVehicleBrands,
+	getVehicleModelTypes,
+	getVehicleModels,
+} from '@/data';
 import { COLOURS_KEY, ENGINE_TYPES_KEY, QUERY_KEY, TRANSMISHIONS_KEY, VEHICLE_TYPES_KEY } from '@/data/constants';
-import { forEach } from 'lodash';
 
 const transmissionTypes = Object.entries(TRANSMISHIONS_KEY).map(([id, value]) => ({
 	id,
@@ -54,14 +60,10 @@ interface AdvertismentDialogProps {
 
 export function AdvertismentDialog({ className, advertisment }: AdvertismentDialogProps) {
 	const queryClient = useQueryClient();
-
+	const locations = queryClient.getQueryData<Location[]>([QUERY_KEY.locations]);
 	// States
 	const [open, setOpen] = useState(false);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
-	const [price, setPrice] = useState<number | undefined>(advertisment?.price);
-	const [engineCapacity, setEngineCapacity] = useState<number | undefined>(advertisment?.engine_capacity);
-	const [picture, setPicture] = useState<File>();
-	const [date, setDate] = useState<Date>();
 
 	const formData = new FormData();
 
@@ -81,19 +83,26 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 	const [selectedColor, setSelectedColor] = useState<string | null>(advertisment?.color || null);
 	const [selecteColorOpen, setSelecteColorOpen] = useState(false);
 
+	const [selectedLocation, setSelectedLocation] = useState<number | null>(advertisment?.location.id || null);
+	const [selecteLocationOpen, setSelecteLocationOpen] = useState(false);
+
 	const [selecteVehicleBrandOpen, setSelecteVehicleBrandOpen] = useState(false);
 	const [selectedVehicleBrand, setSelectedVehicleBrandType] = useState<number | null>(
 		advertisment?.vehicleBrand?.id || null,
 	);
 
 	const [selectedVehicleModel, setSelectedVehicleModel] = useState<number | null>(
-		advertisment?.vehicleModel?.id || null,
+		advertisment?.vehicleModel.id || null,
 	);
 	const [selecteVehicleModelOpen, setSelecteVehicleModelOpen] = useState(false);
 
 	const [selectedVehicleModelType, setSelectedVehicleModelType] = useState<number | null>(
 		advertisment?.vehicleModelType?.id || null,
 	);
+
+	const [selecteYearOpen, setSelecteYearOpen] = useState(false);
+
+	const [selectedYear, setSelectedYear] = useState<number | null>(advertisment?.year || null);
 
 	const [selecteVehicleModelTypeOpen, setSelecteVehicleModelTypeOpen] = useState(false);
 
@@ -113,15 +122,15 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 		enabled: !!selectedVehicleModel,
 	});
 
-	// Imame kukita maina
-	useEffect(() => {
-		setSelectedVehicleModel(null);
-		setSelectedVehicleModelType(null);
-	}, [selectedVehicleBrand]);
+	const generateYears = () => {
+		const currentYear = new Date().getFullYear();
+		const years = [];
+		for (let i = 1999; i <= currentYear; i++) {
+			years.push({ id: i, value: i.toString() });
+		}
+		return years;
+	};
 
-	useEffect(() => {
-		setSelectedVehicleModelType(null);
-	}, [selectedVehicleModel]);
 	// Reset form state
 	const resetForm = () => {
 		reset();
@@ -136,6 +145,7 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 		reset,
 	} = useForm();
 
+	console.log(selectedVehicleModel);
 	// Check if the form is disabled
 	const isDisabled = isLoading;
 	// Handle form submit.
@@ -149,34 +159,28 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 				const value = typeof data[key] === 'number' ? data[key].toString() : data[key];
 				formData.append(key, value);
 			}
-			formData.append('fuel_id', selectedFuel!.toString()); // Convert to string if necessary
-			formData.append('year', '2002'); // Assuming year is a string
-			formData.append('location_id', '3'); // Assuming location_id is a string
-			formData.append('vehicle_brand_id', selectedVehicleBrand!.toString()); // Convert to string if necessary
-			formData.append('vehicle_model_id', selectedVehicleModel!.toString()); // Convert to string if necessary
+
+			formData.append('fuel_id', selectedFuel!.toString());
+			formData.append('year', selectedYear!.toString());
+			formData.append('location_id', selectedLocation!.toString());
+			formData.append('vehicle_brand_id', selectedVehicleBrand!.toString());
+			formData.append('vehicle_model_id', selectedVehicleModel!.toString());
 			formData.append(
 				'vehicle_model_type_id',
 				selectedVehicleModelType ? selectedVehicleModelType.toString() : '',
-			); // Convert to string if necessary
-			formData.append('vehicle_category_id', selectedVehicleCategory!.toString()); // Convert to string if necessary
-			formData.append('transmission_id', selectedTransmission!.toString()); // Convert to string if necessary
-			formData.append('color', selectedColor!); // Assuming color is a string
-			const newLink = await addAdvertisment(formData);
+			);
+			formData.append('vehicle_category_id', selectedVehicleCategory!.toString());
+			formData.append('transmission_id', selectedTransmission!.toString());
+			formData.append('color', selectedColor!);
+
+			const newAdvertisement = await addAdvertisment(formData);
 			// Update cached data
-			// queryClient.setQueriesData([QUERY_KEY.advertisements], (oldData: any) => {
-			// 	if (!oldData) return undefined;
-			// 	return {
-			// 		...oldData,
-			// 		data: oldData.data.map((website: Website) => {
-			// 			if (website.id === newLink.website.id)
-			// 				return {
-			// 					...website,
-			// 					links: [...website.links, newLink],
-			// 				};
-			// 			return website;
-			// 		}),
-			// 	};
-			// });
+			queryClient.setQueriesData([QUERY_KEY.advertisements], (oldData: any) => {
+				if (!oldData) return undefined;
+				return {
+					data: [...oldData, newAdvertisement],
+				};
+			});
 
 			// Show toast
 			toast({
@@ -231,37 +235,48 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 		if (isLoading || !advertisment) return;
 		setIsLoading(true);
 		try {
-			// Call API to edit the link
-			const updatedLink = await editAdvertisment(data, advertisment!.id);
+			// Call API to add the link
+			for (const key in data) {
+				// Convert numeric values to string if necessary
+				const value = typeof data[key] === 'number' ? data[key].toString() : data[key];
+				formData.append(key, value);
+			}
+
+			formData.append('fuel_id', selectedFuel!.toString());
+			formData.append('year', selectedYear!.toString());
+			formData.append('location_id', selectedLocation!.toString());
+			formData.append('vehicle_brand_id', selectedVehicleBrand!.toString());
+			formData.append('vehicle_model_id', selectedVehicleModel!.toString());
+			formData.append(
+				'vehicle_model_type_id',
+				selectedVehicleModelType ? selectedVehicleModelType.toString() : '',
+			);
+			formData.append('vehicle_category_id', selectedVehicleCategory!.toString());
+			formData.append('transmission_id', selectedTransmission!.toString());
+			formData.append('color', selectedColor!);
+
+			const updatedAdvertisement = await editAdvertisment(formData, advertisment!.id);
 
 			// Update cached data
-			// queryClient.setQueriesData([QUERY_KEY.websites], (oldData: any) => {
-			// 	if (!oldData) return undefined;
-			// 	return {
-			// 		...oldData,
-			// 		data: oldData.data.map((website: Website) => {
-			// 			if (website.id === updatedLink.website.id)
-			// 				return {
-			// 					...website,
-			// 					links: website.links.map((link: Link) => {
-			// 						if (link.id === updatedLink.id) return updatedLink;
-			// 						return link;
-			// 					}),
-			// 				};
-			// 			return website;
-			// 		}),
-			// 	};
-			// });
-			// queryClient.setQueriesData([QUERY_KEY.website], (oldData: any) => {
-			// 	if (!oldData) return undefined;
-			// 	return {
-			// 		...oldData,
-			// 		links: oldData.links.map((link: Link) => {
-			// 			if (link.id === updatedLink.id) return updatedLink;
-			// 			return link;
-			// 		}),
-			// 	};
-			// });
+			queryClient.setQueriesData([QUERY_KEY.advertisements], (oldData: any) => {
+				if (!oldData) return undefined;
+				return {
+					data: oldData.data.map((advertisment: Advertisement) => {
+						if (advertisment.id === updatedAdvertisement.id)
+							return {
+								...advertisment,
+							};
+						return oldData;
+					}),
+				};
+			});
+
+			queryClient.setQueriesData([QUERY_KEY.advertisement, advertisment.id], (oldData: any) => {
+				if (!oldData) return undefined;
+				return {
+					updatedAdvertisement,
+				};
+			});
 
 			// Show toast notification
 			toast({
@@ -275,17 +290,43 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 			setIsLoading(false);
 			setOpen(false);
 		} catch (e: any) {
-			toast({
-				title: 'An error occurred',
-				description: 'Cannot edit advertisment. Please try again later.',
-				variant: 'destructive',
-			});
-
+			// Handle validation errors
+			if (e.errors) {
+				for (const property of [
+					'color',
+					'price',
+					'mileage',
+					'horse_power',
+					'engine_capacity',
+					'description',
+					'year',
+					'location_id',
+					'vehicle_brand_id',
+					'vehicle_model_id',
+					'vehicle_category_id',
+					'fuel_id',
+					'transmission_id',
+				]) {
+					if (e.errors?.[property]) {
+						setError(property, {
+							type: 'manual',
+							message: e.errors[property],
+						});
+					}
+				}
+			}
+			// Handle generic errors
+			else {
+				toast({
+					title: 'An error occurred',
+					description: e.message,
+					variant: 'destructive',
+				});
+			}
 			// Reset loading state
 			setIsLoading(false);
 		}
 	}
-
 	return (
 		<Dialog
 			open={open}
@@ -299,7 +340,7 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 					<Icons.edit className="w-3 h-6 border-0 cursor-pointer hover:text-primary/50" />
 				) : (
 					<Button size="sm" variant="outline" onClick={() => setOpen(true)}>
-						<Icons.add className={cn('w-4 h-4', className)} />
+						Добави обява
 					</Button>
 				)}
 			</DialogTrigger>
@@ -372,7 +413,12 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 																		delete errors.vehicle_brand_id;
 																	}
 																	if (isSelected) setSelectedVehicleBrandType(null);
-																	else setSelectedVehicleBrandType(vehicleBrand.id);
+																	else {
+																		setSelectedVehicleBrandType(vehicleBrand.id);
+																		setSelectedVehicleModel(null);
+																		setSelectedVehicleModelType(null);
+																	}
+
 																	setSelecteVehicleBrandOpen(false);
 																}}
 															>
@@ -413,11 +459,9 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 												errors?.vehicle_model_id && 'border-destructive',
 											)}
 										>
-											{selectedVehicleModel
-												? vehicleModels?.find(
-														(vehicleModel) => vehicleModel.id === selectedVehicleModel,
-												  )?.name
-												: 'Избери модел'}
+											{vehicleModels?.find(
+												(vehicleModel) => vehicleModel.id === selectedVehicleModel,
+											)?.name || 'Избери модел'}
 											<Icons.chevronUpDown className="w-4 h-4 ml-2 opacity-50 shrink-0" />
 										</Button>
 									</PopoverTrigger>
@@ -436,7 +480,10 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 																		delete errors.vehicle_model_id;
 																	}
 																	if (isSelected) setSelectedVehicleModel(null);
-																	else setSelectedVehicleModel(vehicleModel.id);
+																	else {
+																		setSelectedVehicleModel(vehicleModel.id);
+																		setSelectedVehicleModelType(null);
+																	}
 																	setSelecteVehicleModelOpen(false);
 																}}
 															>
@@ -736,31 +783,135 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 									onChange={(event) => {
 										const files = Array.from(event.target.files!);
 										files.forEach((file, index) => {
-										  formData.append(`images[${index}]`, file);
+											formData.append(`images[${index}]`, file);
 										});
 									}}
 								/>
 							</div>
 						</div>
+
 						<div className="flex flex-col w-full gap-4">
-							{/* Year Type
-							<Popover>
-								<PopoverTrigger asChild>
-									<Button
-										variant={'outline'}
-										className={cn(
-											'w-[280px] justify-start text-left font-normal',
-											!date && 'text-muted-foreground',
-										)}
-									>
-										<CalendarIcon className="mr-2 h-4 w-4" />
-										{date ? format(date, 'PPP') : <span>Pick a date</span>}
-									</Button>
-								</PopoverTrigger>
-								<PopoverContent className="w-auto p-0">
-									<Calendar mode="single" selected={date} onSelect={setDate} initialFocus />
-								</PopoverContent>
-							</Popover> */}
+							{/* Location */}
+							<div className="space-y-2">
+								<Label>
+									Район <span className="text-destructive">*</span>
+								</Label>
+								<Popover open={selecteLocationOpen} onOpenChange={setSelecteLocationOpen}>
+									<PopoverTrigger asChild>
+										<Button
+											variant="outline"
+											role="combobox"
+											className={cn(
+												'justify-between w-full',
+												errors?.location_id && 'border-destructive',
+											)}
+										>
+											{selectedLocation
+												? locations?.find((year) => year.id === selectedLocation)?.name
+												: 'Избери район'}
+											<Icons.chevronUpDown className="w-4 h-4 ml-2 opacity-50 shrink-0" />
+										</Button>
+									</PopoverTrigger>
+									<PopoverContent className="p-0">
+										<Command>
+											<CommandList>
+												<CommandEmpty>No results found.</CommandEmpty>
+												<CommandGroup>
+													{locations?.map((location) => {
+														const isSelected = selectedLocation === location.id;
+														return (
+															<CommandItem
+																key={location.id}
+																onSelect={() => {
+																	if (errors.location_id) {
+																		delete errors.location_id;
+																	}
+																	if (isSelected) setSelectedLocation(null);
+																	else setSelectedLocation(location.id);
+																	setSelecteLocationOpen(false);
+																}}
+															>
+																<div
+																	className={cn(
+																		'mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary',
+																		isSelected
+																			? 'bg-primary text-primary-foreground'
+																			: 'opacity-50 [&_svg]:invisible',
+																	)}
+																>
+																	<Icons.check className="w-4 h-4" />
+																</div>
+																<span>{location.name}</span>
+															</CommandItem>
+														);
+													})}
+												</CommandGroup>
+											</CommandList>
+										</Command>
+									</PopoverContent>
+								</Popover>
+							</div>
+
+							{/* Year Type */}
+							<div className="space-y-2">
+								<Label>
+									Година <span className="text-destructive">*</span>
+								</Label>
+								<Popover open={selecteYearOpen} onOpenChange={setSelecteYearOpen}>
+									<PopoverTrigger asChild>
+										<Button
+											variant="outline"
+											role="combobox"
+											className={cn(
+												'justify-between w-full',
+												errors?.year && 'border-destructive',
+											)}
+										>
+											{selectedYear
+												? generateYears()?.find((year) => year.id === selectedYear)?.value
+												: 'Избери година на производство'}
+											<Icons.chevronUpDown className="w-4 h-4 ml-2 opacity-50 shrink-0" />
+										</Button>
+									</PopoverTrigger>
+									<PopoverContent className="p-0">
+										<Command>
+											<CommandList>
+												<CommandEmpty>No results found.</CommandEmpty>
+												<CommandGroup>
+													{generateYears()?.map((year) => {
+														const isSelected = selectedYear === year.id;
+														return (
+															<CommandItem
+																key={year.id}
+																onSelect={() => {
+																	if (errors.year) {
+																		delete errors.year;
+																	}
+																	if (isSelected) setSelectedYear(null);
+																	else setSelectedYear(year.id);
+																	setSelecteYearOpen(false);
+																}}
+															>
+																<div
+																	className={cn(
+																		'mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary',
+																		isSelected
+																			? 'bg-primary text-primary-foreground'
+																			: 'opacity-50 [&_svg]:invisible',
+																	)}
+																>
+																	<Icons.check className="w-4 h-4" />
+																</div>
+																<span>{year.value}</span>
+															</CommandItem>
+														);
+													})}
+												</CommandGroup>
+											</CommandList>
+										</Command>
+									</PopoverContent>
+								</Popover>
+							</div>
 
 							{/* Fuel Type */}
 							<div className="space-y-2">

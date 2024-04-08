@@ -2,7 +2,7 @@ import { Activity, BarChart, MapPin, Car  } from 'lucide-react';
 import { TabsContent } from '@/components/ui/Tabs';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '@/components/ui/Card';
 import { useQuery } from '@tanstack/react-query';
-import { getDashboardStats } from '@/data';
+import { getDashboardStats, getLocations } from '@/data';
 import { EstateTypesChart } from './components/EstateTypesChart';
 import { EstateCountChart } from './components/EstateCountChart';
 import { QUERY_KEY } from '@/data/constants';
@@ -19,7 +19,7 @@ export function DashboardOverviewPage() {
 		keepPreviousData: true,
 		staleTime: 1000 * 60 * 5, // 5 minutes
 	});
-
+	useQuery({ queryKey: [QUERY_KEY.locations], queryFn: () => getLocations() });
 	// Get estate counts for today
 	const advertisementsToday =
 		data?.advertisementsCountLastWeek.find((i) => {

@@ -8,6 +8,7 @@ import { buttonVariants } from '@/components/ui/Button';
 import { NavLink } from 'react-router-dom';
 import { DeleteDialog } from '@/components/DeleteDialog';
 import { useAuth } from '@/hooks/auth.hook';
+import { AdvertismentDialog } from '@/pages/dashboard/components/AdvertismentDialog';
 
 export const columns: ColumnDef<Advertisement>[] = [
 	{
@@ -41,7 +42,7 @@ export const columns: ColumnDef<Advertisement>[] = [
 		header: ({ column }) => <DataTableColumnHeader className="w-full" column={column} title="Превозно средство" />,
 		cell: ({ row }) => (
 			<div>
-				{row.original?.name} {row.original?.vehicleModelType?.name}
+				{row.original?.name}
 			</div>
 		),
 	},
@@ -109,6 +110,7 @@ export const columns: ColumnDef<Advertisement>[] = [
 				return (
 					<div className="flex flex-row items-center gap-2">
 						<DeleteDialog advertismentId={vehicleId} />
+						<AdvertismentDialog advertisment={row.original} />
 					</div>
 				);
 			}

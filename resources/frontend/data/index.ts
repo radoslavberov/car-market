@@ -1,6 +1,5 @@
 import {
 	DashboardStats,
-	Analysis,
 	AdminPanelUser,
 	AdminPanelAnylysis,
 	Advertisement,
@@ -114,6 +113,7 @@ export const getAdvertisements = async (): Promise<Advertisement[]> => {
 };
 
 export const getVehicleModels = async (brandId: any): Promise<VehicleModel[]> => {
+	console.log('Ff');
 	return api.get(`/api/vehicle-models/${brandId}`).then((res) => {
 		return res.data.data;
 	});
@@ -129,47 +129,6 @@ export const getVehicleModelTypes = async (modelId: any): Promise<VehicleModelTy
 	return api.get(`/api/vehicle-model-types/${modelId}`).then((res) => {
 		return res.data.data;
 	});
-};
-
-export const generateEstateAnalysis = async (id: any): Promise<Analysis> => {
-	return api.post(`/api/estates/${id}/analysis`).then((res) => {
-		return res.data.data;
-	});
-};
-
-export const getUserAnalyses = async ({
-	pageIndex = 0,
-	pageSize = 20,
-	sortBy,
-	sort,
-}: {
-	pageIndex: number;
-	pageSize: number;
-	sortBy?: string;
-	sort?: 'asc' | 'desc';
-}): Promise<{
-	rows: Analysis[];
-	meta: {
-		currentPage: number;
-		from: number;
-		lastPage: number;
-		perPage: number;
-		to: number;
-		total: number;
-	};
-}> => {
-	return api
-		.get('/api/analyses', {
-			params: {
-				page: pageIndex + 1,
-				limit: pageSize,
-				sortBy,
-				sort,
-			},
-		})
-		.then((res) => {
-			return res.data;
-		});
 };
 
 interface AdminPanelUserFilters {
@@ -304,9 +263,9 @@ export const addAdvertisment = async (data: FormData): Promise<Advertisement> =>
 		});
 };
 
-export const editAdvertisment = async (data: AdvertisementInput, id: number): Promise<Advertisement> => {
+export const editAdvertisment = async (data: FormData, id: number): Promise<Advertisement> => {
 	return api
-		.put(`/api/advertisements/${id}`, data)
+		.patch(`/api/advertisements/${id}`, data)
 		.then((res) => {
 			return res.data.data;
 		})

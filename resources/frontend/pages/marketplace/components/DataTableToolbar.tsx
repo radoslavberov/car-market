@@ -5,7 +5,7 @@ import { X } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 // import { Input } from '@/components/ui/Input';
 
-import { ConstructionType, District, EstateType, Location, Provider } from '@/types/index';
+import {Location } from '@/types/index';
 import { DataTableFacetedFilter } from './DataTableFacetedFilter';
 import { Toggle } from '@/components/ui/Toggle';
 import { Icons } from '@/components/Icons';
