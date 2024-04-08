@@ -15,6 +15,7 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    //Creating controller for posting comments
     public function store(Request $request, Advertisement $advertisement)
     {
         $request->validate([

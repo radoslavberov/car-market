@@ -20,6 +20,7 @@ class EditUserRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
+    //Validation for edit user profile
     public function rules(): array
     {
         return [

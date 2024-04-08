@@ -13,6 +13,7 @@ class FuelsTableSeeder extends Seeder
      */
     public function run(): void
     {
+        //creating seeders for fuels
         $fuels = [
             [
                 'name' => 'Бензинов',

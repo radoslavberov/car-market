@@ -100,6 +100,8 @@ class AdvertisementController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
+     //Creating controller for creating advertisement
     public function store(StoreAdvertisementRequest $request)
     {
         DB::beginTransaction();
