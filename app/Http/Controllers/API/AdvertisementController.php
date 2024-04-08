@@ -41,23 +41,13 @@ class AdvertisementController extends Controller
 
         # Sort mapping for the query
         $sortMapping = [
-            'id' => 'id',
-            'vehicleCategory' => 'vehicle_categories.name',
             'price' => 'price',
-            'color' => 'color',
-            'location' => 'locations.name',
             'year' => 'year',
-            'vehicleModel' => 'vehicle_models.name',
-            'vehicleModelType' => 'vehicle_model_types.name',
-            'createdAt' => 'advertisements.created_at',
-            'default' => 'created_at'
+            'default' => 'advertisements.created_at'
         ];
 
         # Query builder for estates
-        $advertisementsQuery = Advertisement::query()
-            ->select('advertisements.*', 'vehicle_brands.name',
-                'locations.name', 'vehicle_models.name', 'vehicle_models.vehicle_brand_id',
-            'vehicle_model_types.name', 'vehicle_model_types.vehicle_model_id', 'vehicle_categories.name')
+        $advertisementsQuery = Advertisement::with('vehicleBrand', 'vehicleModel', 'vehicleModelType', 'vehicleCategory')
             ->leftJoin('vehicle_brands', 'advertisements.vehicle_brand_id', '=', 'vehicle_brands.id')
             ->leftJoin('locations', 'advertisements.location_id', '=', 'locations.id')
             ->leftJoin('vehicle_models', 'advertisements.vehicle_model_id', '=', 'vehicle_models.id')
@@ -66,16 +56,16 @@ class AdvertisementController extends Controller
 
             # Filter by query parameters
             ->when($request->vehicleBrand, function ($query, $brand) {
-                return $query->whereIn('vehicle_brand_id', $brand);
+                return $query->whereIn('advertisements.vehicle_brand_id', $brand);
             })
             ->when($request->vehicleCategory, function ($query, $category) {
-                return $query->whereIn('vehicle_category_id', $category);
+                return $query->whereIn('advertisements.vehicle_category_id', $category);
             })
             ->when($request->vehicleModel, function ($query, $vehicleModel) {
-                return $query->whereIn('vehicle_model_id', $vehicleModel);
+                return $query->whereIn('advertisements.vehicle_model_id', $vehicleModel);
             })
             ->when($request->vehicleModelType, function ($query, $vehicleModelType) {
-                return $query->whereIn('vehicle_model_type_id', $vehicleModelType);
+                return $query->whereIn('advertisements.vehicle_model_type_id', $vehicleModelType);
             })
             ->when($request->location, function ($query, $location) {
                 return $query->whereIn('advertisements.location_id', $location);
