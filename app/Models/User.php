@@ -66,6 +66,6 @@ class User extends Authenticatable
     public function canDodvertisements()
     {
         $currentMonthAnalysisCount = $this->advertisementsCountThisMonth();
-        return $currentMonthAnalysisCount < 5;
+        return $currentMonthAnalysisCount < 10;
     }
 }
