@@ -58,7 +58,7 @@ export function MarketplacePage() {
 		keepPreviousData: true,
 		meta: {
 			// Error message that will be displayed via toast if the query fails
-			errorMessage: 'Неуспешно зареждане на имотите. Моля опитайте пак по-късно.',
+			errorMessage: 'Неуспешно зареждане на обявите. Моля опитайте пак по-късно.',
 		},
 		enabled: !!user,
 	});
@@ -214,7 +214,7 @@ export function MarketplacePage() {
 				<div>
 					<h2 className="text-2xl font-bold tracking-tight">Търсене</h2>
 					<p className="text-muted-foreground">
-						Намерете имотите, които търсите, използвайки филтрите по-долу.
+						Намерете автомобилите, които търсите, използвайки филтрите по-долу.
 					</p>
 				</div>
 				{data && (
@@ -241,7 +241,7 @@ export function MarketplacePage() {
 				<span className="flex flex-row items-center text-muted-foreground">
 					<Icons.spinner className="w-4 h-4 mr-2 animate-spin" /> Моля изчакайте...
 				</span>
-			)} 
+			)}
 		</div>
 	);
 }

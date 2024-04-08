@@ -30,6 +30,11 @@ export const columns: ColumnDef<Advertisement>[] = [
 		enableSorting: false,
 		enableHiding: false,
 	},
+    {
+        accessorKey: 'vehicleCategory',
+        header: ({ column }) => <DataTableColumnHeader column={column} title="Категория" />,
+        cell: ({ row }) => <div>{row.original.vehicleCategory?.name}</div>,
+    },
 	{
 		id: 'vehicle',
 		accessorFn: (data) => data.vehicleModelType?.name,
@@ -49,6 +54,21 @@ export const columns: ColumnDef<Advertisement>[] = [
 			</div>
 		),
 	},
+    {
+        id: 'location',
+        header: ({ column }) => <DataTableColumnHeader column={column} title="Местоп." className="w-24" />,
+        cell: ({ row }) => <div>{row.original?.location?.name}</div>,
+    },
+    {
+        id: 'mileage',
+        header: ({ column }) => <DataTableColumnHeader column={column} title="Пробег" className="w-24" />,
+        cell: ({ row }) => <div>{row.original?.mileage} км.</div>,
+    },
+    {
+        accessorKey: 'year',
+        header: ({ column }) => <DataTableColumnHeader column={column} title="Година" />,
+        cell: ({ row }) => <div>{row.getValue('year')}</div>,
+    },
 	{
 		accessorKey: 'color',
 		header: ({ column }) => <DataTableColumnHeader column={column} title="Цвят" />,
@@ -56,44 +76,25 @@ export const columns: ColumnDef<Advertisement>[] = [
 	},
 	{
 		accessorKey: 'fuel',
-		header: ({ column }) => <DataTableColumnHeader column={column} title="Тип гориво" />,
+		header: ({ column }) => <DataTableColumnHeader column={column} title="Гориво" />,
 		cell: ({ row }) => <div>{row.original?.fuel?.name}</div>,
-	},
-	{
-		id: 'location',
-		header: ({ column }) => <DataTableColumnHeader column={column} title="Местоп." className="w-24" />,
-		cell: ({ row }) => <div>{row.original?.location?.name}</div>,
-	},
-	{
-		id: 'mileage',
-		header: ({ column }) => <DataTableColumnHeader column={column} title="Мили" className="w-24" />,
-		cell: ({ row }) => <div>{row.original?.mileage} мили</div>,
-	},
-	{
-		accessorKey: 'year',
-		header: ({ column }) => <DataTableColumnHeader column={column} title="Година" />,
-		cell: ({ row }) => <div>{row.getValue('year')}</div>,
 	},
 	{
 		id: 'transmission',
 		header: ({ column }) => <DataTableColumnHeader column={column} title="Трансмисия" />,
 		cell: ({ row }) => <div>{row.original?.transmission?.name}</div>,
 	},
-	{
-		accessorKey: 'vehicleCategory',
-		header: ({ column }) => <DataTableColumnHeader column={column} title="Купе" />,
-		cell: ({ row }) => <div>{row.original.vehicleCategory?.name}</div>,
-	},
+
 	{
 		accessorKey: 'engineCapacity',
 		header: ({ column }) => (
-			<DataTableColumnHeader column={column} title="Капацитет на вдигателя" className="w-full m-auto" />
+			<DataTableColumnHeader column={column} title="Кубатура" className="w-full m-auto" />
 		),
-		cell: ({ row }) => <div className="text-center">{row.original?.engine_capacity}</div>,
+		cell: ({ row }) => <div className="text-center">{row.original?.engine_capacity} куб.см</div>,
 	},
 	{
 		accessorKey: 'horsePower',
-		header: ({ column }) => <DataTableColumnHeader column={column} title="Конски сили" className="w-24" />,
+		header: ({ column }) => <DataTableColumnHeader column={column} title="Мощност" className="w-24" />,
 		cell: ({ row }) => <div>{row.original?.horsePower} КС.</div>,
 	},
 	{

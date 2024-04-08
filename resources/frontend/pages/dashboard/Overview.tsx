@@ -1,4 +1,4 @@
-import { Activity, UserSquare, Euro, Users } from 'lucide-react';
+import { Activity, BarChart, MapPin, Car  } from 'lucide-react';
 import { TabsContent } from '@/components/ui/Tabs';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '@/components/ui/Card';
 import { useQuery } from '@tanstack/react-query';
@@ -43,7 +43,7 @@ export function DashboardOverviewPage() {
 					<Card>
 						<CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
 							<CardTitle className="text-sm font-medium">Брой обяви</CardTitle>
-							<Euro className="h-4 w-4 text-muted-foreground" />
+							<BarChart  className="h-4 w-4 text-muted-foreground" />
 						</CardHeader>
 						<CardContent>
 							<div className="text-2xl font-bold">{data?.total.advertisements}</div>
@@ -55,7 +55,7 @@ export function DashboardOverviewPage() {
 					<Card>
 						<CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
 							<CardTitle className="text-sm font-medium">Местоположения</CardTitle>
-							<Users className="h-4 w-4 text-muted-foreground" />
+							<MapPin  className="h-4 w-4 text-muted-foreground" />
 						</CardHeader>
 						<CardContent>
 							<div className="text-2xl font-bold">{data?.total.locations}</div>
@@ -67,7 +67,7 @@ export function DashboardOverviewPage() {
 					<Card>
 						<CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
 							<CardTitle className="text-sm font-medium">Марки</CardTitle>
-							<UserSquare className="h-4 w-4 text-muted-foreground" />
+							<Car  className="h-4 w-4 text-muted-foreground" />
 						</CardHeader>
 						<CardContent>
 							<div className="text-2xl font-bold">{data?.total.brands}</div>
@@ -97,7 +97,7 @@ export function DashboardOverviewPage() {
 					{/* Newly added estates chart */}
 					<Card className="col-span-7 lg:col-span-4">
 						<CardHeader>
-							<CardTitle>Нови имоти</CardTitle>
+							<CardTitle>Нови обяви</CardTitle>
 						</CardHeader>
 						<CardContent className="pl-2">
 							<EstateCountChart />
@@ -108,7 +108,7 @@ export function DashboardOverviewPage() {
 					<Card className="col-span-7 lg:col-span-3">
 						<CardHeader>
 							<CardTitle>Най-високи цени за марка автомобили</CardTitle>
-							<CardDescription>Показаната цена е средната за марка автомобили </CardDescription>
+							<CardDescription>Показаната цена е средна за марка автомобил в системата</CardDescription>
 						</CardHeader>
 						<CardContent>
 							<div className="space-y-8">
@@ -131,7 +131,7 @@ export function DashboardOverviewPage() {
 					{/* Estate types chart */}
 					<Card className="col-span-7">
 						<CardHeader>
-							<CardTitle>Автомобилни категории</CardTitle>
+							<CardTitle>Категории автомобили</CardTitle>
 						</CardHeader>
 						<CardContent className="pl-2">
 							<EstateTypesChart />

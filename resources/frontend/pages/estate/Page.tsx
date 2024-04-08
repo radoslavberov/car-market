@@ -36,7 +36,7 @@ export function VehiclePage() {
 						{isLoading ? (
 							<p className="flex flex-row items-center text-muted-foreground">
 								<Icons.spinner className="w-4 h-4 mr-2 animate-spin" /> Моля изчакайте, докато заредим
-								информацията за имота.
+								информацията за обявата.
 							</p>
 						) : (
 							<p className="flex flex-row items-center capitalize text-muted-foreground">

@@ -549,7 +549,7 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 														(vehicleCategory) =>
 															parseInt(vehicleCategory.id) === selectedVehicleCategory,
 												  )?.value
-												: 'Избери скоросттна кутия'}
+												: 'Избери купе'}
 											<Icons.chevronUpDown className="w-4 h-4 ml-2 opacity-50 shrink-0" />
 										</Button>
 									</PopoverTrigger>
@@ -600,7 +600,7 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 							{/* transmission Type */}
 							<div className="space-y-2">
 								<Label>
-									Тип скоросттна кутия <span className="text-destructive">*</span>
+									Тип скоростна кутия <span className="text-destructive">*</span>
 								</Label>
 								<Popover open={selecteTransmissionOpen} onOpenChange={setSelecteTransmissionOpen}>
 									<PopoverTrigger asChild>
@@ -617,7 +617,7 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 														(transmissionTypes) =>
 															parseInt(transmissionTypes.id) === selectedTransmission,
 												  )?.value
-												: 'Избери скоросттна кутия'}
+												: 'Избери скоростна кутия'}
 											<Icons.chevronUpDown className="w-4 h-4 ml-2 opacity-50 shrink-0" />
 										</Button>
 									</PopoverTrigger>
@@ -728,7 +728,7 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 
 							{/* Picture */}
 							<div className="grid w-full max-w-sm items-center gap-1.5">
-								<Label htmlFor="picture">Picture</Label>
+								<Label htmlFor="picture">Добави снимки</Label>
 								<Input
 									id="picture"
 									type="file"
@@ -779,7 +779,7 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 										>
 											{selectedFuel
 												? fuels?.find((fuel) => parseInt(fuel.id) === selectedFuel)?.value
-												: 'Избери скоросттна кутия'}
+												: 'Избери гориво'}
 											<Icons.chevronUpDown className="w-4 h-4 ml-2 opacity-50 shrink-0" />
 										</Button>
 									</PopoverTrigger>
@@ -870,7 +870,7 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 							{/* Horse power */}
 							<div className="grid gap-2">
 								<Label htmlFor="mileage">
-									Конски сили <span className="text-destructive">*</span>{' '}
+									Мощност (к.с.) <span className="text-destructive">*</span>{' '}
 								</Label>
 								<Input
 									id="horsePower"
@@ -892,7 +892,7 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 							{/* Capacity */}
 							<div className="grid gap-2">
 								<Label htmlFor="capacity">
-									Капацитет <span className="text-destructive">*</span>{' '}
+									Кубатура на двигател (куб.см) <span className="text-destructive">*</span>{' '}
 								</Label>
 								<Input
 									id="capacity"
@@ -914,7 +914,7 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 							{/* Description */}
 							<div className="grid gap-2">
 								<Label htmlFor="note">
-									Описнаие <span className="text-destructive">*</span>{' '}
+									Описание <span className="text-destructive">*</span>{' '}
 								</Label>
 								<Textarea
 									id="note"
@@ -933,7 +933,7 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 
 					<Button type="submit" disabled={isDisabled} className="w-full mt-2">
 						{isLoading && <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />}
-						{!advertisment ? 'Create' : 'Save'}
+						{!advertisment ? 'Създай' : 'Save'}
 					</Button>
 				</form>
 			</DialogContent>

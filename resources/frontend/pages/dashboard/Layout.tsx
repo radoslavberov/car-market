@@ -27,7 +27,7 @@ export function DashboardLayout() {
 
 					{/* Analyses Tab */}
 					<NavLink to="/dashboard/advertisments">
-						<TabsTrigger value="advertisments">Моите оферти</TabsTrigger>
+						<TabsTrigger value="advertisments">Моите обяви</TabsTrigger>
 					</NavLink>
 				</TabsList>
 
