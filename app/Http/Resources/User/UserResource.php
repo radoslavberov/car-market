@@ -16,7 +16,7 @@ class UserResource extends JsonResource
     {
 //        $advertisementsLimit = 10;
 //        $monthlyAdvertisements = $this->analysisCountThisMonth();
-//        $analysisRemaining = $advertisementsLimit - ($monthlyAdvertisements > 0 ? $monthlyAdvertisements : 0);
+//        $advertisementsRemaining = $advertisementsLimit - ($monthlyAdvertisements > 0 ? $monthlyAdvertisements : 0);
 
 
         return [
@@ -28,9 +28,9 @@ class UserResource extends JsonResource
             'createdAt' => $this->created_at,
             'updatedAt' => $this->updated_at,
             'emailVerifiedAt' => $this->email_verified_at,
-//            'monthlyAnalysisDone' => $monthlyAdvertisements,
-//            'analysisRemaining' => $analysisRemaining,
-//            'analysisLimit' => $advertisementsLimit
+//            'monthlyAdvertisementsDone' => $monthlyAdvertisements,
+//            'advertisementsRemaining' => $advertisementsRemaining,
+//            'advertisementsLimit' => $advertisementsLimit
         ];
     }
 }
