@@ -8,7 +8,9 @@
             "DOM.Iterable"
         ],
         "types": [
-            "vite/client"
+            "vite/client",
+            "node",
+            "next"
         ],
         "allowJs": true,
         "skipLibCheck": true,

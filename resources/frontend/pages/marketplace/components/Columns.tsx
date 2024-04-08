@@ -61,20 +61,10 @@ export const columns: ColumnDef<Advertisement>[] = [
         cell: ({ row }) => <div>{row.original?.location?.name}</div>,
     },
     {
-        id: 'mileage',
-        header: ({ column }) => <DataTableColumnHeader column={column} title="Пробег" className="w-24" />,
-        cell: ({ row }) => <div>{row.original?.mileage} км.</div>,
-    },
-    {
         accessorKey: 'year',
         header: ({ column }) => <DataTableColumnHeader column={column} title="Година" />,
         cell: ({ row }) => <div>{row.getValue('year')}</div>,
     },
-	{
-		accessorKey: 'color',
-		header: ({ column }) => <DataTableColumnHeader column={column} title="Цвят" />,
-		cell: ({ row }) => <div>{row.getValue('color')}</div>,
-	},
 	{
 		accessorKey: 'fuel',
 		header: ({ column }) => <DataTableColumnHeader column={column} title="Гориво" />,
@@ -84,19 +74,6 @@ export const columns: ColumnDef<Advertisement>[] = [
 		id: 'transmission',
 		header: ({ column }) => <DataTableColumnHeader column={column} title="Трансмисия" />,
 		cell: ({ row }) => <div>{row.original?.transmission?.name}</div>,
-	},
-
-	{
-		accessorKey: 'engineCapacity',
-		header: ({ column }) => (
-			<DataTableColumnHeader column={column} title="Кубатура" className="w-full m-auto" />
-		),
-		cell: ({ row }) => <div className="text-center">{row.original?.engine_capacity} куб.см</div>,
-	},
-	{
-		accessorKey: 'horsePower',
-		header: ({ column }) => <DataTableColumnHeader column={column} title="Мощност" className="w-24" />,
-		cell: ({ row }) => <div>{row.original?.horsePower} КС.</div>,
 	},
 	{
 		accessorKey: 'delete',

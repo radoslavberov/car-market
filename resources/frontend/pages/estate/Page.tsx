@@ -1,11 +1,11 @@
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+"use client"
+import { useQuery } from '@tanstack/react-query';
 import { getAdvertisement } from '@/data';
 import { Euro, HardHat, Home, Expand, Hotel, Calendar } from 'lucide-react';
 import { Card, CardHeader, CardContent, CardTitle } from '@/components/ui/Card';
 import { Icons } from '@/components/Icons';
 import { useParams } from 'react-router-dom';
-import { useEffect, useMemo, useState } from 'react';
-import { Button, buttonVariants } from '@/components/ui/Button';
+
 import { cn } from '@/lib/utils';
 import { QUERY_KEY } from '@/data/constants';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/Carusel';
@@ -19,10 +19,7 @@ export function VehiclePage() {
 		queryFn: () => getAdvertisement(id),
 		enabled: !!id,
 	});
-	const backgroundImages = Object.values(
-		import.meta.glob(`C:/Users/MSI/Desktop/Rado Proekt/car-market/storage/app/public/${data?.images[0].path}/*.{png,jpg,jpeg,PNG,JPEG}`)
-	);
-	console.log(backgroundImages);
+	
 	return (
 		<div className="flex flex-col flex-1 h-full space-y-8">
 			<div className="flex flex-col justify-between gap-4 lg:items-center lg:flex-row">
@@ -128,8 +125,7 @@ export function VehiclePage() {
 					</CardContent>
 				</Card>
 			</div>
-			<img src={"C:/Users/MSI/Desktop/Rado Proekt/car-market/storage/app/public/images_advertisement_23/Екранна снимка 2024-01-31 224159.png"} alt='gaga' />
-           
+
 			{/* Description */}
 			<div className={cn(data ? 'grid' : 'hidden', 'grid-cols-1')}>
 				<Card>
