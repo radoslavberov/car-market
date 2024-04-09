@@ -80,7 +80,79 @@ class LocationsTableSeeder extends Seeder
             'active' => 1, 
             'created_at' => now(), 
             'updated_at' => now()
-        ]
+        ],
+        [
+            'name' => 'Айтос', 
+            'active' => 1, 
+            'created_at' => now(), 
+            'updated_at' => now()
+        ],
+        [
+            'name' => 'Банско', 
+            'active' => 1, 
+            'created_at' => now(), 
+            'updated_at' => now()
+        ],
+        [
+            'name' => 'Благоевград', 
+            'active' => 1, 
+            'created_at' => now(), 
+            'updated_at' => now()
+        ],
+        [
+            'name' => 'Видин', 
+            'active' => 1, 
+            'created_at' => now(), 
+            'updated_at' => now()
+        ],
+        [
+            'name' => 'Елена', 
+            'active' => 1, 
+            'created_at' => now(), 
+            'updated_at' => now()
+        ],
+        [
+            'name' => 'Казанлък', 
+            'active' => 1, 
+            'created_at' => now(), 
+            'updated_at' => now()
+        ],
+        [
+            'name' => 'Слънчев бряг', 
+            'active' => 1, 
+            'created_at' => now(), 
+            'updated_at' => now()
+        ],
+        [
+            'name' => 'Перник', 
+            'active' => 1, 
+            'created_at' => now(), 
+            'updated_at' => now()
+        ],
+        [
+            'name' => 'Разград', 
+            'active' => 1, 
+            'created_at' => now(), 
+            'updated_at' => now()
+        ],
+        [
+            'name' => 'Свищов', 
+            'active' => 1, 
+            'created_at' => now(), 
+            'updated_at' => now()
+        ],
+        [
+            'name' => 'Севлиево', 
+            'active' => 1, 
+            'created_at' => now(), 
+            'updated_at' => now()
+        ],
+        [
+            'name' => 'Трявна', 
+            'active' => 1, 
+            'created_at' => now(), 
+            'updated_at' => now()
+        ],
         ];
         foreach ($locations as $location) {
             DB::table('locations')->insertOrIgnore($location);
