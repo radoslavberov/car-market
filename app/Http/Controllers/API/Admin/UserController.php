@@ -23,16 +23,15 @@ class UserController extends Controller
 
         # Sort mapping for the query
         $sortMapping = [
-            'analysesCount'     => 'estates_analyses_count',
-            'admin'             => 'is_admin',
-            'active'            => 'active',
-            'name'              => 'name',
-            'email'             => 'email',
-            'default'           => 'created_at'
+            'advertisementsCount'   => 'advertisements_count',
+            'admin'                 => 'is_admin',
+            'active'                => 'active',
+            'name'                  => 'name',
+            'email'                 => 'email',
+            'default'               => 'created_at'
         ];
 
-        # Query builder for estate analysis
-        $usersQuery = User::withCount('estatesAnalyses')
+        $usersQuery = User::withCount('advertisements')
 
         # Filter query by parameters
             ->when($request->admin === '1', function ($query) {

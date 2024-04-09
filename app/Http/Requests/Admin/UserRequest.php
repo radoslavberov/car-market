@@ -26,7 +26,7 @@ class UserRequest extends FormRequest
             'admin' => 'nullable|boolean',
             'active' => 'nullable|boolean',
             'search' => 'nullable|string',
-            'sortBy' => Rule::in(['admin', 'active', 'analysesCount', 'name', 'email']),
+            'sortBy' => Rule::in(['admin', 'active', 'advertisementsCount', 'name', 'email']),
             'sort' => Rule::in(['asc', 'desc'])
         ];
     }

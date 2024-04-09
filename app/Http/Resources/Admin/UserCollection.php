@@ -7,7 +7,7 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class UserCollection extends ResourceCollection
 {
-    
+
     private $pagination;
 
     public function setPaginationData($currentPage, $total, $perPage)
@@ -39,7 +39,7 @@ class UserCollection extends ResourceCollection
                     'active' => $user->active,
                     'createdAt' => $user->created_at,
                     'updatedAt' => $user->updated_at,
-                    'analysisDone' => $user->analysisCountThisMonth(),
+                    'advertisementsDone' => $user->advertisementsCountThisMonth(),
                 ];
             }),
             'meta' => $this->pagination,
