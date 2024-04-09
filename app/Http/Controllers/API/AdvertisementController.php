@@ -231,10 +231,64 @@ class AdvertisementController extends Controller
         return response()->json(['message' => 'Вие изтрихте вашата обява!', 200]);
     }
 
-    public function getUserAdvertisements()
+    public function getUserAdvertisements(AdvertisementFilterRequest $request)
     {
-        $getUserAdvertisements = Advertisement::where('user_id', auth()->id())->get();
-        return UserAdvertisementCollection::make($getUserAdvertisements);
+        # Default and maximum number of items per page
+        $defaultLimit = 20;
+        $maxLimit = 50;
+
+        # Get query parameters
+        $sortBy = $request->query('sortBy', 'default');
+        $sortDirection = $request->query('sort', 'desc');
+        $page = $request->query('page', 1);
+        $limit = $request->query('limit', $defaultLimit) > $maxLimit ? $defaultLimit : $request->query('limit', $defaultLimit);
+
+        # Sort mapping for the query
+        $sortMapping = [
+            'price' => 'price',
+            'year' => 'year',
+            'default' => 'advertisements.created_at'
+        ];
+
+        # Query builder for estates
+        $advertisementsQuery = Advertisement::with('vehicleBrand', 'vehicleModel', 'vehicleModelType', 'vehicleCategory')
+            ->leftJoin('vehicle_brands', 'advertisements.vehicle_brand_id', '=', 'vehicle_brands.id')
+            ->leftJoin('locations', 'advertisements.location_id', '=', 'locations.id')
+            ->leftJoin('vehicle_models', 'advertisements.vehicle_model_id', '=', 'vehicle_models.id')
+            ->leftJoin('vehicle_model_types', 'advertisements.vehicle_model_type_id', '=', 'vehicle_model_types.id')
+            ->leftJoin('vehicle_categories', 'advertisements.vehicle_category_id', '=', 'vehicle_categories.id')
+
+            # Filter by query parameters
+            ->when($request->vehicleBrand, function ($query, $brand) {
+                return $query->whereIn('advertisements.vehicle_brand_id', $brand);
+            })
+            ->when($request->vehicleCategory, function ($query, $category) {
+                return $query->whereIn('advertisements.vehicle_category_id', $category);
+            })
+            ->when($request->vehicleModel, function ($query, $vehicleModel) {
+                return $query->whereIn('advertisements.vehicle_model_id', $vehicleModel);
+            })
+            ->when($request->vehicleModelType, function ($query, $vehicleModelType) {
+                return $query->whereIn('advertisements.vehicle_model_type_id', $vehicleModelType);
+            })
+            ->when($request->location, function ($query, $location) {
+                return $query->whereIn('advertisements.location_id', $location);
+            })
+            ->where('user_id', auth()->id())
+            ->orderBy($sortMapping[$sortBy], $sortDirection);
+
+        # Apply limit and offset
+        $total = $advertisementsQuery->count();
+        $offset = ($page - 1) * $limit;
+
+        # Get estates
+        $advertisements = $advertisementsQuery->offset($offset)->limit($limit)->get();
+
+        # Create a resource collection with pagination data
+        $advertisementsCollection = new AdvertisementCollection($advertisements);
+        $advertisementsCollection->setPaginationData($page, $total, $limit);
+
+        return $advertisementsCollection;
     }
 
 
