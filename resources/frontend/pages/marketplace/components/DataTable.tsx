@@ -1,4 +1,8 @@
 import * as React from 'react';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/Table';
+import { DataTablePagination } from '@/components/table/Pagination';
+import { DataTableToolbar } from './DataTableToolbar';
+import { cn } from '@/lib/utils';
 import {
 	ColumnDef,
 	ColumnFiltersState,
@@ -8,15 +12,8 @@ import {
 	getCoreRowModel,
 	getFacetedRowModel,
 	getFacetedUniqueValues,
-	// getFilteredRowModel,
-	// getPaginationRowModel,
-	// getSortedRowModel,
 	useReactTable,
 } from '@tanstack/react-table';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/Table';
-import { DataTablePagination } from '@/components/DataTablePagination';
-import { DataTableToolbar } from './DataTableToolbar';
-import { cn } from '@/lib/utils';
 
 interface DataTableProps<TData, TValue> {
 	isFetching: boolean;
@@ -32,6 +29,16 @@ interface DataTableProps<TData, TValue> {
 	onSetSorting: React.Dispatch<React.SetStateAction<SortingState>>;
 	columnFilters: ColumnFiltersState;
 	onSetColumnFilters: React.Dispatch<React.SetStateAction<ColumnFiltersState>>;
+	selectedModels: string[];
+	onSetSelectedModels: (languages: string[]) => void;
+	selectedLocations: string[];
+	onSetSelectedLocations: (countries: string[]) => void;
+	selectedCategories: string[];
+	onSetSelectedCategories: (categories: string[]) => void;
+	selectedBrands: string[];
+	onSetSelectedBrands: (niches: string[]) => void;
+	selectedModelTypes: string[];
+	onSetSelectedModelTypes: (niches: string[]) => void;
 }
 
 export function DataTable<TData, TValue>({
@@ -45,6 +52,16 @@ export function DataTable<TData, TValue>({
 	onSetSorting: setSorting,
 	columnFilters,
 	onSetColumnFilters: setColumnFilters,
+	selectedModels,
+	onSetSelectedModels,
+	selectedLocations,
+	onSetSelectedLocations,
+	selectedCategories,
+	onSetSelectedCategories,
+	selectedBrands,
+	onSetSelectedBrands,
+	selectedModelTypes,
+	onSetSelectedModelTypes,
 }: DataTableProps<TData, TValue>) {
 	const [rowSelection, setRowSelection] = React.useState({});
 	const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
@@ -71,23 +88,32 @@ export function DataTable<TData, TValue>({
 		// @ts-ignore
 		onPaginationChange: setPagination,
 		onSortingChange: setSorting,
-		// getFilteredRowModel: getFilteredRowModel(),
-		// getPaginationRowModel: getPaginationRowModel(),
-		// getSortedRowModel: getSortedRowModel(),
 		getFacetedRowModel: getFacetedRowModel(),
 		getFacetedUniqueValues: getFacetedUniqueValues(),
 	});
 
 	return (
 		<div className={cn('space-y-4', isFetching && 'opacity-50')}>
-			{/* <DataTableToolbar table={table} />
-			<DataTablePagination table={table} /> */}
+			<DataTableToolbar
+				table={table}
+				selectedModels={selectedModels}
+				onSetSelectedModels={onSetSelectedModels}
+				selectedLocations={selectedLocations}
+				onSetSelectedLocations ={onSetSelectedLocations}
+				selectedCategories ={selectedCategories}
+				onSetSelectedCategories={onSetSelectedCategories}
+				selectedBrands={selectedBrands}
+				onSetSelectedBrands={onSetSelectedBrands}
+				selectedModelTypes={selectedModelTypes}
+				onSetSelectedModelTypes={onSetSelectedModelTypes}
+			/>
+			<DataTablePagination table={table} />
 			<div className="border rounded-md bg-background">
 				<Table>
 					<TableHeader>
 						{table.getHeaderGroups().map((headerGroup) => (
 							<TableRow key={headerGroup.id}>
-								{headerGroup.headers.map((header) => {
+								{headerGroup.headers.map((header, index) => {
 									return (
 										<TableHead key={header.id}>
 											{header.isPlaceholder
@@ -101,8 +127,12 @@ export function DataTable<TData, TValue>({
 					</TableHeader>
 					<TableBody>
 						{table.getRowModel().rows?.length ? (
-							table.getRowModel().rows.map((row) => (
-								<TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
+							table.getRowModel().rows.map((row, rowIndex) => (
+								<TableRow
+									key={row.id}
+									data-state={row.getIsSelected() && 'selected'}
+									className={cn(rowIndex % 2 !== 0 && 'bg-body')}
+								>
 									{row.getVisibleCells().map((cell) => (
 										<TableCell key={cell.id}>
 											{flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -113,7 +143,7 @@ export function DataTable<TData, TValue>({
 						) : (
 							<TableRow>
 								<TableCell colSpan={columns.length} className="h-24 text-center">
-									Не открихме резултати по зададените филтри.
+									No websites found.
 								</TableCell>
 							</TableRow>
 						)}

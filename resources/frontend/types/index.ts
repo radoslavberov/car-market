@@ -1,3 +1,5 @@
+export type SortDirection = 'asc' | 'desc';
+
 export interface User {
 	id: number;
 	name: string;
@@ -5,9 +7,9 @@ export interface User {
 	active: number; // 1 or 0
 	isAdmin: number; // 1 or 0
 	emailVerifiedAt: string | null; // ISO date
-	// monthlyAnalysisDone: number;
-	// analysisRemaining: number;
-	// analysisLimit: number;
+	monthlyAdvertisementsDone: number;
+	advertisementsRemaining: number;
+	advertisementsLimit: number;
 	createdAt: string | null; // ISO date
 	updatedAt: string | null; // ISO date
 }
@@ -95,6 +97,18 @@ export interface Advertisement {
 	vehicleCategory: VehicleCategory;
 	fuel: Fuel;
 	transmission: Transmission;
+}
+
+export interface GetAdvertisementParams {
+	pageIndex?: number;
+	pageSize?: number;
+	sort?: SortDirection;
+	sortBy?: string;
+	locations?: string[] | null;
+	brands?: string[] | null;
+	categories?: string[] | null;
+	models?: string[] | null;
+	types?: string[] | null;
 }
 
 export interface AdvertisementInput {

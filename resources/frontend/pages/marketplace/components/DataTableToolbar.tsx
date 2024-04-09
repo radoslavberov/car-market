@@ -1,112 +1,153 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { Table } from '@tanstack/react-table';
-import { X } from 'lucide-react';
-
 import { Button } from '@/components/ui/Button';
-// import { Input } from '@/components/ui/Input';
-
-import {Location } from '@/types/index';
-import { DataTableFacetedFilter } from './DataTableFacetedFilter';
-import { Toggle } from '@/components/ui/Toggle';
+import { Location, VehicleBrand, VehicleModel, VehicleModelType } from '@/types/index';
+import { QUERY_KEY, VEHICLE_TYPES_KEY } from '@/data/constants';
+import { InFilter } from '@/components/table/filters/InFilter';
+import { useSearchParams } from 'react-router-dom';
 import { Icons } from '@/components/Icons';
-import { cn } from '@/lib/utils';
-import { QUERY_KEY } from '@/data/constants';
 
 interface DataTableToolbarProps<TData> {
 	table: Table<TData>;
+	selectedModels: string[];
+	onSetSelectedModels: (languages: string[]) => void;
+	selectedLocations: string[];
+	onSetSelectedLocations: (countries: string[]) => void;
+	selectedCategories: string[];
+	onSetSelectedCategories: (categories: string[]) => void;
+	selectedBrands: string[];
+	onSetSelectedBrands: (niches: string[]) => void;
+	selectedModelTypes: string[];
+	onSetSelectedModelTypes: (niches: string[]) => void;
 }
 
-export function DataTableToolbar<TData>({ table }: DataTableToolbarProps<TData>) {
+export function DataTableToolbar<TData>({
+	table,
+	selectedModels,
+	onSetSelectedModels,
+	selectedLocations,
+	onSetSelectedLocations,
+	selectedCategories,
+	onSetSelectedCategories,
+	selectedBrands,
+	onSetSelectedBrands,
+	selectedModelTypes,
+	onSetSelectedModelTypes,
+}: DataTableToolbarProps<TData>) {
 	const queryClient = useQueryClient();
+	const vehicleCategories = Object.entries(VEHICLE_TYPES_KEY).map(([id, value]) => ({
+		id,
+		value,
+	}));
+	const [_, setSearchParams] = useSearchParams();
 
 	// Use the query client to get the data from the cache
-	const estateTypes = queryClient.getQueryData<EstateType[]>([QUERY_KEY.estateTypes]);
 	const locations = queryClient.getQueryData<Location[]>([QUERY_KEY.locations]);
-	const districts = queryClient.getQueryData<District[]>([QUERY_KEY.districts]);
-	const constructionTypes = queryClient.getQueryData<ConstructionType[]>([QUERY_KEY.constructionTypes]);
-	const providers = queryClient.getQueryData<Provider[]>([QUERY_KEY.providers]);
+	const brands = queryClient.getQueryData<VehicleBrand[]>([QUERY_KEY.vehicleBrands]);
+	const models = queryClient.getQueryData<VehicleModel[]>([QUERY_KEY.vehicleModels, selectedBrands[0]]);
+	const modelTypes = queryClient.getQueryData<VehicleModelType[]>([QUERY_KEY.vehicleModelTypes, selectedModels[0]]);
+	// Check if websites are filtered
+	const isFiltered =
+		selectedBrands.length > 0 ||
+		selectedCategories.length > 0 ||
+		selectedLocations.length > 0 ||
+		selectedModels.length > 0 ||
+		selectedModelTypes.length > 0;
 
-	const locationFilters = table.getColumn('location')?.getFilterValue() as string[] | undefined;
-
-	const isFiltered = table.getAllColumns().some((column) => column.getIsFiltered());
-
+	// Reset filters
+	const handleResetFilters = () => {
+		table.setPageIndex(0);
+		setSearchParams({}, { replace: true });
+	};
 	return (
 		<div className="flex items-center justify-between">
 			<div className="flex flex-wrap items-center flex-1 gap-2">
-				{/* <Input
-					placeholder="Филтриране на имоти..."
-					value={(table.getColumn('id')?.getFilterValue() as string) ?? ''}
-					onChange={(event) => table.getColumn('id')?.setFilterValue(event.target.value)}
-					className="h-8 w-[150px] lg:w-[250px]"
-				/> */}
+				{/* Brands filter */}
+				<InFilter
+					key="brands"
+					table={table}
+					single={true}
+					title="Марки"
+					options={brands!.map((i) => ({
+						label: i.name,
+						value: i.id.toString(),
+					}))}
+					selectedValues={selectedBrands}
+					onSetSelectedValues={(value) => {
+						onSetSelectedBrands(value as string[]);
+					}}
+				/>
 
-				{/* Estate types filter */}
-				{estateTypes && table.getColumn('estateType') && (
-					<DataTableFacetedFilter
-						column={table.getColumn('estateType')}
-						title="Тип имот"
-						options={estateTypes.map((i) => ({
-							label: i.name,
-							value: i.id.toString(),
-						}))}
-					/>
-				)}
+				{/* Categories filter */}
+				<InFilter
+					key="categories"
+					table={table}
+					title="Купе"
+					options={vehicleCategories.map((i) => ({
+						label: i.value,
+						value: i.id.toString(),
+					}))}
+					selectedValues={selectedCategories}
+					onSetSelectedValues={(value) => {
+						onSetSelectedCategories(value as string[]);
+					}}
+				/>
 
 				{/* Locations filter */}
-				{locations && table.getColumn('location') && (
-					<DataTableFacetedFilter
-						column={table.getColumn('location')}
-						title="Местоположение"
-						options={locations.map((i) => ({
-							label: i.name.toUpperCase(),
-							value: i.id.toString(),
-						}))}
-					/>
-				)}
+				<InFilter
+					key="locations"
+					table={table}
+					title="Местоположение"
+					options={locations!.map((i) => ({
+						label: i.name,
+						value: i.id.toString(),
+					}))}
+					selectedValues={selectedLocations}
+					onSetSelectedValues={(value) => {
+						onSetSelectedLocations(value as string[]);
+					}}
+				/>
 
-				{/* District filter */}
-				{locationFilters?.length && districts && table.getColumn('district') && (
-					<DataTableFacetedFilter
-						column={table.getColumn('district')}
-						title="Район"
-						options={districts
-							.filter((d) => d.location?.id && locationFilters.includes(d.location.id.toString()))
-							.map((i) => ({
-								label: i.name.toUpperCase(),
-								value: i.id.toString(),
-							}))}
-					/>
-				)}
-
-				{/* Construction type filter */}
-				{constructionTypes && table.getColumn('constructionType') && (
-					<DataTableFacetedFilter
-						column={table.getColumn('constructionType')}
-						title="Тип конструкция"
-						options={constructionTypes.map((i) => ({
+				{/* Vehicle models filter */}
+				{models?.length! > 0 && (
+					<InFilter
+						key="vehicle_models"
+						table={table}
+						single={true}
+						title="Модели"
+						options={models!.map((i) => ({
 							label: i.name,
 							value: i.id.toString(),
 						}))}
+						selectedValues={selectedModels}
+						onSetSelectedValues={(value) => {
+							onSetSelectedModels(value as string[]);
+						}}
 					/>
 				)}
 
-				{/* Provider filter */}
-				{providers && table.getColumn('provider') && (
-					<DataTableFacetedFilter
-						column={table.getColumn('provider')}
-						title="Доставчик"
-						options={providers.map((i) => ({
+				{/* Categories filter */}
+				{modelTypes?.length! > 0 && (
+					<InFilter
+						key="vehicle_model_types"
+						table={table}
+						title="Вид модел"
+						options={modelTypes!.map((i) => ({
 							label: i.name,
 							value: i.id.toString(),
 						}))}
+						selectedValues={selectedModelTypes}
+						onSetSelectedValues={(value) => {
+							onSetSelectedModelTypes(value as string[]);
+						}}
 					/>
 				)}
 
 				{/* Clear filters */}
 				{isFiltered && (
-					<Button variant="ghost" onClick={() => table.resetColumnFilters()} className="h-8 px-2 lg:px-3">
-						Изчисти
-						<X className="w-4 h-4 ml-2" />
+					<Button variant="ghost" onClick={handleResetFilters} className="h-8 px-2 lg:px-3">
+						Clear filters
+						<Icons.close className="w-4 h-4 ml-2" />
 					</Button>
 				)}
 			</div>

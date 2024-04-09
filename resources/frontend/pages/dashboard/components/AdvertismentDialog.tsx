@@ -12,10 +12,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/Popover
 import { Label } from '@/components/ui/Label';
 import { Input } from '@/components/ui/Input';
 import { cn } from '@/lib/utils';
-import { format } from 'date-fns';
-import { Calendar as CalendarIcon } from 'lucide-react';
-import { Calendar } from '@/components/ui/Calendar';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { toast } from '@/hooks/toast.hook';
@@ -25,7 +22,6 @@ import { Advertisement, AdvertisementInput, Location } from '@/types';
 import {
 	addAdvertisment,
 	editAdvertisment,
-	getLocations,
 	getVehicleBrands,
 	getVehicleModelTypes,
 	getVehicleModels,
@@ -92,7 +88,7 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 	);
 
 	const [selectedVehicleModel, setSelectedVehicleModel] = useState<number | null>(
-		advertisment?.vehicleModel.id || null,
+		advertisment?.vehicleModel?.id || null,
 	);
 	const [selecteVehicleModelOpen, setSelecteVehicleModelOpen] = useState(false);
 
@@ -176,9 +172,11 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 			const newAdvertisement = await addAdvertisment(formData);
 			// Update cached data
 			queryClient.setQueriesData([QUERY_KEY.advertisements], (oldData: any) => {
+				console.log(oldData)
 				if (!oldData) return undefined;
 				return {
-					data: [...oldData, newAdvertisement],
+					...oldData,
+					data: [...oldData.data, newAdvertisement],
 				};
 			});
 

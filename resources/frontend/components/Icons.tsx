@@ -1,4 +1,4 @@
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, PlusCircle, SortAsc, SortDesc } from 'lucide-react';
 import {
 	AlertTriangle,
 	ArrowRight,
@@ -46,6 +46,10 @@ interface LogoProps extends LucideProps {
 export type Icon = LucideIcon;
 
 export const Icons = {
+	// Sort icons
+	sortDesc: SortDesc,
+	plusCircle: PlusCircle,
+	sortAsc: SortAsc,
 	info: Info,
 	x: XIcon,
 	admin: ShieldAlert,

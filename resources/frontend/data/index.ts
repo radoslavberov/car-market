@@ -3,16 +3,14 @@ import {
 	AdminPanelUser,
 	AdminPanelAnylysis,
 	Advertisement,
-	AdvertisementInput,
 	ErrorResponse,
 	VehicleBrand,
 	VehicleModelType,
 	VehicleModel,
 	Location,
+	GetAdvertisementParams,
 } from '@/types/index';
-import { ColumnFiltersState } from '@tanstack/react-table';
 import api from '@/lib/api';
-import axios from 'axios';
 
 export const getDashboardStats = async (): Promise<DashboardStats> => {
 	return api.get('/api/dashboard-stats').then((res) => {
@@ -20,73 +18,46 @@ export const getDashboardStats = async (): Promise<DashboardStats> => {
 	});
 };
 
-// export const getAdvertisements = async ({
-// 	pageIndex = 0,
-// 	pageSize = 50,
-// 	sortBy,
-// 	sort,
-// 	filters,
-// }: {
-// 	pageIndex: number;
-// 	pageSize: number;
-// 	sortBy?: string;
-// 	sort?: 'asc' | 'desc';
-// 	filters?: ColumnFiltersState;
-// }): Promise<{
-// 	rows: Advertisement[];
-// 	meta: {
-// 		from: number;
-// 		to: number;
-// 		current_page: number;
-// 		last_page: number;
-// 		per_page: number;
-// 		total: number;
-// 	};
-// }> => {
-// 	let location = null,
-// 		district = null,
-// 		constructionType = null,
-// 		estateType = null,
-// 		provider = null;
-
-// 	if (filters && filters.length > 0) {
-// 		// Get valid filters
-// 		const locationFilters = filters.find((filter) => filter.id === 'location' && Array.isArray(filter.value));
-// 		const districtFilters = filters.find((filter) => filter.id === 'district' && Array.isArray(filter.value));
-// 		const constructionTypeFilters = filters.find(
-// 			(filter) => filter.id === 'constructionType' && Array.isArray(filter.value),
-// 		);
-// 		const estateTypeFilters = filters.find((filter) => filter.id === 'estateType' && Array.isArray(filter.value));
-// 		const providerFilters = filters.find((filter) => filter.id === 'provider' && Array.isArray(filter.value));
-
-// 		// Apply filters
-// 		if (locationFilters) location = (locationFilters.value as string[]).map((item) => Number(item));
-// 		if (districtFilters) district = (districtFilters.value as string[]).map((item) => Number(item));
-// 		if (constructionTypeFilters)
-// 			constructionType = (constructionTypeFilters.value as string[]).map((item) => Number(item));
-// 		if (estateTypeFilters) estateType = (estateTypeFilters.value as string[]).map((item) => Number(item));
-// 		if (providerFilters) provider = (providerFilters.value as string[]).map((item) => Number(item));
-// 	}
-
-// 	return api
-// 		.get('/api/estates', {
-// 			params: {
-// 				page: pageIndex + 1,
-// 				limit: pageSize,
-// 				sortBy,
-// 				sort,
-// 				location,
-// 				district,
-// 				constructionType,
-// 				estateType,
-// 				provider,
-// 				isFavorite: showFavorites ? 1 : 0,
-// 			},
-// 		})
-// 		.then((res) => {
-// 			return res.data.data;
-// 		});
-// };
+export const getAdvertisements = async ({
+	pageIndex = 0,
+	pageSize = 50,
+	sortBy,
+	sort,
+	locations,
+	brands,
+	models,
+	types,
+	categories,
+}: GetAdvertisementParams): Promise<{
+	data: Advertisement[];
+	meta: {
+		from: number;
+		to: number;
+		currentPage: number;
+		lastPage: number;
+		perPage: number;
+		total: number;
+	};
+}> => {
+	// Execute request with filters
+	return api
+		.get('/api/advertisements', {
+			params: {
+				page: pageIndex + 1,
+				limit: pageSize,
+				sortBy,
+				sort,
+				'vehicleBrand[]': brands?.map((i) => Number(i)),
+				'location[]': locations?.map((i) => Number(i)),
+				'vehicleCategory[]': categories?.map((i) => Number(i)),
+				'vehicleModelType[]': types?.map((i) => Number(i)),
+				'vehicleModel[]': models?.map((i) => Number(i)),
+			},
+		})
+		.then((res) => {
+			return res.data;
+		});
+};
 
 export const getLocations = async (): Promise<Location> => {
 	return api.get(`/api/locations`).then((res) => {
@@ -94,20 +65,49 @@ export const getLocations = async (): Promise<Location> => {
 	});
 };
 
-export const getUserAdvertisements = async (): Promise<Advertisement[]> => {
-	return api.get(`/api/advertisements/advertisements`).then((res) => {
-		return res.data.data;
-	});
+export const getUserAdvertisements = async ({
+	pageIndex = 0,
+	pageSize = 50,
+	sortBy,
+	sort,
+	locations,
+	brands,
+	models,
+	types,
+	categories,
+}: GetAdvertisementParams): Promise<{
+	data: Advertisement[];
+	meta: {
+		from: number;
+		to: number;
+		currentPage: number;
+		lastPage: number;
+		perPage: number;
+		total: number;
+	};
+}> => {
+	// Execute request with filters
+	return api
+		.get('/api/advertisements/advertisements', {
+			params: {
+				page: pageIndex + 1,
+				limit: pageSize,
+				sortBy,
+				sort,
+				'vehicleBrand[]': brands?.map((i) => Number(i)),
+				'location[]': locations?.map((i) => Number(i)),
+				'vehicleCategory[]': categories?.map((i) => Number(i)),
+				'vehicleModelType[]': types?.map((i) => Number(i)),
+				'vehicleModel[]': models?.map((i) => Number(i)),
+			},
+		})
+		.then((res) => {
+			return res.data;
+		});
 };
 
 export const getAdvertisement = async (id: any): Promise<Advertisement> => {
 	return api.get(`/api/advertisements/${id}`).then((res) => {
-		return res.data.data;
-	});
-};
-
-export const getAdvertisements = async (): Promise<Advertisement[]> => {
-	return api.get(`/api/advertisements`).then((res) => {
 		return res.data.data;
 	});
 };

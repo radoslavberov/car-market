@@ -14,9 +14,9 @@ class UserResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-//        $advertisementsLimit = 10;
-//        $monthlyAdvertisements = $this->analysisCountThisMonth();
-//        $advertisementsRemaining = $advertisementsLimit - ($monthlyAdvertisements > 0 ? $monthlyAdvertisements : 0);
+       $advertisementsLimit = 10;
+       $monthlyAdvertisements = $this->advertisementsCountThisMonth();
+       $advertisementsRemaining = $advertisementsLimit - ($monthlyAdvertisements > 0 ? $monthlyAdvertisements : 0);
 
 
         return [
@@ -28,9 +28,9 @@ class UserResource extends JsonResource
             'createdAt' => $this->created_at,
             'updatedAt' => $this->updated_at,
             'emailVerifiedAt' => $this->email_verified_at,
-//            'monthlyAdvertisementsDone' => $monthlyAdvertisements,
-//            'advertisementsRemaining' => $advertisementsRemaining,
-//            'advertisementsLimit' => $advertisementsLimit
+           'monthlyAdvertisementsDone' => $monthlyAdvertisements,
+           'advertisementsRemaining' => $advertisementsRemaining,
+           'advertisementsLimit' => $advertisementsLimit
         ];
     }
 }
