@@ -168,6 +168,54 @@ class AdvertisementController extends Controller
     public function update(UpdateAdvertisementRequest $request, Advertisement $advertisement)
     {
         $this->authorize('update', $advertisement);
+
+        DB::beginTransaction();
+
+        try {
+
+            $updateData = [];
+            if ($request->filled('vehicle_brand_id') && $request->filled('vehicle_model_id')) {
+                $getBrand = VehicleBrand::findOrFail($request->vehicle_brand_id);
+                $getModel = VehicleModel::findOrFail($request->vehicle_model_id);
+                $updateData['name'] = $getBrand->name . ' ' . $getModel->name;
+            }
+            $fields = ['description', 'color', 'year', 'mileage', 'horse_power', 'engine_capacity', 'price', 'location_id', 'vehicle_brand_id', 'vehicle_model_id', 'vehicle_model_type_id', 'vehicle_category_id', 'fuel_id', 'transmission_id'];
+
+            foreach ($fields as $field) {
+                if ($request->filled($field)) {
+                    $updateData[$field] = $request->$field;
+                }
+            }
+
+            $advertisement->update($updateData);
+
+            if ($request->hasFile('images')) {
+                $folderName = 'images_advertisement_' . $advertisement->id;
+
+                $advertisement->images->delete();
+
+
+                foreach ($request->file('images') as $image) {
+                    $fileName = $image->getClientOriginalName();
+                    $imagePath = $image->storeAs($folderName, $fileName, 'public');
+
+                    Image::create([
+                        'title' => $fileName,
+                        'user_id' => auth()->id(),
+                        'advertisement_id' => $advertisement->id,
+                        'path' => $imagePath,
+                    ]);
+                }
+            }
+
+            DB::commit();
+
+            return new AdvertisementResource($advertisement);
+
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['message' => 'An error occurred while updating the advertisement.', $e->getMessage()], 500);
+        }
     }
 
     /**
