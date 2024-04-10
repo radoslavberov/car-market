@@ -48,13 +48,7 @@ class AdvertisementController extends Controller
 
         # Query builder for estates
         $advertisementsQuery = Advertisement::with('vehicleBrand', 'vehicleModel', 'vehicleModelType', 'vehicleCategory')
-            ->leftJoin('vehicle_brands', 'advertisements.vehicle_brand_id', '=', 'vehicle_brands.id')
-            ->leftJoin('locations', 'advertisements.location_id', '=', 'locations.id')
-            ->leftJoin('vehicle_models', 'advertisements.vehicle_model_id', '=', 'vehicle_models.id')
-            ->leftJoin('vehicle_model_types', 'advertisements.vehicle_model_type_id', '=', 'vehicle_model_types.id')
-            ->leftJoin('vehicle_categories', 'advertisements.vehicle_category_id', '=', 'vehicle_categories.id')
 
-            # Filter by query parameters
             ->when($request->vehicleBrand, function ($query, $brand) {
                 return $query->whereIn('advertisements.vehicle_brand_id', $brand);
             })
@@ -252,12 +246,6 @@ class AdvertisementController extends Controller
 
         # Query builder for estates
         $advertisementsQuery = Advertisement::with('vehicleBrand', 'vehicleModel', 'vehicleModelType', 'vehicleCategory')
-            ->leftJoin('vehicle_brands', 'advertisements.vehicle_brand_id', '=', 'vehicle_brands.id')
-            ->leftJoin('locations', 'advertisements.location_id', '=', 'locations.id')
-            ->leftJoin('vehicle_models', 'advertisements.vehicle_model_id', '=', 'vehicle_models.id')
-            ->leftJoin('vehicle_model_types', 'advertisements.vehicle_model_type_id', '=', 'vehicle_model_types.id')
-            ->leftJoin('vehicle_categories', 'advertisements.vehicle_category_id', '=', 'vehicle_categories.id')
-
             # Filter by query parameters
             ->when($request->vehicleBrand, function ($query, $brand) {
                 return $query->whereIn('advertisements.vehicle_brand_id', $brand);
