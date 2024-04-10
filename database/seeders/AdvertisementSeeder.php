@@ -15,6 +15,7 @@ class AdvertisementSeeder extends Seeder
     {
         $advertisements = [
             [
+                'id' => 1,
                 'name' => 'Example Advertisement 1',
                 'price' => 25000.00,
                 'color' => 'Red',
@@ -35,6 +36,7 @@ class AdvertisementSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
+                'id' => 2,
                 'name' => 'Example Advertisement 2',
                 'price' => 2500.00,
                 'color' => 'Blue',
@@ -51,46 +53,6 @@ class AdvertisementSeeder extends Seeder
                 'vehicle_category_id' => 8, // Ensure this ID exists in your vehicle_categories table
                 'fuel_id' => 1, // Ensure this ID exists in your fuels table
                 'transmission_id' => 1, // Ensure this ID exists in your transmissions table
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'name' => 'Example Advertisement 3',
-                'price' => 3500.00,
-                'color' => 'Blue',
-                'year' => 2001,
-                'mileage' => 10000,
-                'horse_power' => 150,
-                'engine_capacity' => 2000,
-                'description' => 'Detailed description of the vehicle.',
-                'user_id' => 1, // Ensure this ID exists in your users table
-                'location_id' => 2, // Ensure this ID exists in your locations table
-                'vehicle_brand_id' => 4, // Assuming 1 is the ID for Mercedes
-                'vehicle_model_id' => 8, // ID for Mercedes E Class, ensure it exists and is correct
-                'vehicle_model_type_id' => 8, // Ensure this ID is correct for the E Class model type
-                'vehicle_category_id' => 2, // Ensure this ID exists in your vehicle_categories table
-                'fuel_id' => 1, // Ensure this ID exists in your fuels table
-                'transmission_id' => 1, // Ensure this ID exists in your transmissions table
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'name' => 'Example Advertisement 4',
-                'price' => 4500.00,
-                'color' => 'White',
-                'year' => 2001,
-                'mileage' => 10000,
-                'horse_power' => 150,
-                'engine_capacity' => 2000,
-                'description' => 'Detailed description of the vehicle.',
-                'user_id' => 1, // Ensure this ID exists in your users table
-                'location_id' => 2, // Ensure this ID exists in your locations table
-                'vehicle_brand_id' => 2, // Assuming 1 is the ID for Mercedes
-                'vehicle_model_id' => 3, // ID for Mercedes E Class, ensure it exists and is correct
-                'vehicle_model_type_id' => 3, // Ensure this ID is correct for the E Class model type
-                'vehicle_category_id' => 1, // Ensure this ID exists in your vehicle_categories table
-                'fuel_id' => 1, // Ensure this ID exists in your fuels table
-                'transmission_id' => 2, // Ensure this ID exists in your transmissions table
                 'created_at' => now(),
                 'updated_at' => now(),
             ]

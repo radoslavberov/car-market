@@ -399,14 +399,14 @@ class VehicleModelTypesSeeder extends Seeder
                 'active' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
-            ],  
+            ],
             [
                 'name' => 'Q3',
                 'vehicle_model_id' => 8,
                 'active' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
-            ],  
+            ],
             [
                 'name' => 'Q5',
                 'vehicle_model_id' => 8,
@@ -507,112 +507,112 @@ class VehicleModelTypesSeeder extends Seeder
             ],
             [
                 'name' => '425',
-                'vehicle_model_id' => 11,
+                'vehicle_model_id' => 12,
                 'active' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'name' => '435',
-                'vehicle_model_id' => 11,
+                'vehicle_model_id' => 12,
                 'active' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'name' => '440',
-                'vehicle_model_id' => 11,
+                'vehicle_model_id' => 12,
                 'active' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'name' => 'M4',
-                'vehicle_model_id' => 11,
+                'vehicle_model_id' => 12,
                 'active' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'name' => '525',
-                'vehicle_model_id' => 12,
+                'vehicle_model_id' => 13,
                 'active' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'name' => '535',
-                'vehicle_model_id' => 12,
+                'vehicle_model_id' => 13,
                 'active' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'name' => '550',
-                'vehicle_model_id' => 12,
+                'vehicle_model_id' => 13,
                 'active' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'name' => 'M5',
-                'vehicle_model_id' => 12,
+                'vehicle_model_id' => 13,
                 'active' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'name' => '750',
-                'vehicle_model_id' => 13,
+                'vehicle_model_id' => 14,
                 'active' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'name' => '760',
-                'vehicle_model_id' => 13,
+                'vehicle_model_id' => 14,
                 'active' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'name' => 'X1',
-                'vehicle_model_id' => 14,
+                'vehicle_model_id' => 11,
                 'active' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'name' => 'X3',
-                'vehicle_model_id' => 14,
+                'vehicle_model_id' => 11,
                 'active' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'name' => 'X4',
-                'vehicle_model_id' => 14,
+                'vehicle_model_id' => 11,
                 'active' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'name' => 'X5',
-                'vehicle_model_id' => 14,
+                'vehicle_model_id' => 11,
                 'active' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'name' => 'X6',
-                'vehicle_model_id' => 14,
+                'vehicle_model_id' => 11,
                 'active' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'name' => 'X7',
-                'vehicle_model_id' => 14,
+                'vehicle_model_id' => 11,
                 'active' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
