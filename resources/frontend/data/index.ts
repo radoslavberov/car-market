@@ -9,6 +9,7 @@ import {
 	VehicleModel,
 	Location,
 	GetAdvertisementParams,
+	Comment,
 } from '@/types/index';
 import api from '@/lib/api';
 
@@ -238,6 +239,12 @@ export const getAdminPanelUsers = async ({
 
 export const deactivateUser = async (id: number): Promise<[]> => {
 	return api.put(`/api/admin/users/${id}/deactivate`).then((res) => {
+		return res.data.data;
+	});
+};
+
+export const createComment = async (id: number, data: string): Promise<Advertisement> => {
+	return api.post(`/api/advertisements/${id}/comment`, data).then((res) => {
 		return res.data.data;
 	});
 };

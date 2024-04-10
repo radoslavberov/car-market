@@ -182,8 +182,8 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 
 			// Show toast
 			toast({
-				title: 'Success',
-				description: `Added advertisement`,
+				title: 'Успешно',
+				description: `Добавена е обявата`,
 				variant: 'default',
 			});
 

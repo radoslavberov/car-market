@@ -23,13 +23,14 @@ class CommentController extends Controller
         ]);
 
 
-        $comment = Comment::create([
+        Comment::create([
             'user_id' => auth()->id(),
             'advertisement_id' => $advertisement->id,
             'description' => $request->description,
         ]);
 
-        return AdvertisementResource::make($comment);
+        $advertisement->load('comments');
+        return AdvertisementResource::make($advertisement);
     }
 
     /**

@@ -1,4 +1,4 @@
-"use client"
+'use client';
 import { useQuery } from '@tanstack/react-query';
 import { getAdvertisement } from '@/data';
 import { Euro, HardHat, Home, Expand, Hotel, Calendar } from 'lucide-react';
@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { QUERY_KEY } from '@/data/constants';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/Carusel';
+import { AddCommentDialog } from './components/AddCommentDialog';
 
 const NO_INFO_TEXT = 'Няма инф.';
 
@@ -19,7 +20,7 @@ export function VehiclePage() {
 		queryFn: () => getAdvertisement(id),
 		enabled: !!id,
 	});
-	
+
 	return (
 		<div className="flex flex-col flex-1 h-full space-y-8">
 			<div className="flex flex-col justify-between gap-4 lg:items-center lg:flex-row">
@@ -31,7 +32,7 @@ export function VehiclePage() {
 						<h2 className="flex flex-row items-baseline gap-1 text-3xl font-bold tracking-tight">
 							<span>{isLoading ? '' : data?.name}</span>
 						</h2>
-
+						<AddCommentDialog advertisment={data}/>
 						{isLoading ? (
 							<p className="flex flex-row items-center text-muted-foreground">
 								<Icons.spinner className="w-4 h-4 mr-2 animate-spin" /> Моля изчакайте, докато заредим
@@ -140,7 +141,7 @@ export function VehiclePage() {
 					</CardContent>
 				</Card>
 			</div>
-			{data?.comments.length! > 0 && (
+			{data?.comments?.length! > 0 && (
 				<Carousel
 					opts={{
 						align: 'start',
