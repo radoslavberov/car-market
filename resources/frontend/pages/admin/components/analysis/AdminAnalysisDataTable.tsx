@@ -81,13 +81,13 @@ export function AnalysisDataTable<TData, TValue>({
 
 	return (
 		<div className={cn('space-y-4', isFetching && 'opacity-50')}>
-			<AnalysisDataTableToolbar
+			{/* <AnalysisDataTableToolbar
 				table={table}
 				searchTerm={searchTerm}
 				onSetSearchTerm={onSetSearchTerm}
 				searchEstateId={searchEstateId}
 				onSetSearchEstateId={onSetSearchEstateId}
-			/>
+			/> */}
 			<DataTablePagination table={table} />
 			<div className="border rounded-md bg-background">
 				<Table>

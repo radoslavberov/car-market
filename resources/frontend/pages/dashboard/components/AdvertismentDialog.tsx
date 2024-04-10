@@ -19,13 +19,7 @@ import { toast } from '@/hooks/toast.hook';
 import { Textarea } from '@/components/ui/Textarea';
 import { Command, CommandEmpty, CommandGroup, CommandItem, CommandList } from '@/components/ui/Command';
 import { Advertisement, AdvertisementInput, Location } from '@/types';
-import {
-	addAdvertisment,
-	editAdvertisment,
-	getVehicleBrands,
-	getVehicleModelTypes,
-	getVehicleModels,
-} from '@/data';
+import { addAdvertisment, editAdvertisment, getVehicleBrands, getVehicleModelTypes, getVehicleModels } from '@/data';
 import { COLOURS_KEY, ENGINE_TYPES_KEY, QUERY_KEY, TRANSMISHIONS_KEY, VEHICLE_TYPES_KEY } from '@/data/constants';
 
 const transmissionTypes = Object.entries(TRANSMISHIONS_KEY).map(([id, value]) => ({
@@ -79,7 +73,7 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 	const [selectedColor, setSelectedColor] = useState<string | null>(advertisment?.color || null);
 	const [selecteColorOpen, setSelecteColorOpen] = useState(false);
 
-	const [selectedLocation, setSelectedLocation] = useState<number | null>(advertisment?.location.id || null);
+	const [selectedLocation, setSelectedLocation] = useState<number | null>(advertisment?.location?.id || null);
 	const [selecteLocationOpen, setSelecteLocationOpen] = useState(false);
 
 	const [selecteVehicleBrandOpen, setSelecteVehicleBrandOpen] = useState(false);
@@ -141,7 +135,6 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 		reset,
 	} = useForm();
 
-	console.log(selectedVehicleModel);
 	// Check if the form is disabled
 	const isDisabled = isLoading;
 	// Handle form submit.
@@ -172,7 +165,6 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 			const newAdvertisement = await addAdvertisment(formData);
 			// Update cached data
 			queryClient.setQueriesData([QUERY_KEY.advertisements], (oldData: any) => {
-				console.log(oldData)
 				if (!oldData) return undefined;
 				return {
 					...oldData,
@@ -256,7 +248,7 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 			const updatedAdvertisement = await editAdvertisment(formData, advertisment!.id);
 
 			// Update cached data
-			queryClient.setQueriesData([QUERY_KEY.advertisements], (oldData: any) => {
+			queryClient.setQueriesData([QUERY_KEY.advertisements], (oldData: any) => {	
 				if (!oldData) return undefined;
 				return {
 					data: oldData.data.map((advertisment: Advertisement) => {
@@ -264,7 +256,21 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 							return {
 								...advertisment,
 							};
-						return oldData;
+						return advertisment;
+					}),
+				};
+			});
+
+			queryClient.setQueriesData([QUERY_KEY.userAdvertisements], (oldData: any) => {
+				if (!oldData) return undefined;
+				return {
+					...oldData,
+					data: oldData.data.map((advertisment: Advertisement) => {
+						if (advertisment.id === updatedAdvertisement.id)
+							return {
+								...updatedAdvertisement
+							};
+						return advertisment;
 					}),
 				};
 			});
@@ -361,12 +367,6 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 								  } as unknown as AdvertisementInput)
 								: onEdit({
 										...data,
-										vehicle_brand_id: selectedVehicleBrand,
-										vehicle_model_id: selectedVehicleModel,
-										vehicle_model_type_id: selectedVehicleModelType,
-										vehicle_category_id: selectedVehicleCategory,
-										transmission_id: selectedTransmission,
-										color: selectedColor,
 								  } as unknown as AdvertisementInput);
 						}
 					})}

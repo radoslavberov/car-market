@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\API\AdvertisementController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\API\CommentController;
+use App\Http\Controllers\API\Admin\UserController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -36,6 +37,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('/store', 'store');
         Route::patch('{advertisement}', 'update');
         Route::delete('{advertisement}', 'destroy');
+    });
+
+    #Admin routes
+    Route::prefix('admin')->middleware('isAdmin')->group(function () {
+        Route::put('/users/{user}/deactivate', [UserController::class, 'deactivate']);
+        Route::apiResource('/users', UserController::class)->only('index');
     });
 
     Route::post('advertisements/{advertisement}/comment', [CommentController::class, 'store']);

@@ -41,7 +41,7 @@ export function AdminAnalysesDashboardPage() {
 		isFetching,
 		data: analyses,
 	} = useQuery({
-		queryKey: [QUERY_KEY.analyses, fetchDataOptions],
+		queryKey: [QUERY_KEY.advertisements, fetchDataOptions],
 		queryFn: () => getAdminPanelAnalyses(fetchDataOptions),
 		keepPreviousData: true,
 		meta: {
@@ -50,6 +50,7 @@ export function AdminAnalysesDashboardPage() {
 		},
 	});
 
+	console.log(analyses);
 	// Define pagination and default data for the table
 	const pagination = useMemo(() => ({ pageIndex, pageSize }), [pageIndex, pageSize]);
 	const defaultData = useMemo(() => [], []); // Default data is used when the real data is loading
@@ -80,7 +81,7 @@ export function AdminAnalysesDashboardPage() {
 						// Render AnalysisDataTable when data is loaded
 						<AnalysisDataTable
 							isFetching={isFetching}
-							data={analyses?.rows || defaultData}
+							data={analyses?.data || defaultData}
 							count={analyses?.meta?.total || -1}
 							columns={columns}
 							pagination={pagination}

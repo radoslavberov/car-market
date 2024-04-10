@@ -162,7 +162,7 @@ class AdvertisementController extends Controller
     public function update(UpdateAdvertisementRequest $request, Advertisement $advertisement)
     {
         $this->authorize('update', $advertisement);
-
+  
         DB::beginTransaction();
 
         try {

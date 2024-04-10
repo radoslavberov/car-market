@@ -20,6 +20,9 @@ import { LandingPage } from '@/pages/landing/Page';
 import { useEffect } from 'react';
 import { toast } from './hooks/toast.hook';
 import { ToastCookiesAction } from './components/ui/ToastCookiesAction';
+import { AdminPanel } from './pages/admin/Page';
+import { AdminUsersDashboardPage } from './pages/admin/AdminUsers';
+import { AdminAnalysesDashboardPage } from './pages/admin/AdminAnalyses';
 // import { TermsAndConditions } from './pages/t&c/Page';
 
 // This is the topmost app component
@@ -68,7 +71,6 @@ export default function App() {
 					<Route path="advertisments" element={<UserAdvertismentsPage />} />
 				</Route>
 				<Route path="marketplace" element={<MarketplacePage />} />
-				{/*<Route path="locations" element={<LocationsPage />} />*/}
 				<Route path="advertisments/:id" element={<VehiclePage />} />
 				<Route path="settings" element={<SettingsLayout />}>
 					<Route path="" element={<Navigate replace to="account" />} />
@@ -76,11 +78,11 @@ export default function App() {
 					<Route path="account" element={<SettingsAccountPage />} />
 					<Route path="password" element={<SettingsPasswordPage />} />
 				</Route>
-				{/* <Route path="admin" element={<AdminPanel />}>
+				<Route path="admin" element={<AdminPanel />}>
 					<Route path="" element={<Navigate replace to="users" />} />
 					<Route path="users" element={<AdminUsersDashboardPage />} />
 					<Route path="analyses" element={<AdminAnalysesDashboardPage />} />
-				</Route> */}
+				</Route>
 			</Route>
 
 			{/* Guest pages */}

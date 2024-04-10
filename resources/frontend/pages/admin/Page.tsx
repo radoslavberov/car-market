@@ -24,7 +24,7 @@ export function AdminPanel() {
 		<div className="flex items-center justify-center h-full">
 			<div className="w-full p-6">
 				<h2 className="mb-2 text-2xl font-bold tracking-tight text-center">Администраторски панел</h2>
-				<p className="mb-6 text-center text-muted-foreground">Управление на потребителите и анализите</p>
+				<p className="mb-6 text-center text-muted-foreground">Управление на потребителите и обяви</p>
 				<div className="flex flex-col items-center justify-center pb-5 space-y-8 lg:flex-row lg:space-x-12 lg:space-y-0">
 					<Tabs value={activeTab} defaultValue={activeTab} className="space-y-4">
 						<TabsList>
@@ -35,7 +35,7 @@ export function AdminPanel() {
 
 							{/* Analyses Tab */}
 							<NavLink to="/admin/analyses">
-								<TabsTrigger value="analyses">Анализи</TabsTrigger>
+								<TabsTrigger value="analyses">Обяви</TabsTrigger>
 							</NavLink>
 						</TabsList>
 					</Tabs>

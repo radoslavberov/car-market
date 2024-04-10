@@ -157,7 +157,7 @@ export const getAdminPanelAnalyses = async ({
 	search?: string;
 	estateId?: string;
 }): Promise<{
-	rows: AdminPanelAnylysis[];
+	data: Advertisement[];
 	meta: {
 		currentPage: number;
 		from: number;
@@ -172,7 +172,7 @@ export const getAdminPanelAnalyses = async ({
 	else if (sortBy === 'userEmail') sortBy = 'email';
 
 	return api
-		.get('/api/admin/analyses', {
+		.get('api/advertisements', {
 			params: {
 				page: pageIndex + 1,
 				limit: pageSize,
@@ -183,7 +183,7 @@ export const getAdminPanelAnalyses = async ({
 			},
 		})
 		.then((res) => {
-			return res.data.data;
+			return res.data;
 		});
 };
 

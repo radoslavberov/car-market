@@ -7,7 +7,6 @@ import { DataTableColumnHeader } from './DataTableColumnHeader';
 import { buttonVariants } from '@/components/ui/Button';
 import { NavLink } from 'react-router-dom';
 import { DeleteDialog } from '@/components/DeleteDialog';
-import { useAuth } from '@/hooks/auth.hook';
 import { AdvertismentDialog } from '@/pages/dashboard/components/AdvertismentDialog';
 
 export const columns: ColumnDef<Advertisement>[] = [
@@ -85,11 +84,10 @@ export const columns: ColumnDef<Advertisement>[] = [
 		accessorKey: 'delete',
 		header: ({ column }) => <DataTableColumnHeader column={column} title="" />,
 		cell: ({ row }) => {
-			const { user } = useAuth(); // Get the user object from the useAuth hook
 			const vehicleId = row.getValue('id') as number;
 			const urlContainsGaga = window.location.href.includes('advertisments');
 			// Render the delete button only if the user is admin
-			if (user?.isAdmin || urlContainsGaga) {
+			if ( urlContainsGaga) {
 				return (
 					<div className="flex flex-row items-center gap-2">
 						<DeleteDialog advertismentId={vehicleId} />
