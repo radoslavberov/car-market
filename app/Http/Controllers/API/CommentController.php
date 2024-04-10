@@ -29,7 +29,7 @@ class CommentController extends Controller
             'description' => $request->description,
         ]);
 
-        return response()->json(['message' => 'Добавихте коментар!', 'comment' => $comment], 201);
+        return AdvertisementResource::make($comment);
     }
 
     /**
