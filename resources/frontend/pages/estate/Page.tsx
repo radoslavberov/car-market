@@ -1,7 +1,19 @@
 'use client';
 import { useQuery } from '@tanstack/react-query';
 import { getAdvertisement } from '@/data';
-import { Euro, HardHat, Home, Expand, Hotel, Calendar } from 'lucide-react';
+import {
+    Euro,
+    HardHat,
+    Home,
+    Expand,
+    Hotel,
+    Calendar,
+    Palette,
+    Flame,
+    RefreshCw,
+    CalendarCheck2,
+    ArrowRightLeft, Car
+} from 'lucide-react';
 import { Card, CardHeader, CardContent, CardTitle } from '@/components/ui/Card';
 import { Icons } from '@/components/Icons';
 import { useParams } from 'react-router-dom';
@@ -21,7 +33,7 @@ export function VehiclePage() {
 		enabled: !!id,
 	});
 
-	
+
 
 	return (
 		<div className="flex flex-col flex-1 h-full space-y-8">
@@ -65,7 +77,7 @@ export function VehiclePage() {
 				<Card>
 					<CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
 						<CardTitle className="text-sm font-medium">Цвят</CardTitle>
-						<Euro className="w-4 h-4 text-muted-foreground" />
+						<Palette className="w-4 h-4 text-muted-foreground" />
 					</CardHeader>
 					<CardContent>
 						<div className="text-2xl font-bold">{data?.color ?? NO_INFO_TEXT}</div>
@@ -74,7 +86,7 @@ export function VehiclePage() {
 				<Card>
 					<CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
 						<CardTitle className="text-sm font-medium">Двигател</CardTitle>
-						<Expand className="w-4 h-4 text-muted-foreground" />
+						<Flame className="w-4 h-4 text-muted-foreground" />
 					</CardHeader>
 					<CardContent>
 						<div className="text-2xl font-bold">{data?.fuel?.name ?? NO_INFO_TEXT}</div>
@@ -83,7 +95,7 @@ export function VehiclePage() {
 				<Card>
 					<CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
 						<CardTitle className="text-sm font-medium">Пробег</CardTitle>
-						<Calendar className="w-4 h-4 text-muted-foreground" />
+						<RefreshCw className="w-4 h-4 text-muted-foreground" />
 					</CardHeader>
 					<CardContent>
 						<div className="text-2xl font-bold">{data?.mileage ?? NO_INFO_TEXT} км</div>
@@ -92,7 +104,7 @@ export function VehiclePage() {
 				<Card>
 					<CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
 						<CardTitle className="text-sm font-medium">Купе</CardTitle>
-						<Home className="w-4 h-4 text-muted-foreground" />
+						<Car className="w-4 h-4 text-muted-foreground" />
 					</CardHeader>
 					<CardContent>
 						<div className="text-2xl font-bold">{data?.vehicleCategory?.name ?? NO_INFO_TEXT}</div>
@@ -101,7 +113,7 @@ export function VehiclePage() {
 				<Card>
 					<CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
 						<CardTitle className="text-sm font-medium">Капацитет на двигателя</CardTitle>
-						<HardHat className="w-4 h-4 text-muted-foreground" />
+						<Car className="w-4 h-4 text-muted-foreground" />
 					</CardHeader>
 					<CardContent>
 						<div className="text-2xl font-bold">
@@ -112,7 +124,7 @@ export function VehiclePage() {
 				<Card>
 					<CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
 						<CardTitle className="text-sm font-medium">Скоростна кутия</CardTitle>
-						<Hotel className="w-4 h-4 text-muted-foreground" />
+						<Car className="w-4 h-4 text-muted-foreground" />
 					</CardHeader>
 					<CardContent>
 						<div className="text-2xl font-bold">{data?.transmission?.name ?? NO_INFO_TEXT}</div>
@@ -121,6 +133,7 @@ export function VehiclePage() {
 				<Card>
 					<CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
 						<CardTitle className="text-sm font-medium">Година</CardTitle>
+                        <CalendarCheck2 className="w-4 h-4 text-muted-foreground" />
 					</CardHeader>
 					<CardContent>
 						<div className="text-2xl font-bold">{data?.year ?? NO_INFO_TEXT}</div>
@@ -151,7 +164,7 @@ export function VehiclePage() {
 				>
 					<CarouselContent>
 						{data?.comments?.map((comment) => (
-							<CarouselItem key={comment.id} className="md:basis-1/2 lg:basis-1/2 pr-2">						
+							<CarouselItem key={comment.id} className="md:basis-1/2 lg:basis-1/2 pr-2">
 									<Card className='h-full'>
 										<CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
 											<CardTitle className="text-sm font-medium">{comment.user.name} </CardTitle>
@@ -160,7 +173,7 @@ export function VehiclePage() {
 										<CardContent>
 											<div className="text-2xl font-bold">{comment.description}</div>
 										</CardContent>
-									</Card>					
+									</Card>
 							</CarouselItem>
 						))}
 					</CarouselContent>

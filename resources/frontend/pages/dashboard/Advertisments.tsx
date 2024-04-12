@@ -83,7 +83,7 @@ export function UserAdvertismentsPage() {
 		keepPreviousData: true,
 		meta: {
 			// Error message that will be displayed via toast if the query fails
-			errorMessage: 'Неуспешно зареждане на имотите. Моля опитайте пак по-късно.',
+			errorMessage: 'Неуспешно зареждане на обявите. Моля опитайте пак по-късно.',
 		},
 	});
 
