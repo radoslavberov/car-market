@@ -129,16 +129,6 @@ export function LandingPage() {
 					}}
 				/>
 				<div className="absolute inset-0 z-0 bg-cover backdrop-blur-md backdrop-brightness-50"></div>
-
-				{/* Content */}
-				<div className="relative flex flex-col items-center px-4 pt-20 pb-16 mx-auto text-center max-w-7xl sm:px-6 lg:px-8 lg:pt-32">
-					<h1 className="max-w-4xl text-5xl font-medium tracking-tight sm:text-7xl">Напълно безплатно.</h1>
-					<div className="flex justify-center mt-10 gap-x-6">
-						<Link to="/register" className={cn(buttonVariants({ variant: 'default', size: 'lg' }))}>
-							Регистрирайте се!
-						</Link>
-					</div>
-				</div>
 			</section>
 		</>
 	);

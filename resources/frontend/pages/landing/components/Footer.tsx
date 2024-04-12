@@ -1,24 +1,17 @@
-import { Icons } from '@/components/Icons';
-// import { siteConfig } from '@/config/site';
-// import logo_1 from '@/assets/eu/logo_1.png';
-// import logo_2 from '@/assets/eu/logo_2.png';
-
 export function Footer() {
+	const backgroundImages = Object.values(
+		import.meta.glob('@/assets/background/*.{png,jpg,jpeg,PNG,JPEG}', { eager: true, as: 'url' }),
+	);
 	return (
 		<footer className="relative bg-black">
 			<div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
 				<div className="py-16">
 					<span className="flex flex-row items-center justify-center w-auto mx-auto">
-						<Icons.logo className="h-11" />
+					<img className="h-20" src={backgroundImages[1]}></img>
 					</span>
-					<nav className="mt-10 text-sm" aria-label="quick links">
+					<nav className="mt-3 text-sm" aria-label="quick links">
 						<div className="flex items-center justify-center -my-1 gap-x-6">
 							<a href="#">Начало</a>
-							{/*<a href="#features">За Проекта</a>*/}
-							{/*<a href="#pricing">Цена</a>*/}
-							<a href="/terms-and-conditions" target="_blank">
-								Условия за ползване
-							</a>
 						</div>
 					</nav>
 				</div>
