@@ -143,7 +143,7 @@ export function DataTable<TData, TValue>({
 						) : (
 							<TableRow>
 								<TableCell colSpan={columns.length} className="h-24 text-center">
-									No websites found.
+									Не са открити обяви.
 								</TableCell>
 							</TableRow>
 						)}

@@ -120,38 +120,6 @@ export interface AdvertisementInput {
 	year: number;
 }
 
-// export interface LocationEstateData {
-// 	id: number;
-// 	name: string;
-// 	slug: string;
-// 	estates: {
-// 		count: number;
-// 		averagePrice: string;
-// 		averagePriceSquareMeters: string;
-// 		averageSquareMeters: string;
-// 	};
-// }
-// export interface Provider {
-// 	id: number;
-// 	name: string;
-// 	url: string;
-// }
-// export interface District {
-// 	id: number;
-// 	name: string;
-// 	slug: string;
-// 	location: {
-// 		id: number;
-// 		name: string;
-// 	} | null;
-// }
-
-// export interface ConstructionType {
-// 	id: number;
-// 	name: string;
-// 	slug: string;
-// }
-
 export interface DashboardStats {
 	total: {
 		advertisements: number;
@@ -180,11 +148,6 @@ export interface Comment {
 	createdAt: string; // ISO date
 	updatedAt: string; // ISO date
 }
-export interface Favorite {
-	// id: number;
-	// estateId: number;
-	// userId: number;
-}
 
 export interface AdminPanelUser {
 	id: number;
@@ -197,12 +160,9 @@ export interface AdminPanelUser {
 	analysisDone: number;
 }
 
-export interface AdminPanelAnylysis {
+export interface AdminPanelAdvertisements {
 	id: number;
 	estateId: number;
-	pros: string;
-	cons: string;
-	score: number;
 	description: string;
 	createdAt: string; // ISO date
 	updatedAt: string; // ISO date

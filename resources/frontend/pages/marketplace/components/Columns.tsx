@@ -50,7 +50,7 @@ export const columns: ColumnDef<Advertisement>[] = [
 		header: ({ column }) => <DataTableColumnHeader column={column} title="Цена" />,
 		cell: ({ row }) => (
 			<div>
-				{row.getValue('price') ? new Intl.NumberFormat('en-US').format(row.getValue('price')) + ' EUR' : ''}
+				{row.getValue('price') ? new Intl.NumberFormat('en-US').format(row.getValue('price')) + ' ЛВ' : ''}
 			</div>
 		),
 	},
@@ -85,7 +85,7 @@ export const columns: ColumnDef<Advertisement>[] = [
 		header: ({ column }) => <DataTableColumnHeader column={column} title="" />,
 		cell: ({ row }) => {
 			const vehicleId = row.getValue('id') as number;
-			const urlContainsGaga = window.location.href.includes('advertisments');
+			const urlContainsGaga = window.location.href.includes('advertisements');
 			// Render the delete button only if the user is admin
 			if ( urlContainsGaga) {
 				return (

@@ -146,7 +146,7 @@ export function DataTableToolbar<TData>({
 				{/* Clear filters */}
 				{isFiltered && (
 					<Button variant="ghost" onClick={handleResetFilters} className="h-8 px-2 lg:px-3">
-						Clear filters
+                        Премахни филтрите
 						<Icons.close className="w-4 h-4 ml-2" />
 					</Button>
 				)}

@@ -11,24 +11,12 @@ const features = [
 	{
 		title: 'Дашборд',
 		description: 'Всичко което ви трябва на едно място.',
-		image: gallery[1],
-	},
-	{
-		title: 'Превозни средства',
-		description: 'Подробна информация за всекяко едно превозно. Направете сравнение измежду, които ви интересуват.',
-		image: gallery[2],
-	},
-	{
-		title: 'Анализи',
-		description:
-			'Направени с помощта на най-новите технологии и AI (изкуствен интелект) алгоритми. Възползвайте се от безплатния ни AI анализ.',
 		image: gallery[0],
 	},
 	{
-		title: 'Източници на данни',
-		description:
-			'Информация за превозни средства от множество области. Търсете и сравнявайте, използвайки богат набор от филтри.',
-		image: gallery[3],
+		title: 'Превозни средства',
+		description: 'Подробна информация за всяко едно превозно. Открийте вашия нов автомобил сега.',
+		image: gallery[1],
 	},
 ];
 
@@ -40,10 +28,7 @@ export function LandingPage() {
 		<>
 			{/* Hero */}
 			<div className="relative flex flex-col items-center px-4 pt-20 pb-16 mx-auto text-center max-w-7xl sm:px-6 lg:px-8 lg:pt-32">
-				<h1 className="max-w-4xl text-5xl font-medium tracking-tight sm:text-7xl">Тест</h1>
-				<p className="max-w-2xl mt-6 text-lg tracking-tight">
-					{siteConfig.description1}
-				</p>
+				<h3 className="max-w-4xl text-5xl font-medium tracking-tight sm:text-5xl">Mobirex - платформа за продажба на автомобили</h3>
 				{!isAuthenticated && (
 					<div className="flex justify-center mt-10 gap-x-6">
 						<Link to="/register" className={cn(buttonVariants({ variant: 'default', size: 'lg' }))}>
@@ -57,10 +42,9 @@ export function LandingPage() {
 			<section id="features" className="relative pt-20 overflow-hidden bg-black pb-28 sm:py-32">
 				<div className="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
 					<div className="max-w-2xl md:mx-auto md:text-center xl:max-w-none">
-						<h2 className="text-3xl tracking-tight text-white font-display sm:text-4xl md:text-5xl">
-							Всичко което ви трябва, за да направите най-добрия избор.
+						<h2 className="text-3xl tracking-tight text-white font-display sm:text-4xl md:text-3xl">
+							Всичко което ви трябва, за да откриете вашия бъдещ автомобил.
 						</h2>
-						<p className="mt-6 text-lg tracking-tight text-gray-400">{siteConfig.description2}</p>
 					</div>
 					<div className="grid items-center grid-cols-1 pt-10 mt-16 gap-y-2 sm:gap-y-6 md:mt-20 lg:grid-cols-12 lg:pt-0">
 						<>
@@ -149,10 +133,6 @@ export function LandingPage() {
 				{/* Content */}
 				<div className="relative flex flex-col items-center px-4 pt-20 pb-16 mx-auto text-center max-w-7xl sm:px-6 lg:px-8 lg:pt-32">
 					<h1 className="max-w-4xl text-5xl font-medium tracking-tight sm:text-7xl">Напълно безплатно.</h1>
-					{/*<p className="max-w-2xl mt-6 text-lg tracking-tight">*/}
-					{/*	Вие можете да използвате нашият софтуер напълно безплатно. Единственото, което трябва да*/}
-					{/*	направите е да се регистрирате!*/}
-					{/*</p>*/}
 					<div className="flex justify-center mt-10 gap-x-6">
 						<Link to="/register" className={cn(buttonVariants({ variant: 'default', size: 'lg' }))}>
 							Регистрирайте се!

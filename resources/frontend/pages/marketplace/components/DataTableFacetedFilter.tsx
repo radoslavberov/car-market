@@ -140,7 +140,7 @@ export function DataTableFacetedFilter<TData, TValue>({
                     onSelect={() => column?.setFilterValue(undefined)}
                     className="justify-center text-center"
                   >
-                    Clear filters
+                    Премахни филтрите
                   </CommandItem>
                 </CommandGroup>
               </>
