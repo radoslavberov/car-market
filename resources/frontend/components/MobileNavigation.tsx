@@ -15,7 +15,9 @@ import useDarkMode from '@/hooks/darkMode.hook';
 export function MobileNavigation() {
 	const [open, setOpen] = React.useState(false);
 	const { isDarkMode } = useDarkMode();
-
+	const backgroundImages = Object.values(
+		import.meta.glob('@/assets/background/*.{png,jpg,jpeg,PNG,JPEG}', { eager: true, as: 'url' }),
+	);
 	return (
 		<Sheet open={open} onOpenChange={setOpen}>
 			<SheetTrigger asChild>
@@ -30,7 +32,7 @@ export function MobileNavigation() {
 			<SheetContent size="xl" position="left" className="pr-0">
 				<LogoStart>
 					<Link to="/" className="">
-						<Icons.logo variant={isDarkMode ? 'default' : 'dark'} className="h-10" />
+					{isDarkMode ? <img src={backgroundImages[1]}></img> : <img src={backgroundImages[0]}></img>}
 					</Link>
 				</LogoStart>
 				<ScrollArea className="my-4 h-[calc(100vh-8rem)] pb-10 pl-6">

@@ -21,6 +21,8 @@ export function VehiclePage() {
 		enabled: !!id,
 	});
 
+	
+
 	return (
 		<div className="flex flex-col flex-1 h-full space-y-8">
 			<div className="flex flex-col justify-between gap-4 lg:items-center lg:flex-row">
@@ -32,7 +34,6 @@ export function VehiclePage() {
 						<h2 className="flex flex-row items-baseline gap-1 text-3xl font-bold tracking-tight">
 							<span>{isLoading ? '' : data?.name}</span>
 						</h2>
-						<AddCommentDialog advertisment={data}/>
 						{isLoading ? (
 							<p className="flex flex-row items-center text-muted-foreground">
 								<Icons.spinner className="w-4 h-4 mr-2 animate-spin" /> Моля изчакайте, докато заредим
@@ -141,17 +142,17 @@ export function VehiclePage() {
 					</CardContent>
 				</Card>
 			</div>
+			<AddCommentDialog advertisment={data}/>
 			{data?.comments?.length! > 0 && (
 				<Carousel
 					opts={{
 						align: 'start',
 					}}
 				>
-					<CarouselContent className="w-full">
+					<CarouselContent>
 						{data?.comments?.map((comment) => (
-							<CarouselItem key={comment.id} className="md:basis-1/2 lg:basis-1/2 w-full">
-								<div className="p-1">
-									<Card className="w-full">
+							<CarouselItem key={comment.id} className="md:basis-1/2 lg:basis-1/2 pr-2">						
+									<Card className='h-full'>
 										<CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
 											<CardTitle className="text-sm font-medium">{comment.user.name} </CardTitle>
 											<span className="text-sm font-medium">{comment.createdAt}</span>
@@ -159,8 +160,7 @@ export function VehiclePage() {
 										<CardContent>
 											<div className="text-2xl font-bold">{comment.description}</div>
 										</CardContent>
-									</Card>
-								</div>
+									</Card>					
 							</CarouselItem>
 						))}
 					</CarouselContent>

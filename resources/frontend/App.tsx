@@ -1,7 +1,6 @@
 import { Routes, Route, Navigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '@/hooks/auth.hook';
 import useDarkMode from '@/hooks/darkMode.hook';
-import { Icons } from '@/components/Icons';
 import { Layout } from '@/components/Layout';
 import { Layout as LandingLayout } from '@/pages/landing/Layout';
 import { DashboardLayout } from '@/pages/dashboard/Layout';
@@ -23,6 +22,10 @@ import { ToastCookiesAction } from './components/ui/ToastCookiesAction';
 import { AdminPanel } from './pages/admin/Page';
 import { AdminUsersDashboardPage } from './pages/admin/AdminUsers';
 import { AdminAnalysesDashboardPage } from './pages/admin/AdminAnalyses';
+import { getLocations, getVehicleBrands } from './data';
+import { QUERY_KEY } from './data/constants';
+import { useQuery } from '@tanstack/react-query';
+
 // import { TermsAndConditions } from './pages/t&c/Page';
 
 // This is the topmost app component
@@ -31,6 +34,14 @@ export default function App() {
 	const { isLoading, isAuthenticated } = useAuth();
 	const [searchParams] = useSearchParams();
 
+	const backgroundImages = Object.values(
+		import.meta.glob('@/assets/background/*.{png,jpg,jpeg,PNG,JPEG}', { eager: true, as: 'url' }),
+	);
+
+	console.log(backgroundImages);
+	// Load vehicle brands
+	useQuery({ queryKey: [QUERY_KEY.vehicleBrands], queryFn: getVehicleBrands });
+	useQuery({ queryKey: [QUERY_KEY.locations], queryFn: () => getLocations() });
 	// Imame kukita maina
 	useEffect(() => {
 		// Check if the 'cookiesAccepted' flag exists in localStorage
@@ -49,7 +60,7 @@ export default function App() {
 	return isLoading ? (
 		// Loading screen
 		<div className="flex items-center justify-center h-screen text-lg font-medium animate-pulse">
-			<Icons.logo variant={isDarkMode ? 'default' : 'dark'} className="h-14" />
+			{isDarkMode ? <img src={backgroundImages[1]}></img> : <img src={backgroundImages[0]}></img>}
 		</div>
 	) : (
 		<Routes>
@@ -90,7 +101,6 @@ export default function App() {
 				<Route path="login" element={<LoginPage />} />
 				<Route path="register" element={<RegisterPage />} />
 			</Route>
-
 
 			{/* 404 */}
 			<Route path="*" element={<NotFoundPage />} />

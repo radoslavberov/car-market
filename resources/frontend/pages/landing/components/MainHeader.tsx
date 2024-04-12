@@ -3,16 +3,20 @@ import { NavLink, Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { Icons } from '@/components/Icons';
 import { buttonVariants } from '@/pages/landing/components/Button';
+import useDarkMode from '@/hooks/darkMode.hook';
 
 export function MainHeader() {
 	const { isAuthenticated } = useAuth();
+	const backgroundImages = Object.values(
+		import.meta.glob('@/assets/background/*.{png,jpg,jpeg,PNG,JPEG}', { eager: true, as: 'url' }),
+	);
 	return (
 		<header className="hidden py-10 md:block">
 			<div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
 				<nav className="relative z-50 flex justify-between">
 					<div className="flex flex-col items-center md:flex-row md:gap-x-12">
 						<Link to="#" aria-label="Home" className="flex flex-row items-center">
-							<Icons.logo className="h-11" />
+							<img src={backgroundImages[1]}></img>
 						</Link>
 
 						<div className="items-center md:flex md:gap-x-6 md:flex-row">

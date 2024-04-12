@@ -248,7 +248,7 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 			const updatedAdvertisement = await editAdvertisment(formData, advertisment!.id);
 
 			// Update cached data
-			queryClient.setQueriesData([QUERY_KEY.advertisements], (oldData: any) => {	
+			queryClient.setQueriesData([QUERY_KEY.advertisements], (oldData: any) => {
 				if (!oldData) return undefined;
 				return {
 					data: oldData.data.map((advertisment: Advertisement) => {
@@ -268,7 +268,7 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 					data: oldData.data.map((advertisment: Advertisement) => {
 						if (advertisment.id === updatedAdvertisement.id)
 							return {
-								...updatedAdvertisement
+								...updatedAdvertisement,
 							};
 						return advertisment;
 					}),
@@ -341,7 +341,9 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 		>
 			<DialogTrigger asChild>
 				{advertisment ? (
-					<Icons.edit className="w-3 h-6 border-0 cursor-pointer hover:text-primary/50" />
+					<Button variant="outline">
+						<Icons.edit className="w-3 h-6 border-0 cursor-pointer hover:text-primary/50" />
+					</Button>
 				) : (
 					<Button size="sm" variant="outline" onClick={() => setOpen(true)}>
 						Добави обява

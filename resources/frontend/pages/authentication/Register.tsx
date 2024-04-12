@@ -4,9 +4,11 @@ import { cn } from '@/lib/utils';
 import { buttonVariants } from '@/components/ui/Button';
 import { RegisterForm } from '@/pages/authentication/components/RegisterForm';
 import { siteConfig } from '@/config/site';
-import { Icons } from '@/components/Icons';
 
 export function RegisterPage() {
+	const backgroundImages = Object.values(
+		import.meta.glob('@/assets/background/*.{png,jpg,jpeg,PNG,JPEG}', { eager: true, as: 'url' }),
+	);
 	return (
 		<>
 			<div className="container relative grid flex-col items-center justify-center h-screen lg:max-w-none lg:grid-cols-2 lg:px-0">
@@ -34,7 +36,7 @@ export function RegisterPage() {
 					<div className="absolute inset-0 bg-cover backdrop-blur-md backdrop-brightness-50"></div>
 					<div className="relative z-20 flex items-center text-lg font-medium">
 						<Link to="/" aria-label="Home" className="flex flex-row items-center">
-							<Icons.logo className="h-11" />
+							<img src={backgroundImages[1]}></img>
 						</Link>
 					</div>
 					<div className="relative z-20 mt-auto">

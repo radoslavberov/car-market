@@ -18,7 +18,7 @@ export function NotFoundPage() {
 					/>
 					<div className="absolute inset-0 bg-cover backdrop-blur-md"></div>
 					<div className="relative z-20 flex items-center text-lg font-medium">
-						<Icons.logo className="h-11" />
+					{isDarkMode ? <img src={backgroundImages[1]}></img> : <img src={backgroundImages[0]}></img>}
 					</div>
 
 					{/* Page not found */}

@@ -7,12 +7,16 @@ import { ScrollArea } from '@/components/ui/ScrollArea';
 import { cn } from '@/lib/utils';
 import { Icons } from '@/components/Icons';
 import { useAuth } from '@/hooks/auth.hook';
+import useDarkMode from '@/hooks/darkMode.hook';
 
 export function MobileHeader() {
 	const { isAuthenticated } = useAuth();
 
 	const [open, setOpen] = React.useState(false);
-
+	const { isDarkMode } = useDarkMode();
+	const backgroundImages = Object.values(
+		import.meta.glob('@/assets/background/*.{png,jpg,jpeg,PNG,JPEG}', { eager: true, as: 'url' }),
+	);
 	// function onBillingClick() {
 	// 	const billing = document.getElementById('pricing');
 	// 	billing?.scrollIntoView({ behavior: 'smooth' });
@@ -29,7 +33,7 @@ export function MobileHeader() {
 		<header className="relative md:hidden">
 			<div className="flex items-center justify-between h-16 px-4">
 				<Link to="#" aria-label="Home" className="flex flex-row items-center">
-					<Icons.logo className="h-9" />
+				{isDarkMode ? <img src={backgroundImages[1]}></img> : <img src={backgroundImages[0]}></img>}
 				</Link>
 				<Sheet open={open} onOpenChange={setOpen}>
 					<SheetTrigger asChild>
