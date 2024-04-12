@@ -1,9 +1,7 @@
 import { useAuth } from '@/hooks/auth.hook';
 import { NavLink, Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
-import { Icons } from '@/components/Icons';
 import { buttonVariants } from '@/pages/landing/components/Button';
-import useDarkMode from '@/hooks/darkMode.hook';
 
 export function MainHeader() {
 	const { isAuthenticated } = useAuth();
