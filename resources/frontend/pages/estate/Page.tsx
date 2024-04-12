@@ -3,16 +3,11 @@ import { useQuery } from '@tanstack/react-query';
 import { getAdvertisement } from '@/data';
 import {
     Euro,
-    HardHat,
-    Home,
-    Expand,
-    Hotel,
-    Calendar,
     Palette,
     Flame,
     RefreshCw,
     CalendarCheck2,
-    ArrowRightLeft, Car
+    Car
 } from 'lucide-react';
 import { Card, CardHeader, CardContent, CardTitle } from '@/components/ui/Card';
 import { Icons } from '@/components/Icons';
