@@ -102,7 +102,7 @@ export function AddCommentDialog({ advertisment }: AddCommentDialogProps) {
 			}}
 		>
 			<DialogTrigger asChild>
-				<Button size="sm" variant="outline" onClick={() => setOpen(true)}>
+				<Button size="sm" variant="outline" className='ml-auto' onClick={() => setOpen(true)}>
 					Добави коментар
 				</Button>
 			</DialogTrigger>

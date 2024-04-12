@@ -19,7 +19,7 @@ export function DashboardOverviewPage() {
 		keepPreviousData: true,
 		staleTime: 1000 * 60 * 5, // 5 minutes
 	});
-	useQuery({ queryKey: [QUERY_KEY.locations], queryFn: () => getLocations() });
+	
 	// Get estate counts for today
 	const advertisementsToday =
 		data?.advertisementsCountLastWeek.find((i) => {
