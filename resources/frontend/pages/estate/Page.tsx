@@ -176,6 +176,16 @@ export function VehiclePage() {
 					<CarouselNext />
 				</Carousel>
 			)}
+            {!isLoading && data?.images?.length > 0 && (
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    {data.images.map((image) => (
+                        <div key={image.title} className="p-2 border rounded shadow-sm">
+                            <img src={`http://127.0.0.1:8000${image.path}`} alt={image.title} className="w-full h-auto" />
+                            <p className="text-center mt-2">{image.title}</p>
+                        </div>
+                    ))}
+                </div>
+            )}
 		</div>
 	);
 }

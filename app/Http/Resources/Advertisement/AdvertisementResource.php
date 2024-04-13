@@ -14,6 +14,7 @@ use App\Http\Resources\VehicleModelTypes\VehicleModelTypeResource;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class AdvertisementResource extends JsonResource
 {
@@ -56,7 +57,7 @@ class AdvertisementResource extends JsonResource
                 return $this->images->map(function ($image) {
                     return [
                         'title'             => $image->title,
-                        'path'              => $image->path,
+                        'path'              => Storage::url($image->path),
                         'advertisement_id'  => $image->advertisement_id,
                         'createdAt'         => Carbon::parse($image->created_at)->format('d/m/y H:i')
                     ];
