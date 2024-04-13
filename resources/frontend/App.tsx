@@ -37,8 +37,7 @@ export default function App() {
 	const backgroundImages = Object.values(
 		import.meta.glob('@/assets/background/*.{png,jpg,jpeg,PNG,JPEG}', { eager: true, as: 'url' }),
 	);
-
-	console.log(backgroundImages);
+	
 	// Load vehicle brands
 	useQuery({ queryKey: [QUERY_KEY.vehicleBrands], queryFn: getVehicleBrands });
 	useQuery({ queryKey: [QUERY_KEY.locations], queryFn: () => getLocations() });

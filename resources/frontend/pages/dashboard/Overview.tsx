@@ -32,7 +32,7 @@ export function DashboardOverviewPage() {
 			return i.date === yesterday;
 		})?.count ?? 0;
 
-	console.log(data);
+
 	return (
 		<>
 			{/* Tabs content */}

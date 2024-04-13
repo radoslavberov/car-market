@@ -161,7 +161,7 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 			formData.append('vehicle_category_id', selectedVehicleCategory!.toString());
 			formData.append('transmission_id', selectedTransmission!.toString());
 			formData.append('color', selectedColor!);
-			console.log(formData.keys);
+
 			const newAdvertisement = await addAdvertisment(formData);
 			// Update cached data
 			queryClient.setQueriesData([QUERY_KEY.advertisements], (oldData: any) => {

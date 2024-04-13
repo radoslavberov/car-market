@@ -8,7 +8,6 @@ export function Layout({ variant }: { variant: 'auth' | 'guest' }) {
 	const navigate = useNavigate();
 	const { user, token } = useAuth();
 
-	console.log(user)
 	useEffect(() => {
 		// Redirect to login page if user is not authenticated
 		if ((!user || !token) && variant === 'auth') navigate('', { replace: true });

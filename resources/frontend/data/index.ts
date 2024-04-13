@@ -114,7 +114,6 @@ export const getAdvertisement = async (id: any): Promise<Advertisement> => {
 };
 
 export const getVehicleModels = async (brandId: any): Promise<VehicleModel[]> => {
-	console.log('Ff');
 	return api.get(`/api/vehicle-models/${brandId}`).then((res) => {
 		return res.data.data;
 	});
@@ -256,7 +255,6 @@ export const deleteAdvertisment = async (id: number): Promise<[]> => {
 };
 
 export const addAdvertisment = async (data: FormData): Promise<Advertisement> => {
-	console.log(data);
 	return api
 		.post('/api/advertisements/store', data, { headers: { 'Content-Type': 'multipart/form-data' } })
 		.then((res) => {

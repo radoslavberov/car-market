@@ -48,10 +48,9 @@ export function AddCommentDialog({ advertisment }: AddCommentDialogProps) {
 			// Call API to add the link
 
 			const newAdvertisement = await createComment(advertisment?.id!, data);
-			console.log(newAdvertisement);
+
 			// Update cached data
 			queryClient.setQueriesData([QUERY_KEY.advertisement, advertisment?.id.toString()], (oldData: any) => {
-				console.log(oldData);
 				if (!oldData) return undefined;
 				return {
 					...oldData,

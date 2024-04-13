@@ -50,7 +50,7 @@ export function AdminAnalysesDashboardPage() {
 		},
 	});
 
-	console.log(analyses);
+
 	// Define pagination and default data for the table
 	const pagination = useMemo(() => ({ pageIndex, pageSize }), [pageIndex, pageSize]);
 	const defaultData = useMemo(() => [], []); // Default data is used when the real data is loading
