@@ -2,14 +2,14 @@ import { useQuery } from '@tanstack/react-query';
 import { getAdminPanelAnalyses } from '@/data';
 import { useState, useMemo } from 'react';
 import { SortingState, SortDirection } from '@tanstack/react-table';
-import { AnalysisDataTable } from './components/analysis/AdminAnalysisDataTable';
+import { AnalysisDataTable } from './components/advertisments/AdminAnalysisDataTable';
 import { Icons } from '@/components/Icons';
-import { columns } from './components/analysis/AdminAnalysisColumns';
+import { columns } from './components/advertisments/AdminAnalysisColumns';
 import { debounce } from 'lodash';
 import { QUERY_KEY } from '@/data/constants';
 
-export function AdminAnalysesDashboardPage() {
-	// Pagination and sorting states for analysis data
+export function AdminAdvertismentsDashboardPage() {
+	// Pagination and sorting states for data
 	const [{ pageIndex, pageSize }, setPagination] = useState({
 		pageIndex: 0,
 		pageSize: 20,
@@ -35,11 +35,11 @@ export function AdminAnalysesDashboardPage() {
 		estateId: searchEstateId ? searchEstateId : undefined,
 	};
 
-	// Get analyses data
+	// Get advertisments data
 	const {
 		isLoading,
 		isFetching,
-		data: analyses,
+		data: advertisments,
 	} = useQuery({
 		queryKey: [QUERY_KEY.advertisements, fetchDataOptions],
 		queryFn: () => getAdminPanelAnalyses(fetchDataOptions),
@@ -78,11 +78,11 @@ export function AdminAnalysesDashboardPage() {
 			<div className="space-y-4">
 				<div className="flex flex-col flex-1 h-full space-y-8">
 					{!isLoading ? (
-						// Render AnalysisDataTable when data is loaded
+						// Render when data is loaded
 						<AnalysisDataTable
 							isFetching={isFetching}
-							data={analyses?.data || defaultData}
-							count={analyses?.meta?.total || -1}
+							data={advertisments?.data || defaultData}
+							count={advertisments?.meta?.total || -1}
 							columns={columns}
 							pagination={pagination}
 							onSetPagination={setPagination}

@@ -11,7 +11,7 @@ export function AdminPanel() {
 
 	// Determine the active tab based on the current URL
 	let activeTab = 'users';
-	if (path.includes('/admin/analyses')) activeTab = 'analyses';
+	if (path.includes('/admin/advertisments')) activeTab = 'advertisments';
 	if (path.includes('/admin/users')) activeTab = 'users';
 
 	const { user } = useAuth();
@@ -33,9 +33,9 @@ export function AdminPanel() {
 								<TabsTrigger value="users">Потребители</TabsTrigger>
 							</NavLink>
 
-							{/* Analyses Tab */}
-							<NavLink to="/admin/analyses">
-								<TabsTrigger value="analyses">Обяви</TabsTrigger>
+							{/* Advertisments Tab */}
+							<NavLink to="/admin/advertisments">
+								<TabsTrigger value="advertisments">Обяви</TabsTrigger>
 							</NavLink>
 						</TabsList>
 					</Tabs>

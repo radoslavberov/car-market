@@ -21,7 +21,7 @@ import { toast } from './hooks/toast.hook';
 import { ToastCookiesAction } from './components/ui/ToastCookiesAction';
 import { AdminPanel } from './pages/admin/Page';
 import { AdminUsersDashboardPage } from './pages/admin/AdminUsers';
-import { AdminAnalysesDashboardPage } from './pages/admin/AdminAnalyses';
+import { AdminAdvertismentsDashboardPage } from './pages/admin/AdminAdvertisment';
 import { getLocations, getVehicleBrands } from './data';
 import { QUERY_KEY } from './data/constants';
 import { useQuery } from '@tanstack/react-query';
@@ -91,7 +91,7 @@ export default function App() {
 				<Route path="admin" element={<AdminPanel />}>
 					<Route path="" element={<Navigate replace to="users" />} />
 					<Route path="users" element={<AdminUsersDashboardPage />} />
-					<Route path="analyses" element={<AdminAnalysesDashboardPage />} />
+					<Route path="advertisments" element={<AdminAdvertismentsDashboardPage />} />
 				</Route>
 			</Route>
 

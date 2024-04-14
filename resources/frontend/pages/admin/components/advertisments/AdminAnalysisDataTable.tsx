@@ -7,15 +7,11 @@ import {
 	getCoreRowModel,
 	getFacetedRowModel,
 	getFacetedUniqueValues,
-	// getFilteredRowModel,
-	//getPaginationRowModel,
-	//getSortedRowModel,
 	useReactTable,
 } from '@tanstack/react-table';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/Table';
 import { DataTablePagination } from '@/components/DataTablePagination';
 import { cn } from '@/lib/utils';
-import { AnalysisDataTableToolbar } from './AdminAnalysisDataTableToolbar';
 
 interface DataTableProps<TData, TValue> {
 	isFetching: boolean;
@@ -44,10 +40,6 @@ export function AnalysisDataTable<TData, TValue>({
 	onSetPagination: setPagination,
 	sorting,
 	onSetSorting: setSorting,
-	searchTerm,
-	onSetSearchTerm,
-	searchEstateId,
-	onSetSearchEstateId,
 }: DataTableProps<TData, TValue>) {
 	const [rowSelection, setRowSelection] = React.useState({});
 	const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
@@ -72,22 +64,12 @@ export function AnalysisDataTable<TData, TValue>({
 		// @ts-ignore
 		onPaginationChange: setPagination,
 		onSortingChange: setSorting,
-		// getFilteredRowModel: getFilteredRowModel(),
-		//getPaginationRowModel: getPaginationRowModel(),
-		// getSortedRowModel: getSortedRowModel(),
 		getFacetedRowModel: getFacetedRowModel(),
 		getFacetedUniqueValues: getFacetedUniqueValues(),
 	});
 
 	return (
 		<div className={cn('space-y-4', isFetching && 'opacity-50')}>
-			{/* <AnalysisDataTableToolbar
-				table={table}
-				searchTerm={searchTerm}
-				onSetSearchTerm={onSetSearchTerm}
-				searchEstateId={searchEstateId}
-				onSetSearchEstateId={onSetSearchEstateId}
-			/> */}
 			<DataTablePagination table={table} />
 			<div className="border rounded-md bg-background">
 				<Table>

@@ -73,7 +73,6 @@ export function AdminUsersDashboardPage() {
 			<div className="space-y-4">
 				<div className="flex flex-col flex-1 h-full space-y-8">
 					{!isLoading ? (
-						// Render AnalysisDataTable when data is loaded
 						<UsersDataTable
 							isFetching={isFetching}
 							data={users?.rows || defaultData}
