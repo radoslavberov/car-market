@@ -57,6 +57,8 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 
 	const formData = new FormData();
 
+	const [images, setImages] = useState<File[]>();
+
 	const [selectedFuel, setSelectedFuel] = useState<number | null>(advertisment?.fuel?.id || null);
 	const [selecteFuelOpen, setSelecteFuelOpen] = useState(false);
 
@@ -162,6 +164,10 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 			formData.append('transmission_id', selectedTransmission!.toString());
 			formData.append('color', selectedColor!);
 
+			images?.forEach((file, index) => {
+				formData.append(`images[${index}]`, file);
+			});
+
 			const newAdvertisement = await addAdvertisment(formData);
 			// Update cached data
 			queryClient.setQueriesData([QUERY_KEY.advertisements], (oldData: any) => {
@@ -241,9 +247,14 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 				'vehicle_model_type_id',
 				selectedVehicleModelType ? selectedVehicleModelType.toString() : '',
 			);
+
 			formData.append('vehicle_category_id', selectedVehicleCategory!.toString());
 			formData.append('transmission_id', selectedTransmission!.toString());
 			formData.append('color', selectedColor!);
+
+			images?.forEach((file, index) => {
+				formData.append(`images[${index}]`, file);
+			});
 
 			const updatedAdvertisement = await editAdvertisment(formData, advertisment!.id);
 
@@ -782,10 +793,7 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 									multiple
 									onChange={(event) => {
 										const files = Array.from(event.target.files!);
-										
-										files.forEach((file, index) => {
-											formData.append(`images[${index}]`, file);
-										});
+										setImages(files);
 									}}
 								/>
 							</div>
