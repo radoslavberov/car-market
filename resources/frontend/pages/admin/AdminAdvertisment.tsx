@@ -46,7 +46,7 @@ export function AdminAdvertismentsDashboardPage() {
 		keepPreviousData: true,
 		meta: {
 			// Error message that will be displayed via toast if the query fails
-			errorMessage: 'Неуспешно зареждане на анализите. Моля опитайте пак по-късно.',
+			errorMessage: 'Неуспешно зареждане на обяви. Моля опитайте пак по-късно.',
 		},
 	});
 

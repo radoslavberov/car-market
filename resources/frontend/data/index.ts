@@ -215,7 +215,7 @@ export const getAdminPanelUsers = async ({
 }> => {
 	// Replace column names with sort by names
 	if (sortBy === 'isAdmin') sortBy = 'admin';
-	if (sortBy === 'analysisDone') sortBy = 'analysesCount';
+	if (sortBy === 'advertisementsDone') sortBy = 'analysesCount';
 
 	return api
 		.get('/api/admin/users', {

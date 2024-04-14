@@ -105,7 +105,7 @@ export function VehiclePage() {
 					</CardHeader>
 					<CardContent>
 						<div className="text-2xl font-bold">
-							{data?.engine_capacity ?? NO_INFO_TEXT} {data?.engine_capacity ? 'литра' : ''}
+							{data?.engine_capacity ?? NO_INFO_TEXT} {data?.engine_capacity ? 'куб. см.' : ''}
 						</div>
 					</CardContent>
 				</Card>

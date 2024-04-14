@@ -85,10 +85,10 @@ export const columns: ColumnDef<AdminPanelUser>[] = [
 		enableHiding: true,
 	},
 	{
-		accessorKey: 'analysisDone',
-		header: ({ column }) => <UsersDataTableColumnHeader column={column} title="Направени анализи" />,
+		accessorKey: 'advertisementsDone',
+		header: ({ column }) => <UsersDataTableColumnHeader column={column} title="Направени обяви" />,
 		cell: ({ row }) => (
-			<div className="flex flex-row items-center justify-center gap-2"> {row.getValue('analysisDone')}</div>
+			<div className="flex flex-row items-center justify-center gap-2"> {row.getValue('advertisementsDone')}</div>
 		),
 		enableSorting: true,
 		enableHiding: true,

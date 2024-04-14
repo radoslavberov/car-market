@@ -157,7 +157,7 @@ export interface AdminPanelUser {
 	active: number;
 	createdAt: string; // ISO date
 	updatedAt: string; // ISO date
-	analysisDone: number;
+	advertisementsDone: number;
 }
 
 export interface AdminPanelAdvertisements {
