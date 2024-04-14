@@ -11,7 +11,7 @@ import { SettingsLayout } from '@/pages/settings/Layout';
 import { SettingsAccountPage } from '@/pages/settings/Account';
 import { SettingsPasswordPage } from '@/pages/settings/Password';
 import { NotFoundPage } from '@/pages/404/Page';
-import { VehiclePage } from '@/pages/estate/Page';
+import { VehiclePage } from '@/pages/advertiment/Page';
 // import { LocationsPage } from '@/pages/locations/Page';
 import { UserAdvertismentsPage } from '@/pages/dashboard/Advertisments';
 import { DashboardOverviewPage } from '@/pages/dashboard/Overview';

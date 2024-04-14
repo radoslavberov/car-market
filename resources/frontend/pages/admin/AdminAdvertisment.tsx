@@ -2,9 +2,9 @@ import { useQuery } from '@tanstack/react-query';
 import { getAdminPanelAnalyses } from '@/data';
 import { useState, useMemo } from 'react';
 import { SortingState, SortDirection } from '@tanstack/react-table';
-import { AnalysisDataTable } from './components/advertisments/AdminAnalysisDataTable';
+import { AdvertismentDataTable } from './components/advertisments/AdminAdvertismentDataTable';
 import { Icons } from '@/components/Icons';
-import { columns } from './components/advertisments/AdminAnalysisColumns';
+import { columns } from './components/advertisments/AdminAdvertismentColumns';
 import { debounce } from 'lodash';
 import { QUERY_KEY } from '@/data/constants';
 
@@ -79,7 +79,7 @@ export function AdminAdvertismentsDashboardPage() {
 				<div className="flex flex-col flex-1 h-full space-y-8">
 					{!isLoading ? (
 						// Render when data is loaded
-						<AnalysisDataTable
+						<AdvertismentDataTable
 							isFetching={isFetching}
 							data={advertisments?.data || defaultData}
 							count={advertisments?.meta?.total || -1}

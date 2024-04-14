@@ -31,7 +31,7 @@ interface DataTableProps<TData, TValue> {
 	onSetSearchEstateId: (value: string) => void;
 }
 
-export function AnalysisDataTable<TData, TValue>({
+export function AdvertismentDataTable<TData, TValue>({
 	isFetching,
 	columns,
 	data,

@@ -3,8 +3,8 @@ import { TabsContent } from '@/components/ui/Tabs';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '@/components/ui/Card';
 import { useQuery } from '@tanstack/react-query';
 import { getDashboardStats } from '@/data';
-import { EstateTypesChart } from './components/EstateTypesChart';
-import { EstateCountChart } from './components/EstateCountChart';
+import { VehichelTypesChart } from './components/VehichelTypesChart';
+import { VehichelCountChart } from './components/VehichelCountChart';
 import { QUERY_KEY } from '@/data/constants';
 // Get today's and yesterday's dates
 const today = new Date().toISOString().split('T')[0];
@@ -100,7 +100,7 @@ export function DashboardOverviewPage() {
 							<CardTitle>Нови обяви</CardTitle>
 						</CardHeader>
 						<CardContent className="pl-2">
-							<EstateCountChart />
+							<VehichelCountChart />
 						</CardContent>
 					</Card>
 
@@ -134,7 +134,7 @@ export function DashboardOverviewPage() {
 							<CardTitle>Категории автомобили</CardTitle>
 						</CardHeader>
 						<CardContent className="pl-2">
-							<EstateTypesChart />
+							<VehichelTypesChart />
 						</CardContent>
 					</Card>
 				</div>

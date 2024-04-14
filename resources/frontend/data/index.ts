@@ -1,7 +1,6 @@
 import {
 	DashboardStats,
 	AdminPanelUser,
-	AdminPanelAnylysis,
 	Advertisement,
 	ErrorResponse,
 	VehicleBrand,
@@ -9,7 +8,6 @@ import {
 	VehicleModel,
 	Location,
 	GetAdvertisementParams,
-	Comment,
 } from '@/types/index';
 import api from '@/lib/api';
 

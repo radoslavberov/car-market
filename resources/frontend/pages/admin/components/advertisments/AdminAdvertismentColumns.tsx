@@ -2,7 +2,7 @@
 
 import { ColumnDef } from '@tanstack/react-table';
 import { Advertisement } from '@/types/index';
-import { AnalysisDataTableColumnHeader } from './AdminAnalysisDataTableColumnHeader';
+import { AdvertismentDataTableColumnHeader } from './AdminAdvertismentDataTableColumnHeader';
 import { buttonVariants } from '@/components/ui/Button';
 import { NavLink } from 'react-router-dom';
 import { DeleteDialog } from '@/components/DeleteDialog';
@@ -10,7 +10,7 @@ import { DeleteDialog } from '@/components/DeleteDialog';
 export const columns: ColumnDef<Advertisement>[] = [
 	{
 		accessorKey: 'id',
-		header: ({ column }) => <AnalysisDataTableColumnHeader column={column} title="" />,
+		header: ({ column }) => <AdvertismentDataTableColumnHeader column={column} title="" />,
 		cell: ({ row }) => {
 			const vehicleId = row.getValue('id') as number;
 			return (
@@ -30,14 +30,14 @@ export const columns: ColumnDef<Advertisement>[] = [
 	{
 		id: 'vehicle',
 		accessorFn: (data) => data?.name,
-		header: ({ column }) => <AnalysisDataTableColumnHeader className="w-full" column={column} title="Превозно средство" />,
+		header: ({ column }) => <AdvertismentDataTableColumnHeader className="w-full" column={column} title="Превозно средство" />,
 		cell: ({ row }) => <div>{row.original?.name}</div>,
 		enableSorting: false,
 		enableHiding: false,
 	},
 	{
 		accessorKey: 'vehicleCategory',
-		header: ({ column }) => <AnalysisDataTableColumnHeader column={column} title="Категория" />,
+		header: ({ column }) => <AdvertismentDataTableColumnHeader column={column} title="Категория" />,
 		cell: ({ row }) => <div>{row.original.vehicleCategory?.name}</div>,
 		enableSorting: false,
 		enableHiding: false,
@@ -45,7 +45,7 @@ export const columns: ColumnDef<Advertisement>[] = [
 
 	{
 		accessorKey: 'price',
-		header: ({ column }) => <AnalysisDataTableColumnHeader column={column} title="Цена" />,
+		header: ({ column }) => <AdvertismentDataTableColumnHeader column={column} title="Цена" />,
 		cell: ({ row }) => (
 			<div>
 				{row.getValue('price') ? new Intl.NumberFormat('en-US').format(row.getValue('price')) + ' EUR' : ''}
@@ -54,33 +54,33 @@ export const columns: ColumnDef<Advertisement>[] = [
 	},
 	{
 		id: 'location',
-		header: ({ column }) => <AnalysisDataTableColumnHeader column={column} title="Местоп." className="w-24" />,
+		header: ({ column }) => <AdvertismentDataTableColumnHeader column={column} title="Местоп." className="w-24" />,
 		cell: ({ row }) => <div>{row.original?.location?.name}</div>,
 		enableSorting: false,
 		enableHiding: false,
 	},
 	{
 		accessorKey: 'year',
-		header: ({ column }) => <AnalysisDataTableColumnHeader column={column} title="Година" />,
+		header: ({ column }) => <AdvertismentDataTableColumnHeader column={column} title="Година" />,
 		cell: ({ row }) => <div>{row.getValue('year')}</div>,
 	},
 	{
 		accessorKey: 'fuel',
-		header: ({ column }) => <AnalysisDataTableColumnHeader column={column} title="Гориво" />,
+		header: ({ column }) => <AdvertismentDataTableColumnHeader column={column} title="Гориво" />,
 		cell: ({ row }) => <div>{row.original?.fuel?.name}</div>,
 		enableSorting: false,
 		enableHiding: false,
 	},
 	{
 		id: 'transmission',
-		header: ({ column }) => <AnalysisDataTableColumnHeader column={column} title="Трансмисия" />,
+		header: ({ column }) => <AdvertismentDataTableColumnHeader column={column} title="Трансмисия" />,
 		cell: ({ row }) => <div>{row.original?.transmission?.name}</div>,
 		enableSorting: false,
 		enableHiding: false,
 	},
 	{
 		accessorKey: 'delete',
-		header: ({ column }) => <AnalysisDataTableColumnHeader column={column} title="" />,
+		header: ({ column }) => <AdvertismentDataTableColumnHeader column={column} title="" />,
 		cell: ({ row }) => {
 			const vehicleId = row.getValue('id') as number;
 			const urlContainsGaga = window.location.href.includes('advertisments');
