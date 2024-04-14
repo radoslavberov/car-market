@@ -63,9 +63,9 @@ class User extends Authenticatable
         return $this->advertisements()->whereMonth('created_at', now()->month)->count();
     }
 
-    public function canDodvertisements()
+    public function canDoAdvertisements()
     {
-        $currentMonthAnalysisCount = $this->advertisementsCountThisMonth();
-        return $currentMonthAnalysisCount < 10;
+        $currentMonthAdvertisementsCount = $this->advertisementsCountThisMonth();
+        return $currentMonthAdvertisementsCount < 10;
     }
 }

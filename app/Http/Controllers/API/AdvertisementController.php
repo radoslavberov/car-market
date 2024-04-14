@@ -88,6 +88,10 @@ class AdvertisementController extends Controller
      //Creating controller for creating advertisement
     public function store(StoreAdvertisementRequest $request)
     {
+        $user = auth()->user();
+
+        if (!$user->canDoAdvertisements()) return response()->json(['message' => 'Достигнали сте лимита за добяне на обяви за месец!'], 403);
+
         DB::beginTransaction();
 
         try {
@@ -162,7 +166,7 @@ class AdvertisementController extends Controller
     public function update(UpdateAdvertisementRequest $request, Advertisement $advertisement)
     {
         $this->authorize('update', $advertisement);
-  
+
         DB::beginTransaction();
 
         try {
