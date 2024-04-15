@@ -10,7 +10,7 @@ const gallery = Object.values(import.meta.glob('@/assets/*.{png,jpg,jpeg,PNG,JPE
 const features = [
 	{
 		title: 'Дашборд',
-		description: 'Всичко което ви трябва на едно място.',
+		description: 'Всичко, което ви трябва на едно място.',
 		image: gallery[0],
 	},
 	{
@@ -43,7 +43,7 @@ export function LandingPage() {
 				<div className="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
 					<div className="max-w-2xl md:mx-auto md:text-center xl:max-w-none">
 						<h2 className="text-3xl tracking-tight text-white font-display sm:text-4xl md:text-3xl">
-							Всичко което ви трябва, за да откриете вашия бъдещ автомобил.
+							Всичко, което ви трябва, за да откриете вашия бъдещ автомобил.
 						</h2>
 					</div>
 					<div className="grid items-center grid-cols-1 pt-10 mt-16 gap-y-2 sm:gap-y-6 md:mt-20 lg:grid-cols-12 lg:pt-0">
