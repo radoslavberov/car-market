@@ -268,7 +268,7 @@ export const addAdvertisment = async (data: FormData): Promise<Advertisement> =>
 
 export const editAdvertisment = async (data: FormData, id: number): Promise<Advertisement> => {
 	return api
-		.patch(`/api/advertisements/${id}`, data)
+		.patch(`/api/advertisements/${id}`, data, { headers: { 'Content-Type': 'multipart/form-data' } })
 		.then((res) => {
 			return res.data.data;
 		})

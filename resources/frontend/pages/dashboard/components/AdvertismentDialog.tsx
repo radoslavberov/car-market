@@ -18,7 +18,7 @@ import { useForm } from 'react-hook-form';
 import { toast } from '@/hooks/toast.hook';
 import { Textarea } from '@/components/ui/Textarea';
 import { Command, CommandEmpty, CommandGroup, CommandItem, CommandList } from '@/components/ui/Command';
-import { Advertisement, AdvertisementInput, Image, Location } from '@/types';
+import { Advertisement, AdvertisementInput, Location } from '@/types';
 import { addAdvertisment, editAdvertisment, getVehicleBrands, getVehicleModelTypes, getVehicleModels } from '@/data';
 import { COLOURS_KEY, ENGINE_TYPES_KEY, QUERY_KEY, TRANSMISHIONS_KEY, VEHICLE_TYPES_KEY } from '@/data/constants';
 
@@ -58,8 +58,6 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 	const formData = new FormData();
 
 	const [images, setImages] = useState<File[]>();
-
-	const [advertismentImages, setAdvertismentImages] = useState<Image[]>(advertisment?.images || []);
 
 	const [selectedFuel, setSelectedFuel] = useState<number | null>(advertisment?.fuel?.id || null);
 	const [selecteFuelOpen, setSelecteFuelOpen] = useState(false);
@@ -255,6 +253,7 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 			formData.append('color', selectedColor!);
 
 			images?.forEach((file, index) => {
+				console.log(file);
 				formData.append(`images[${index}]`, file);
 			});
 
@@ -298,7 +297,7 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 			// Show toast notification
 			toast({
 				title: 'Success',
-				description: `Edited link - ${advertisment?.id}`,
+				description: `Edited advertisement - ${advertisment?.id}`,
 				variant: 'default',
 			});
 

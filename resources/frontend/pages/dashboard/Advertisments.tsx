@@ -86,7 +86,6 @@ export function UserAdvertismentsPage() {
 			errorMessage: 'Неуспешно зареждане на обявите. Моля опитайте пак по-късно.',
 		},
 	});
-	console.log(data);
 	// Define pagination and default data for the table
 	const pagination = useMemo(() => ({ pageIndex, pageSize }), [pageIndex, pageSize]);
 	const defaultData = useMemo(() => [], []); // Default data is used when the real data is loading
