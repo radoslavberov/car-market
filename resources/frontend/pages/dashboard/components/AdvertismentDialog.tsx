@@ -786,18 +786,20 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 							</div>
 
 							{/* Picture */}
-							<div className="grid w-full max-w-sm items-center gap-1.5">
-								<Label htmlFor="picture">Добави снимки</Label>
-								<Input
-									id="picture"
-									type="file"
-									multiple
-									onChange={(event) => {
-										const files = Array.from(event.target.files!);
-										setImages(files);
-									}}
-								/>
-							</div>
+							{!advertisment && (
+								<div className="grid w-full max-w-sm items-center gap-1.5">
+									<Label htmlFor="picture">Добави снимки</Label>
+									<Input
+										id="picture"
+										type="file"
+										multiple
+										onChange={(event) => {
+											const files = Array.from(event.target.files!);
+											setImages(files);
+										}}
+									/>
+								</div>
+							)}
 						</div>
 
 						<div className="flex flex-col w-full gap-4">
