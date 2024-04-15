@@ -58,8 +58,6 @@ class UpdateAdvertisementRequest extends FormRequest
             'vehicle_category_id' => 'nullable|exists:vehicle_categories,id',
             'fuel_id' => 'nullable|exists:fuels,id',
             'transmission_id' => 'nullable|exists:transmissions,id',
-            'images' => 'nullable|array',
-            'images.*' => 'image|mimes:jpg,jpeg,png|max:2048',
         ];
     }
 }

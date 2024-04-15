@@ -191,25 +191,6 @@ class AdvertisementController extends Controller
 
             $advertisement->update($updateData);
 
-            if ($request->hasFile('images')) {
-                $folderName = 'images_advertisement_' . $advertisement->id;
-
-                $advertisement->images->delete();
-
-
-                foreach ($request->file('images') as $image) {
-                    $fileName = $image->getClientOriginalName();
-                    $imagePath = $image->storeAs($folderName, $fileName, 'public');
-
-                    Image::create([
-                        'title' => $fileName,
-                        'user_id' => auth()->id(),
-                        'advertisement_id' => $advertisement->id,
-                        'path' => $imagePath,
-                    ]);
-                }
-            }
-
             DB::commit();
 
             return new AdvertisementResource($advertisement);
