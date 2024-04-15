@@ -63,6 +63,11 @@ export function RegisterForm({ className, ...props }: RegisterFormProps) {
 					type: 'manual',
 					message: e.errors.password,
 				});
+            if (e?.errors?.phone_number)
+                setError('phone_number', {
+                    type: 'manual',
+                    message: e.errors.phone_number,
+                });
 			setIsLoading(false);
 		}
 	}
@@ -109,6 +114,25 @@ export function RegisterForm({ className, ...props }: RegisterFormProps) {
 							<span className="pl-1 text-xs text-red-500">{errors.email.message?.toString()}</span>
 						)}
 					</div>
+                    <div className="grid gap-1">
+                        <Label className="sr-only" htmlFor="phone_number">
+                            Phone number
+                        </Label>
+                        <Input
+                            id="email"
+                            {...formRegister('phone_number', { required: 'Полето за телефонен номер е задължително.' })}
+                            placeholder="0899999999"
+                            type="phone_number"
+                            autoCapitalize="none"
+                            autoComplete="phone_number"
+                            autoCorrect="off"
+                            disabled={isLoading}
+                            className={errors?.phone_number && 'border-red-500'}
+                        />
+                        {errors?.phone_number && (
+                            <span className="pl-1 text-xs text-red-500">{errors.phone_number.message?.toString()}</span>
+                        )}
+                    </div>
 					<div className="grid gap-1">
 						<Label className="sr-only" htmlFor="password">
 							Password

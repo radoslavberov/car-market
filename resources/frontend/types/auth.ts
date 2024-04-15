@@ -14,6 +14,7 @@ export interface RegisterInput {
 	name: string;
 	email: string;
 	password: string;
+	phone_number: string;
 	password_confirmation: string;
 	terms: boolean;
 }
