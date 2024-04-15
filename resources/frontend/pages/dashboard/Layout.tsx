@@ -10,7 +10,7 @@ export function DashboardLayout() {
 
 	// Determine the default tab based on the URL
 	let defaultTab = 'overview';
-	if (path.includes('/dashboard/advertisments')) defaultTab = 'advertisments';
+	if (path.includes('/dashboard/advertisements')) defaultTab = 'advertisements';
 
 	return (
 		<>
@@ -26,9 +26,9 @@ export function DashboardLayout() {
 							<TabsTrigger value="overview">Преглед</TabsTrigger>
 						</NavLink>
 
-						{/* Advertisments Tab */}
-						<NavLink to="/dashboard/advertisments">
-							<TabsTrigger value="advertisments">Моите обяви</TabsTrigger>
+						{/* Advertisements Tab */}
+						<NavLink to="/dashboard/advertisements">
+							<TabsTrigger value="advertisements">Моите обяви</TabsTrigger>
 						</NavLink>
 					</TabsList>
 

@@ -19,7 +19,7 @@ export const columns: ColumnDef<Advertisement>[] = [
 				<div className="flex flex-row items-center gap-2">
 					<NavLink
 						className={buttonVariants({ variant: 'outline', size: 'sm' })}
-						to={`/advertisments/${vehicleId}`}
+						to={`/advertisements/${vehicleId}`}
 					>
 						Преглед
 					</NavLink>

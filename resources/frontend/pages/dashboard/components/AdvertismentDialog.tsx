@@ -18,7 +18,7 @@ import { useForm } from 'react-hook-form';
 import { toast } from '@/hooks/toast.hook';
 import { Textarea } from '@/components/ui/Textarea';
 import { Command, CommandEmpty, CommandGroup, CommandItem, CommandList } from '@/components/ui/Command';
-import { Advertisement, AdvertisementInput, Location } from '@/types';
+import { Advertisement, AdvertisementInput, Image, Location } from '@/types';
 import { addAdvertisment, editAdvertisment, getVehicleBrands, getVehicleModelTypes, getVehicleModels } from '@/data';
 import { COLOURS_KEY, ENGINE_TYPES_KEY, QUERY_KEY, TRANSMISHIONS_KEY, VEHICLE_TYPES_KEY } from '@/data/constants';
 
@@ -59,6 +59,8 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 
 	const [images, setImages] = useState<File[]>();
 
+	const [advertismentImages, setAdvertismentImages] = useState<Image[]>(advertisment?.images || []);
+
 	const [selectedFuel, setSelectedFuel] = useState<number | null>(advertisment?.fuel?.id || null);
 	const [selecteFuelOpen, setSelecteFuelOpen] = useState(false);
 
@@ -91,6 +93,8 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 	const [selectedVehicleModelType, setSelectedVehicleModelType] = useState<number | null>(
 		advertisment?.vehicleModelType?.id || null,
 	);
+
+	console.log(selectedVehicleModelType);
 
 	const [selecteYearOpen, setSelecteYearOpen] = useState(false);
 
@@ -243,10 +247,8 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 			formData.append('location_id', selectedLocation!.toString());
 			formData.append('vehicle_brand_id', selectedVehicleBrand!.toString());
 			formData.append('vehicle_model_id', selectedVehicleModel!.toString());
-			formData.append(
-				'vehicle_model_type_id',
-				selectedVehicleModelType ? selectedVehicleModelType.toString() : '',
-			);
+
+			selectedVehicleModelType && formData.append('vehicle_model_type_id', selectedVehicleModelType.toString());
 
 			formData.append('vehicle_category_id', selectedVehicleCategory!.toString());
 			formData.append('transmission_id', selectedTransmission!.toString());

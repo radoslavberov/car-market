@@ -17,7 +17,7 @@ export const columns: ColumnDef<Advertisement>[] = [
 				<div className="flex flex-row items-center gap-2">
 					<NavLink
 						className={buttonVariants({ variant: 'outline', size: 'sm' })}
-						to={`/advertisments/${vehicleId}`}
+						to={`/advertisements/${vehicleId}`}
 					>
 						Преглед
 					</NavLink>
@@ -83,7 +83,7 @@ export const columns: ColumnDef<Advertisement>[] = [
 		header: ({ column }) => <AdvertismentDataTableColumnHeader column={column} title="" />,
 		cell: ({ row }) => {
 			const vehicleId = row.getValue('id') as number;
-			const urlContainsGaga = window.location.href.includes('advertisments');
+			const urlContainsGaga = window.location.href.includes('advertisements');
 			const urlContainsAdmin = window.location.href.includes('admin');
 			// Render the delete button only if the user is admin
 			if ( urlContainsGaga || urlContainsAdmin) {

@@ -185,6 +185,10 @@ class AdvertisementController extends Controller
                 }
             }
 
+            if(!isset($request->vehicle_model_type_id)){
+                $advertisement['vehicle_model_type_id'] = null;
+            }
+
             $advertisement->update($updateData);
 
             if ($request->hasFile('images')) {

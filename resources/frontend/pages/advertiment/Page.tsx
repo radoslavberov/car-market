@@ -1,7 +1,7 @@
 'use client';
 import { useQuery } from '@tanstack/react-query';
 import { getAdvertisement } from '@/data';
-import { Euro, Palette, Flame, RefreshCw, CalendarCheck2, Car, LocateIcon, Heading } from 'lucide-react';
+import { Euro, Palette, Flame, RefreshCw, CalendarCheck2, Car, LocateIcon, Heading, Phone } from 'lucide-react';
 import { Card, CardHeader, CardContent, CardTitle } from '@/components/ui/Card';
 import { Icons } from '@/components/Icons';
 import { useParams } from 'react-router-dom';
@@ -27,10 +27,12 @@ export function VehiclePage() {
 		<div className="flex flex-col flex-1 h-full space-y-8">
 			<div className="flex flex-col justify-between gap-4 lg:items-center lg:flex-row">
 				<div className="flex flex-row items-center gap-2">
-					<span className="p-2 cursor-pointer md:p-4 group" onClick={() => window.history.back()}>
+					<div className="p-2 cursor-pointer md:p-4 group" onClick={() => window.history.back()}>
 						<Icons.chevronLeft className="block w-8 h-8 text-muted-foreground group-hover:text-foreground" />
-					</span>
-					<div className="flex flex-col gap-1">
+					</div>
+				</div>
+				<div className="flex justify-between w-full">
+					<div className="flex flex-col gap-1  pt-5">
 						<h2 className="flex flex-row items-baseline gap-1 text-3xl font-bold tracking-tight">
 							<span>{isLoading ? '' : data?.name}</span>
 						</h2>
@@ -46,6 +48,15 @@ export function VehiclePage() {
 							</p>
 						)}
 					</div>
+					<Card className="w-72">
+						<CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
+							<CardTitle className="text-sm font-medium">Контакт с продавача</CardTitle>
+							<Phone className="w-4 h-4 text-muted-foreground" />
+						</CardHeader>
+						<CardContent>
+							<div className="text-2xl font-bold">{data?.user.phoneNumber}</div>
+						</CardContent>
+					</Card>
 				</div>
 			</div>
 

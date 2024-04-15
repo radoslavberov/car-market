@@ -78,10 +78,10 @@ export default function App() {
 			<Route element={<Layout variant="auth" />}>
 				<Route path="dashboard" element={<DashboardLayout />}>
 					<Route path="" element={<DashboardOverviewPage />} />
-					<Route path="advertisments" element={<UserAdvertismentsPage />} />
+					<Route path="advertisements" element={<UserAdvertismentsPage />} />
 				</Route>
 				<Route path="marketplace" element={<MarketplacePage />} />
-				<Route path="advertisments/:id" element={<VehiclePage />} />
+				<Route path="advertisements/:id" element={<VehiclePage />} />
 				<Route path="settings" element={<SettingsLayout />}>
 					<Route path="" element={<Navigate replace to="account" />} />
 					<Route path="*" element={<Navigate replace to="account" />} />
@@ -91,7 +91,7 @@ export default function App() {
 				<Route path="admin" element={<AdminPanel />}>
 					<Route path="" element={<Navigate replace to="users" />} />
 					<Route path="users" element={<AdminUsersDashboardPage />} />
-					<Route path="advertisments" element={<AdminAdvertismentsDashboardPage />} />
+					<Route path="advertisements" element={<AdminAdvertismentsDashboardPage />} />
 				</Route>
 			</Route>
 

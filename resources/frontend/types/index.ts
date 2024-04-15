@@ -12,6 +12,7 @@ export interface User {
 	advertisementsLimit: number;
 	createdAt: string | null; // ISO date
 	updatedAt: string | null; // ISO date
+	phoneNumber: string;
 }
 
 export interface ErrorResponse {

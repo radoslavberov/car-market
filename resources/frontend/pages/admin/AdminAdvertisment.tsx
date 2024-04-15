@@ -35,11 +35,11 @@ export function AdminAdvertismentsDashboardPage() {
 		estateId: searchEstateId ? searchEstateId : undefined,
 	};
 
-	// Get advertisments data
+	// Get advertisements data
 	const {
 		isLoading,
 		isFetching,
-		data: advertisments,
+		data: advertisements,
 	} = useQuery({
 		queryKey: [QUERY_KEY.advertisements, fetchDataOptions],
 		queryFn: () => getAdminPanelAnalyses(fetchDataOptions),
@@ -81,8 +81,8 @@ export function AdminAdvertismentsDashboardPage() {
 						// Render when data is loaded
 						<AdvertismentDataTable
 							isFetching={isFetching}
-							data={advertisments?.data || defaultData}
-							count={advertisments?.meta?.total || -1}
+							data={advertisements?.data || defaultData}
+							count={advertisements?.meta?.total || -1}
 							columns={columns}
 							pagination={pagination}
 							onSetPagination={setPagination}
