@@ -121,7 +121,7 @@ export function RegisterForm({ className, ...props }: RegisterFormProps) {
                         <Input
                             id="email"
                             {...formRegister('phone_number', { required: 'Полето за телефонен номер е задължително.' })}
-                            placeholder="0899999999"
+                            placeholder="Телефонен номер"
                             type="phone_number"
                             autoCapitalize="none"
                             autoComplete="phone_number"
