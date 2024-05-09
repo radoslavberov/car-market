@@ -159,7 +159,7 @@ export function RegisterForm({ className, ...props }: RegisterFormProps) {
 						<Input
 							id="password_confirmation"
 							{...formRegister('password_confirmation', {
-								required: 'Полето за потвърждение на паролата е задължително.',
+								required: 'Полето за потвърждение на паролата e задължително.',
 							})}
 							placeholder="Потвърди парола"
 							type="password"
