@@ -21,8 +21,6 @@ export function VehiclePage() {
 		enabled: !!id,
 	});
 
-	console.log(data);
-
 	return (
 		<div className="flex flex-col flex-1 h-full space-y-8">
 			<div className="flex flex-col justify-between gap-4 lg:items-center lg:flex-row">

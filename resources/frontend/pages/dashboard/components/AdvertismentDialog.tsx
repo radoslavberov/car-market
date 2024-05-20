@@ -92,8 +92,6 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 		advertisment?.vehicleModelType?.id || null,
 	);
 
-	console.log(selectedVehicleModelType);
-
 	const [selecteYearOpen, setSelecteYearOpen] = useState(false);
 
 	const [selectedYear, setSelectedYear] = useState<number | null>(advertisment?.year || null);
@@ -171,8 +169,17 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 			});
 
 			const newAdvertisement = await addAdvertisment(formData);
+
 			// Update cached data
 			queryClient.setQueriesData([QUERY_KEY.advertisements], (oldData: any) => {
+				if (!oldData) return undefined;
+				return {
+					...oldData,
+					data: [...oldData.data, newAdvertisement],
+				};
+			});
+
+			queryClient.setQueriesData([QUERY_KEY.userAdvertisements], (oldData: any) => {
 				if (!oldData) return undefined;
 				return {
 					...oldData,
@@ -253,7 +260,6 @@ export function AdvertismentDialog({ className, advertisment }: AdvertismentDial
 			formData.append('color', selectedColor!);
 
 			images?.forEach((file, index) => {
-				console.log(file);
 				formData.append(`images[${index}]`, file);
 			});
 
